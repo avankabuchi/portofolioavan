@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avankha Barlian Kabuchi — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #07070d;
+  --surface: #0f0f1a;
+  --surface2: #16162a;
+  --accent: #7c6fff;
+  --accent2: #ff6b9d;
+  --accent3: #00e5b0;
+  --accent4: #ffd166;
+  --text: #eeeef5;
+  --muted: #6b6b8a;
+  --border: rgba(124,111,255,0.12);
+  --glow: rgba(124,111,255,0.3);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;}
+
+/* ── NOISE ── */
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;width:100%;z-index:200;padding:1.2rem 5%;display:flex;justify-content:space-between;align-items:center;background:rgba(7,7,13,.8);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;letter-spacing:-.03em;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.nav-links{display:flex;gap:2.5rem;list-style:none;}
+.nav-links a{font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--muted);transition:color .25s;}
+.nav-links a:hover{color:var(--text);}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:8rem 5% 5rem;position:relative;overflow:hidden;}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(124,111,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(124,111,255,.06) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 40%,transparent 100%);}
+.orb{position:absolute;border-radius:50%;filter:blur(120px);pointer-events:none;}
+.orb1{width:700px;height:700px;background:radial-gradient(circle,rgba(124,111,255,.12),transparent 65%);top:-20%;right:-10%;animation:drift 12s ease-in-out infinite;}
+.orb2{width:500px;height:500px;background:radial-gradient(circle,rgba(255,107,157,.08),transparent 65%);bottom:-10%;left:-5%;animation:drift 10s ease-in-out infinite reverse;}
+.orb3{width:300px;height:300px;background:radial-gradient(circle,rgba(0,229,176,.06),transparent 65%);top:40%;left:30%;animation:drift 15s ease-in-out infinite 3s;}
+@keyframes drift{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(30px,-20px) scale(1.04);}66%{transform:translate(-20px,30px) scale(.97);}}
+
+.hero-tag{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);display:inline-flex;align-items:center;gap:.75rem;margin-bottom:1.5rem;opacity:0;animation:slideUp .7s .2s forwards;}
+.hero-tag::before{content:'';width:32px;height:1px;background:var(--accent);}
+.hero-tag-badge{background:rgba(124,111,255,.12);border:1px solid rgba(124,111,255,.25);border-radius:100px;padding:.2rem .8rem;font-size:.65rem;}
+
+.hero-name{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.8rem,8vw,7.5rem);line-height:.95;letter-spacing:-.04em;margin-bottom:.75rem;opacity:0;animation:slideUp .7s .35s forwards;}
+.hero-name .line2{background:linear-gradient(120deg,var(--accent) 0%,var(--accent2) 45%,var(--accent3) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:200%;animation:gradFlow 5s ease infinite;}
+@keyframes gradFlow{0%,100%{background-position:0%;}50%{background-position:100%;}}
+
+.hero-title{font-family:'Space Mono',monospace;font-size:.85rem;color:var(--muted);margin-bottom:1.8rem;letter-spacing:.05em;opacity:0;animation:slideUp .7s .45s forwards;}
+.hero-title span{color:var(--accent3);}
+
+.hero-bio{max-width:560px;font-size:1.1rem;line-height:1.8;color:rgba(238,238,245,.65);margin-bottom:2.5rem;opacity:0;animation:slideUp .7s .55s forwards;}
+
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3rem;opacity:0;animation:slideUp .7s .7s forwards;}
+.btn-glow{padding:.85rem 2rem;background:var(--accent);color:#fff;text-decoration:none;font-family:'Syne',sans-serif;font-weight:700;border-radius:6px;transition:all .25s;box-shadow:0 0 30px rgba(124,111,255,.35),0 0 60px rgba(124,111,255,.1);}
+.btn-glow:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(124,111,255,.55),0 0 80px rgba(124,111,255,.2);}
+.btn-outline{padding:.85rem 2rem;border:1px solid var(--border);color:var(--text);text-decoration:none;font-family:'Syne',sans-serif;font-weight:600;border-radius:6px;transition:all .25s;}
+.btn-outline:hover{border-color:rgba(124,111,255,.4);background:rgba(124,111,255,.05);}
+
+.hero-stats{display:flex;gap:2.5rem;opacity:0;animation:slideUp .7s .85s forwards;}
+.hstat{text-align:center;}
+.hstat-num{font-family:'Syne',sans-serif;font-weight:800;font-size:1.8rem;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hstat-lbl{font-size:.72rem;color:var(--muted);margin-top:.2rem;font-family:'Space Mono',monospace;letter-spacing:.05em;}
+
+.scroll-hint{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.15em;color:var(--muted);text-transform:uppercase;opacity:0;animation:slideUp .7s 1.1s forwards;}
+.scroll-line{width:1px;height:48px;background:linear-gradient(var(--accent),transparent);animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:.3;transform:scaleY(.7);}50%{opacity:1;transform:scaleY(1);}}
+@keyframes slideUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+
+/* ── SECTION BASE ── */
+section{padding:6rem 5%;position:relative;z-index:1;}
+.sec-label{font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:.8rem;margin-bottom:.8rem;}
+.sec-label::after{content:'';width:48px;height:1px;background:var(--border);}
+.sec-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.8rem,4vw,2.8rem);letter-spacing:-.025em;margin-bottom:3rem;}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1);}
+.reveal.in{opacity:1;transform:none;}
+.reveal-delay-1{transition-delay:.1s;}
+.reveal-delay-2{transition-delay:.2s;}
+.reveal-delay-3{transition-delay:.3s;}
+
+/* ── ABOUT ── */
+#about{background:var(--surface);}
+.about-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:5rem;align-items:start;}
+.about-text p{font-size:1.05rem;line-height:1.85;color:rgba(238,238,245,.68);margin-bottom:1.4rem;}
+.about-text p strong{color:var(--text);}
+.about-chips{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.5rem;}
+.chip{font-family:'Space Mono',monospace;font-size:.68rem;padding:.3rem .9rem;border:1px solid var(--border);border-radius:100px;color:var(--muted);transition:all .25s;cursor:default;}
+.chip:hover{border-color:var(--accent);color:var(--accent);background:rgba(124,111,255,.05);}
+
+.about-right{display:flex;flex-direction:column;gap:1rem;}
+.info-card{background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:1.6rem;transition:all .3s;position:relative;overflow:hidden;}
+.info-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(124,111,255,.04),transparent);opacity:0;transition:opacity .3s;}
+.info-card:hover{border-color:rgba(124,111,255,.3);transform:translateX(6px);}
+.info-card:hover::before{opacity:1;}
+.ic-num{font-family:'Syne',sans-serif;font-weight:800;font-size:2.2rem;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;}
+.ic-lbl{font-size:.8rem;color:var(--muted);margin-top:.3rem;}
+
+/* ── SKILLS ── */
+#skills{}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.2rem;}
+.skill-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.8rem;transition:all .3s;cursor:default;position:relative;overflow:hidden;}
+.skill-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--card-color,var(--accent));transform:scaleX(0);transition:transform .35s;}
+.skill-card:hover{transform:translateY(-5px);border-color:var(--card-color,var(--accent));box-shadow:0 20px 60px rgba(0,0,0,.4);}
+.skill-card:hover::after{transform:scaleX(1);}
+.sk-icon{font-size:2rem;margin-bottom:1rem;display:block;}
+.sk-name{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:1rem;}
+.sk-tags{display:flex;flex-wrap:wrap;gap:.45rem;}
+.sk-tag{font-family:'Space Mono',monospace;font-size:.65rem;padding:.25rem .7rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:100px;color:var(--muted);transition:all .2s;}
+.skill-card:hover .sk-tag{border-color:rgba(124,111,255,.25);}
+
+/* ── TIMELINE ── */
+#experience{background:var(--surface);}
+.timeline{position:relative;padding-left:2rem;}
+.timeline::before{content:'';position:absolute;left:0;top:8px;bottom:0;width:1px;background:linear-gradient(to bottom,var(--accent),rgba(124,111,255,.1));}
+.tl-item{position:relative;padding-bottom:3rem;}
+.tl-item:last-child{padding-bottom:0;}
+.tl-dot{position:absolute;left:-2.38rem;top:.35rem;width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(124,111,255,.15),0 0 20px rgba(124,111,255,.5);}
+.tl-period{font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.1em;color:var(--accent);margin-bottom:.6rem;text-transform:uppercase;}
+.tl-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1.25rem;margin-bottom:.2rem;}
+.tl-org{font-size:.85rem;color:var(--accent2);margin-bottom:.8rem;}
+.tl-desc{font-size:.92rem;line-height:1.75;color:rgba(238,238,245,.6);}
+
+/* ── CERTIFICATIONS ── */
+#certs{}
+.cert-filter{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:2rem;}
+.filter-btn{font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.08em;padding:.4rem 1rem;border:1px solid var(--border);border-radius:100px;background:transparent;color:var(--muted);cursor:pointer;transition:all .25s;text-transform:uppercase;}
+.filter-btn.active,.filter-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(124,111,255,.08);}
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:1.2rem;}
+.cert-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.6rem;display:flex;gap:1.2rem;align-items:flex-start;transition:all .3s;position:relative;overflow:hidden;}
+.cert-card::before{content:'';position:absolute;top:0;right:0;width:80px;height:80px;border-radius:50%;opacity:0;transition:opacity .3s;}
+.cert-card:hover{border-color:rgba(124,111,255,.3);transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,.5);}
+.cert-card:hover::before{opacity:.15;}
+.cert-badge{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;}
+.cert-info{}
+.cert-name{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:.3rem;line-height:1.3;}
+.cert-issuer{font-size:.8rem;color:var(--accent2);margin-bottom:.5rem;}
+.cert-meta{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--muted);display:flex;align-items:center;gap:.5rem;}
+.cert-meta::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent3);flex-shrink:0;}
+.cert-id{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);opacity:.5;margin-top:.3rem;}
+.cert-type{position:absolute;top:1rem;right:1rem;font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;padding:.2rem .6rem;border-radius:100px;border:1px solid;}
+
+/* ── SOCIALS ── */
+#contact{background:var(--surface);}
+.social-intro{font-size:1.05rem;line-height:1.8;color:rgba(238,238,245,.6);max-width:500px;margin-bottom:3rem;}
+.socials-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:1rem;}
+.soc-card{background:var(--bg);border:1px solid var(--border);border-radius:18px;padding:2rem 1.2rem;text-decoration:none;color:var(--text);display:flex;flex-direction:column;align-items:center;gap:.9rem;text-align:center;transition:all .3s;position:relative;overflow:hidden;}
+.soc-card::before{content:'';position:absolute;inset:0;background:var(--sc,rgba(124,111,255,.08));opacity:0;transition:opacity .3s;}
+.soc-card:hover{transform:translateY(-7px);border-color:var(--sc-border,rgba(124,111,255,.4));}
+.soc-card:hover::before{opacity:1;}
+.soc-card:hover{box-shadow:0 20px 60px var(--sc-shadow,rgba(124,111,255,.2));}
+.soc-icon{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);font-size:1.4rem;transition:transform .3s;}
+.soc-card:hover .soc-icon{transform:scale(1.15);}
+.soc-name{font-family:'Syne',sans-serif;font-weight:700;font-size:.85rem;}
+.soc-handle{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--muted);}
+
+/* ── FOOTER ── */
+footer{padding:3rem 5%;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.footer-brand{font-family:'Syne',sans-serif;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.footer-copy{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--muted);}
+
+/* ── HIDDEN ── */
+.cert-card[data-hidden]{display:none;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .about-grid{grid-template-columns:1fr;gap:2.5rem;}
+  nav{padding:1rem 5%;}
+  .nav-links{display:none;}
+  .hero{padding:7rem 5% 5rem;}
+}
+@media(max-width:600px){
+  .hero-stats{gap:1.5rem;}
+  .cert-grid{grid-template-columns:1fr;}
+  footer{flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <div class="nav-logo">A.B.K</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#certs">Certifications</a></li>
+    <li><a href="#contact">Connect</a></li>
+  </ul>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+
+  <div class="hero-tag">
+    <span>Informatika · AMIKOM Yogyakarta</span>
+    <span class="hero-tag-badge">Available for Opportunities</span>
+  </div>
+  <h1 class="hero-name">
+    Avankha<br><span class="line2">Barlian Kabuchi</span>
+  </h1>
+  <p class="hero-title">S.Kom. — Sarjana Komputer &nbsp;·&nbsp; <span>Cisco Certified</span> &nbsp;·&nbsp; <span>Creator</span></p>
+  <p class="hero-bio">Lulusan Informatika yang passionate di bidang computer networking, software development, dan teknologi AI/IoT. Menggabungkan keahlian teknis dengan jiwa kreatif untuk membangun hal-hal yang berdampak.</p>
+  <div class="hero-actions">
+    <a href="#contact" class="btn-glow">Hubungi Saya</a>
+    <a href="#certs" class="btn-outline">Lihat Sertifikasi</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hstat">
+      <div class="hstat-num">6+</div>
+      <div class="hstat-lbl">Sertifikat</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-num">3+</div>
+      <div class="hstat-lbl">Tahun Studi</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-num">Int'l</div>
+      <div class="hstat-lbl">Conference</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-num">∞</div>
+      <div class="hstat-lbl">Kreativitas</div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>scroll
+  </div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about">
+  <div class="sec-label">01 — About Me</div>
+  <h2 class="sec-title">Siapa Saya?</h2>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>Halo! Saya <strong>Avankha Barlian Kabuchi, S.Kom.</strong> — lulusan Sarjana Informatika dari <strong>Universitas AMIKOM Yogyakarta</strong>, kampus yang dikenal sebagai pusat inovasi kreatif dan teknologi di Indonesia.</p>
+      <p>Dengan fondasi akademis yang kuat di bidang <strong>jaringan komputer, pengembangan perangkat lunak, dan sistem informasi</strong>, saya aktif mengembangkan diri melalui berbagai seminar, konferensi internasional, dan program sertifikasi profesional — termasuk <strong>Cisco CCNA</strong> dan konferensi internasional AI & IoT.</p>
+      <p>Di luar dunia tech, saya juga seorang <strong>musisi dan content creator</strong> aktif yang berkarya di Spotify, Apple Music, YouTube, dan TikTok. Saya percaya bahwa kreativitas dan teknologi saling melengkapi.</p>
+      <div class="about-chips">
+        <span class="chip">Computer Networks</span>
+        <span class="chip">Web Development</span>
+        <span class="chip">AI & IoT</span>
+        <span class="chip">Music Production</span>
+        <span class="chip">Geospasial</span>
+        <span class="chip">Content Creation</span>
+        <span class="chip">Problem Solving</span>
+      </div>
+    </div>
+    <div class="about-right">
+      <div class="info-card reveal reveal-delay-1">
+        <div class="ic-num">S1</div>
+        <div class="ic-lbl">Sarjana Informatika — AMIKOM Yogyakarta</div>
+      </div>
+      <div class="info-card reveal reveal-delay-2">
+        <div class="ic-num">6+</div>
+        <div class="ic-lbl">Sertifikat & Partisipasi Aktif</div>
+      </div>
+      <div class="info-card reveal reveal-delay-3">
+        <div class="ic-num">Int'l</div>
+        <div class="ic-lbl">Peserta International Conference — AI & IoT, 2024</div>
+      </div>
+      <div class="info-card reveal">
+        <div class="ic-num">Cisco</div>
+        <div class="ic-lbl">CCNAv7: Introduction to Networks Certified</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SKILLS ═══ -->
+<section id="skills">
+  <div class="sec-label">02 — Competencies</div>
+  <h2 class="sec-title">Kompetensi & Keahlian</h2>
+  <div class="skills-grid">
+    <div class="skill-card reveal" style="--card-color:#7c6fff">
+      <span class="sk-icon">🌐</span>
+      <div class="sk-name">Computer Networking</div>
+      <div class="sk-tags">
+        <span class="sk-tag">Cisco IOS</span><span class="sk-tag">TCP/IP</span><span class="sk-tag">VLAN</span>
+        <span class="sk-tag">Routing & Switching</span><span class="sk-tag">Subnetting</span>
+        <span class="sk-tag">OSI Model</span><span class="sk-tag">WLAN</span><span class="sk-tag">Network Security</span>
+      </div>
+    </div>
+    <div class="skill-card reveal reveal-delay-1" style="--card-color:#ff6b9d">
+      <span class="sk-icon">💻</span>
+      <div class="sk-name">Web Development</div>
+      <div class="sk-tags">
+        <span class="sk-tag">HTML5 / CSS3</span><span class="sk-tag">JavaScript</span>
+        <span class="sk-tag">PHP</span><span class="sk-tag">Laravel</span>
+        <span class="sk-tag">MySQL</span><span class="sk-tag">React</span>
+        <span class="sk-tag">Bootstrap</span><span class="sk-tag">REST API</span>
+      </div>
+    </div>
+    <div class="skill-card reveal reveal-delay-2" style="--card-color:#00e5b0">
+      <span class="sk-icon">🤖</span>
+      <div class="sk-name">AI & IoT</div>
+      <div class="sk-tags">
+        <span class="sk-tag">Artificial Intelligence</span><span class="sk-tag">Internet of Things</span>
+        <span class="sk-tag">Industri 5.0</span><span class="sk-tag">Machine Learning (dasar)</span>
+        <span class="sk-tag">Embedded Systems</span>
+      </div>
+    </div>
+    </div>
+    <div class="skill-card reveal" style="--card-color:#c77dff">
+      <span class="sk-icon">🛠️</span>
+      <div class="sk-name">Tools & Platform</div>
+      <div class="sk-tags">
+        <span class="sk-tag">Git & GitHub</span><span class="sk-tag">Cisco Packet Tracer</span>
+        <span class="sk-tag">VS Code</span><span class="sk-tag">Linux CLI</span>
+        <span class="sk-tag">Wireshark</span><span class="sk-tag">Figma</span><span class="sk-tag">Docker</span>
+      </div>
+    </div>
+    <div class="skill-card reveal reveal-delay-1" style="--card-color:#ff9f1c">
+      <span class="sk-icon">🎵</span>
+      <div class="sk-name">Creative & Content</div>
+      <div class="sk-tags">
+        <span class="sk-tag">Music Production</span><span class="sk-tag">Content Creation</span>
+        <span class="sk-tag">Video Editing</span><span class="sk-tag">Social Media</span>
+        <span class="sk-tag">Storytelling</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ EXPERIENCE ═══ -->
+<section id="experience">
+  <div class="sec-label">03 — Journey</div>
+  <h2 class="sec-title">Perjalanan & Pengalaman</h2>
+  <div class="timeline">
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-period">2022 — 2026</div>
+      <h3 class="tl-title">S1 Informatika</h3>
+      <p class="tl-org">Universitas AMIKOM Yogyakarta</p>
+      <p class="tl-desc">Menempuh studi Sarjana Informatika dengan NIM 22.11.4822. Aktif dalam berbagai kegiatan akademik, seminar nasional, dan kuliah umum yang memperkuat kompetensi di bidang networking, pengembangan perangkat lunak, dan teknologi informasi terkini.</p>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-period">Agustus 2024</div>
+      <h3 class="tl-title">International Conference — AI & IoT, Industry 5.0</h3>
+      <p class="tl-org">Universitas Islam Balitar, Indonesia</p>
+      <p class="tl-desc">Berpartisipasi aktif sebagai peserta pada konferensi internasional bertema "The World in the Hands of Artificial Intelligence Technology and the Internet of Things in the Era of Industrial Revolution 5.0". Memperluas wawasan global tentang tren AI dan IoT terkini.</p>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-period">Januari 2024</div>
+      <h3 class="tl-title">Cisco CCNAv7: Introduction to Networks</h3>
+      <p class="tl-org">Cisco Networking Academy</p>
+      <p class="tl-desc">Menyelesaikan program CCNAv7 melalui Cisco Networking Academy. Memperoleh keahlian fundamental dalam konfigurasi perangkat Cisco, protokol TCP/IP, routing, switching, dan keamanan jaringan dasar.</p>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-period">Juni 2025</div>
+      <h3 class="tl-title">Seminar Nasional Informatika 2025</h3>
+      <p class="tl-org">Universitas AMIKOM Yogyakarta</p>
+      <p class="tl-desc">Berpartisipasi aktif dalam Seminar Nasional Informatika 2025 yang diselenggarakan di MSV Cinema, Gedung 6, AMIKOM Yogyakarta — memperluas perspektif tentang perkembangan terkini dunia informatika di Indonesia.</p>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-period">Ongoing</div>
+      <h3 class="tl-title">Musisi & Content Creator</h3>
+      <p class="tl-org">Spotify · Apple Music · YouTube · TikTok · Instagram</p>
+      <p class="tl-desc">Aktif berkarya sebagai musisi dengan rilisan resmi di Spotify dan Apple Music atas nama Avan Kabuchi. Menggabungkan passion di bidang teknologi dan seni — membuktikan bahwa developer pun bisa jadi kreator yang berdampak.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CERTIFICATIONS ═══ -->
+<section id="certs">
+  <div class="sec-label">04 — Credentials</div>
+  <h2 class="sec-title">Sertifikasi & Partisipasi</h2>
+
+  <div class="cert-filter">
+    <button class="filter-btn active" data-filter="all" onclick="filterCerts(this,'all')">Semua</button>
+    <button class="filter-btn" data-filter="professional" onclick="filterCerts(this,'professional')">Profesional</button>
+    <button class="filter-btn" data-filter="seminar" onclick="filterCerts(this,'seminar')">Seminar</button>
+    <button class="filter-btn" data-filter="workshop" onclick="filterCerts(this,'workshop')">Workshop</button>
+  </div>
+
+  <div class="cert-grid">
+
+    <!-- CCNA -->
+    <div class="cert-card reveal" data-cat="professional">
+      <div class="cert-badge" style="background:linear-gradient(135deg,#1ba5e1,#0055aa);">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="rgba(255,255,255,.1)"/><path d="M6 14a8 8 0 1 0 16 0 8 8 0 0 0-16 0z" stroke="#fff" stroke-width="1.5"/><path d="M11 14h6M14 11v6" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="cert-info">
+        <div class="cert-name">CCNAv7: Introduction to Networks</div>
+        <div class="cert-issuer">Cisco Networking Academy</div>
+        <div class="cert-meta">05 Januari 2024</div>
+        <div class="cert-id">Cert ID: 34b115f0-b723-43c4-b6fd-0ce5fc89db76</div>
+      </div>
+      <div class="cert-type" style="color:#00e5b0;border-color:rgba(0,229,176,.3);">Profesional</div>
+    </div>
+
+    <!-- International Conference -->
+    <div class="cert-card reveal reveal-delay-1" data-cat="seminar">
+      <div class="cert-badge" style="background:linear-gradient(135deg,#c0392b,#a93226);">
+        <span style="font-size:1.5rem;">🌏</span>
+      </div>
+      <div class="cert-info">
+        <div class="cert-name">International Conference: AI, IoT & Industry 5.0</div>
+        <div class="cert-issuer">Universitas Islam Balitar, Indonesia</div>
+        <div class="cert-meta">26 Agustus 2024</div>
+        <div class="cert-id">No. 034/DK.04/E-Cert/071070/VIII/2024</div>
+      </div>
+      <div class="cert-type" style="color:#ffd166;border-color:rgba(255,209,102,.3);">Seminar</div>
+    </div>
+
+    <!-- Movers Wellbeing -->
+    <div class="cert-card reveal reveal-delay-2" data-cat="workshop">
+      <div class="cert-badge" style="background:linear-gradient(135deg,#f6c90e,#e09800);">
+        <span style="font-size:1.5rem;">🌱</span>
+      </div>
+      <div class="cert-info">
+        <div class="cert-name">Movers Workshop on Wellbeing for Changemakers</div>
+        <div class="cert-issuer">Movers Programme — Skill Our Future</div>
+        <div class="cert-meta">Certificate of Participation (2-Hour Workshop)</div>
+      </div>
+      <div class="cert-type" style="color:#ff6b9d;border-color:rgba(255,107,157,.3);">Workshop</div>
+    </div>
+
+    <!-- Seminar Nasional Informatika 2025 -->
+    <div class="cert-card reveal reveal-delay-3" data-cat="seminar">
+      <div class="cert-badge" style="background:linear-gradient(135deg,#6a0dad,#9b59b6);">
+        <span style="font-size:1.5rem;">🎓</span>
+      </div>
+      <div class="cert-info">
+        <div class="cert-name">Seminar Nasional Informatika 2025</div>
+        <div class="cert-issuer">Universitas AMIKOM Yogyakarta</div>
+        <div class="cert-meta">5 Juni 2025</div>
+        <div class="cert-id">No. 1624/S-KMHS/AMIKOM/VI/2025</div>
+      </div>
+      <div class="cert-type" style="color:#7c6fff;border-color:rgba(124,111,255,.3);">Seminar</div>
+    </div>
+
+    <!-- Introduction to Computer 2022 -->
+    <div class="cert-card reveal" data-cat="workshop">
+      <div class="cert-badge" style="background:linear-gradient(135deg,#16213e,#4a4e69);">
+        <span style="font-size:1.5rem;">💻</span>
+      </div>
+      <div class="cert-info">
+        <div class="cert-name">Introduction to Computer 2022</div>
+        <div class="cert-issuer">Universitas AMIKOM Yogyakarta</div>
+        <div class="cert-meta">1–13 September 2022</div>
+        <div class="cert-id">No. 220/KMHS/AMIKOM/IX/3385</div>
+      </div>
+      <div class="cert-type" style="color:#ff6b9d;border-color:rgba(255,107,157,.3);">Workshop</div>
+    </div>
+
+    <!-- Kuliah Umum Daring 2022 -->
+    <div class="cert-card reveal reveal-delay-1" data-cat="seminar">
+      <div class="cert-badge" style="background:linear-gradient(135deg,#4a4e69,#6b705c);">
+        <span style="font-size:1.5rem;">🎙️</span>
+      </div>
+      <div class="cert-info">
+        <div class="cert-name">Kuliah Umum: AMIKOM Creative Economy Park</div>
+        <div class="cert-issuer">Universitas AMIKOM Yogyakarta</div>
+        <div class="cert-meta">11 Juni 2022</div>
+        <div class="cert-id">No. 1605.S/A.DKUI/AMIKOM/VI/2022</div>
+      </div>
+      <div class="cert-type" style="color:#7c6fff;border-color:rgba(124,111,255,.3);">Seminar</div>
+    </div>
+
+    <!-- Geospasial -->
+    <div class="cert-card reveal reveal-delay-2" data-cat="seminar">
+      <div class="cert-badge" style="background:linear-gradient(135deg,#1a535c,#4ecdc4);">
+        <span style="font-size:1.5rem;">🗺️</span>
+      </div>
+      <div class="cert-info">
+        <div class="cert-name">Seminar: Potensi Karir Pemetaan & Geospasial</div>
+        <div class="cert-issuer">Universitas AMIKOM Yogyakarta — BPC & Alumni</div>
+        <div class="cert-meta">24 Juni 2025</div>
+        <div class="cert-id">No. 065/Sert.BPC/AMIKOM/VI/2025</div>
+      </div>
+      <div class="cert-type" style="color:#00e5b0;border-color:rgba(0,229,176,.3);">Seminar</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ CONNECT ═══ -->
+<section id="contact">
+  <div class="sec-label">05 — Connect</div>
+  <h2 class="sec-title">Temukan Saya Di</h2>
+  <p class="social-intro">Saya aktif di berbagai platform. Jangan ragu untuk connect, kolaborasi, atau sekadar menyapa — pintu selalu terbuka!</p>
+  <div class="socials-grid">
+
+    <a href="https://www.instagram.com/avankabuchi_?igsh=Y3IyNG5oYjR4cGYz&utm_source=qr" target="_blank" rel="noopener" class="soc-card" style="--sc-border:#e1306c;--sc-shadow:rgba(225,48,108,.2);">
+      <div class="soc-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><defs><radialGradient id="ig1" cx="30%" cy="107%"><stop offset="0%" stop-color="#fdf497"/><stop offset="45%" stop-color="#fd5949"/><stop offset="60%" stop-color="#d6249f"/><stop offset="90%" stop-color="#285AEB"/></radialGradient></defs><rect x="2" y="2" width="20" height="20" rx="5" stroke="url(#ig1)" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="url(#ig1)" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.1" fill="url(#ig1)"/></svg>
+      </div>
+      <div class="soc-name">Instagram</div>
+      <div class="soc-handle">@avankabuchi_</div>
+    </a>
+
+    <a href="https://www.tiktok.com/@avankabuchi_?_r=1&_t=ZS-970N0o4ivbR" target="_blank" rel="noopener" class="soc-card" style="--sc-border:#69c9d0;--sc-shadow:rgba(105,201,208,.2);">
+      <div class="soc-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" stroke="#69c9d0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" stroke="#ee1d52" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" transform="translate(0.8,0.8)"/></svg>
+      </div>
+      <div class="soc-name">TikTok</div>
+      <div class="soc-handle">@avankabuchi_</div>
+    </a>
+
+    <a href="https://www.linkedin.com/in/avankha-barlian-kabuchi-080402274?originalSubdomain=id" target="_blank" rel="noopener" class="soc-card" style="--sc-border:#0a66c2;--sc-shadow:rgba(10,102,194,.2);">
+      <div class="soc-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="#0a66c2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      </div>
+      <div class="soc-name">LinkedIn</div>
+      <div class="soc-handle">Avankha B. K.</div>
+    </a>
+
+    <a href="https://github.com/avankabuchi" target="_blank" rel="noopener" class="soc-card" style="--sc-border:#f0f6fc;--sc-shadow:rgba(240,246,252,.1);">
+      <div class="soc-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="#f0f6fc"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+      </div>
+      <div class="soc-name">GitHub</div>
+      <div class="soc-handle">avankabuchi</div>
+    </a>
+
+    <a href="https://youtube.com/@avankabuchi_?si=B_xE3RLRkXb1kVw-" target="_blank" rel="noopener" class="soc-card" style="--sc-border:#ff0000;--sc-shadow:rgba(255,0,0,.2);">
+      <div class="soc-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="#ff0000"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-1.96C18.88 4 12 4 12 4s-6.88 0-8.6.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.4 19.54C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#fff"/></svg>
+      </div>
+      <div class="soc-name">YouTube</div>
+      <div class="soc-handle">@avankabuchi_</div>
+    </a>
+
+    <a href="https://open.spotify.com/artist/2fNzlKoGfAPpQQDQPpm6zD?si=S59taWq1Tti97nacValoRA" target="_blank" rel="noopener" class="soc-card" style="--sc-border:#1db954;--sc-shadow:rgba(29,185,84,.2);">
+      <div class="soc-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="#1db954"><circle cx="12" cy="12" r="10"/><path d="M8 14.5s1.5-1 4-1 4 1 4 1" stroke="#000" stroke-width="1.3" stroke-linecap="round"/><path d="M7 11.5s2-1.5 5-1.5 5 1.5 5 1.5" stroke="#000" stroke-width="1.3" stroke-linecap="round"/><path d="M6.5 8.5S9 6.5 12 6.5s5.5 2 5.5 2" stroke="#000" stroke-width="1.3" stroke-linecap="round"/></svg>
+      </div>
+      <div class="soc-name">Spotify</div>
+      <div class="soc-handle">Avan Kabuchi</div>
+    </a>
+
+    <a href="https://music.apple.com/id/artist/avan-kabuchi/1766126525?l=id" target="_blank" rel="noopener" class="soc-card" style="--sc-border:#fc3c44;--sc-shadow:rgba(252,60,68,.2);">
+      <div class="soc-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24"><defs><linearGradient id="am1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fc3c44"/><stop offset="100%" stop-color="#ff8a80"/></linearGradient></defs><circle cx="12" cy="12" r="10" fill="url(#am1)"/><path d="M10 17V8l8-2v9" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="17" r="2" fill="#fff"/><circle cx="16" cy="15" r="2" fill="#fff"/></svg>
+      </div>
+      <div class="soc-name">Apple Music</div>
+      <div class="soc-handle">Avan Kabuchi</div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-brand">Avankha Barlian Kabuchi, S.Kom.</div>
+  <div class="footer-copy">Informatika · AMIKOM Yogyakarta · © 2025</div>
+</footer>
+
+<script>
+// ── Scroll Reveal
+const reveals = document.querySelectorAll('.reveal');
+const ro = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      const delay = e.target.classList.contains('reveal-delay-3') ? 300
+                  : e.target.classList.contains('reveal-delay-2') ? 200
+                  : e.target.classList.contains('reveal-delay-1') ? 100 : 0;
+      setTimeout(() => e.target.classList.add('in'), delay);
+      ro.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+reveals.forEach(r => ro.observe(r));
+
+// ── Active nav highlight on scroll
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 120) cur = s.id;
+  });
+  navLinks.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--text)' : '';
+  });
+}, { passive: true });
+
+// ── Cert filter
+function filterCerts(btn, cat) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.cert-card').forEach(c => {
+    if (cat === 'all' || c.dataset.cat === cat) {
+      c.removeAttribute('data-hidden');
+      c.style.display = '';
+    } else {
+      c.style.display = 'none';
+    }
+  });
+}
+
+// ── Skill card subtle parallax tilt
+document.querySelectorAll('.skill-card,.cert-card,.soc-card,.info-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - .5;
+    const y = (e.clientY - r.top) / r.height - .5;
+    card.style.transform = `translateY(-5px) rotateX(${-y * 6}deg) rotateY(${x * 6}deg)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+  });
+});
+</script>
+</body>
+</html>
