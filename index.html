@@ -22,6 +22,7 @@
   --border:rgba(124,111,255,.14);
   --border2:rgba(124,111,255,.28);
   --topbar-h:52px;
+  --footer-h:48px;
   --safe-bottom:env(safe-area-inset-bottom,0px);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -65,13 +66,12 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
   display:flex;align-items:center;padding:0 1.4rem;gap:1.2rem;
   flex-shrink:0;z-index:50;
 }
-.topbar-home-btn {
-  background: rgba(124,111,255,.15); border: 1px solid var(--border2);
-  color: var(--text); border-radius: 6px; padding: 0.3rem 0.8rem;
-  font-family: 'Space Mono', monospace; font-size: 0.65rem;
-  cursor: none; transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.3rem;
-}
-.topbar-home-btn:hover { background: rgba(124,111,255,.3); }
+.win-controls{display:flex;gap:.45rem; flex-shrink: 0;}
+.win-dot{width:12px;height:12px;border-radius:50%;cursor:none;transition:filter .2s;}
+.win-dot.red{background:#ff5f56;}
+.win-dot.yellow{background:#ffbd2e;}
+.win-dot.green{background:#28c840;}
+
 .topbar-breadcrumb{
   font-family:'Space Mono',monospace;font-size:.66rem;
   color:var(--muted);letter-spacing:.05em;
@@ -83,11 +83,6 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
 .topbar-status{display:flex;align-items:center;gap:.4rem;font-family:'Space Mono',monospace;font-size:.62rem;color:var(--accent3);}
 .status-dot{width:5px;height:5px;border-radius:50%;background:var(--accent3);animation:blink-dot 2s ease-in-out infinite;}
 @keyframes blink-dot{0%,100%{opacity:.4;}50%{opacity:1;}}
-.win-controls{display:flex;gap:.45rem;}
-.win-dot{width:12px;height:12px;border-radius:50%;cursor:none;transition:filter .2s;}
-.win-dot.red{background:#ff5f56;}
-.win-dot.yellow{background:#ffbd2e;}
-.win-dot.green{background:#28c840;}
 
 /* ─── PAGES ─── */
 #pages{flex:1;position:relative;overflow:hidden;}
@@ -102,6 +97,34 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
 .page::-webkit-scrollbar{width:4px;}
 .page::-webkit-scrollbar-track{background:transparent;}
 .page::-webkit-scrollbar-thumb{background:rgba(124,111,255,.25);border-radius:100px;}
+
+/* ─── FOOTER TABS (SATU BARIS KECIL) ─── */
+#footer-tabs {
+  height: var(--footer-h);
+  background: rgba(10,10,24,.85);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0 1.4rem;
+  padding-bottom: var(--safe-bottom);
+  overflow-x: auto;
+  white-space: nowrap; /* Menjaga tab tetap di satu garis */
+  scrollbar-width: none; /* Firefox */
+  flex-shrink: 0;
+  z-index: 100;
+}
+#footer-tabs::-webkit-scrollbar { display: none; } /* Chrome, Safari */
+
+.f-tab {
+  background: transparent; border: 1px solid transparent; border-radius: 6px;
+  color: var(--muted2); font-family: 'Space Mono', monospace; font-size: 0.62rem;
+  padding: 0.3rem 0.8rem; cursor: none; transition: all 0.2s;
+  text-transform: uppercase; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 0.3rem;
+}
+.f-tab:hover { color: var(--text); background: rgba(255,255,255,.04); }
+.f-tab.active { color: var(--accent); background: rgba(124,111,255,.1); border-color: rgba(124,111,255,.3); }
 
 /* ─── PAGE HEADERS ─── */
 .pg-header{margin-bottom:2.2rem;}
@@ -133,6 +156,7 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
 }
 .home-tag-pill::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(0,229,176,.15),transparent);animation:shimmer 2.8s infinite;}
 @keyframes shimmer{0%{transform:translateX(-100%);}100%{transform:translateX(100%);}}
+
 .home-name{
   font-family:'Syne',sans-serif;font-weight:800;
   font-size:clamp(2rem,5vw,4rem);letter-spacing:-.04em;line-height:1.1;margin-bottom:1.2rem;
@@ -142,16 +166,24 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
   background-size:200%;animation:grad-flow 5s ease infinite;
 }
-@keyframes grad-flow{0%,100%{background-position:0%;}50%{background-position:100%;}}
 
+/* TYPING CONTAINER (Kecil, Responsif) */
+.typing-container {
+  display: inline-flex;
+  align-items: center;
+  font-size: clamp(0.65rem, 1.5vw, 0.95rem); /* Diperkecil */
+  margin-left: 0.8rem;
+  vertical-align: middle;
+  font-family: 'Space Mono', monospace;
+  font-weight: 500;
+  color: var(--accent2);
+}
 .typing-wrap{display:inline-flex;align-items:center;gap:2px;}
-.typing-wrap span{color:var(--accent2);}
 .cursor-blink{display:inline-block;width:3px;height:1em;background:var(--accent2);animation:blink .7s step-end infinite;vertical-align:-.08em;}
 @keyframes blink{50%{opacity:0;}}
 
 .home-bio{font-size:.97rem;line-height:1.88;color:rgba(238,238,245,.6);max-width:580px;margin-bottom:1.8rem;}
 
-/* Tab Buttons in Home */
 .home-actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-bottom:2.2rem;}
 .btn{
   padding:.7rem 1.5rem;border-radius:8px;
@@ -161,8 +193,6 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
 }
 .btn-primary{background:var(--accent);color:#fff;box-shadow:0 0 28px rgba(124,111,255,.35);}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 42px rgba(124,111,255,.6);}
-.btn-ghost{background:rgba(255,255,255,0.03);color:var(--text);border:1px solid var(--border2);}
-.btn-ghost:hover{background:rgba(124,111,255,.1);border-color:rgba(124,111,255,.5); transform:translateY(-2px);}
 
 .home-stats{display:flex;gap:1.8rem;flex-wrap:wrap;}
 .hst{text-align:center;cursor:default;}
@@ -248,7 +278,7 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
 .proj-card.soon{opacity:.45;pointer-events:none;}
 .proj-soon-badge{position:absolute;top:1rem;left:1rem;background:rgba(255,209,102,.1);border:1px solid rgba(255,209,102,.3);color:var(--accent4);font-family:'Space Mono',monospace;font-size:.58rem;padding:.18rem .65rem;border-radius:100px;letter-spacing:.06em;}
 
-/* ════ EXPERIENCE (Expanded / Langsung Terbuka) ════ */
+/* ════ EXPERIENCE ════ */
 .timeline-expanded{display:flex;flex-direction:column;gap:1.5rem;}
 .tl-detail{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.8rem;transition:all .3s;}
 .tl-detail:hover{border-color:var(--border2);transform:translateY(-3px);box-shadow:0 14px 42px rgba(0,0,0,.3);}
@@ -334,7 +364,7 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
 .contact-cta p{font-size:.93rem;line-height:1.8;color:rgba(238,238,245,.58);margin-bottom:1.3rem;}
 
 /* ─── TOAST ─── */
-#toast{position:fixed;bottom:1.4rem;right:1.4rem;background:var(--surface2);border:1px solid var(--border2);border-radius:10px;padding:.65rem 1.2rem;font-family:'Space Mono',monospace;font-size:.68rem;color:var(--text);z-index:5000;transform:translateY(16px);opacity:0;transition:all .28s;pointer-events:none;display:flex;align-items:center;gap:.55rem;}
+#toast{position:fixed;bottom:calc(var(--footer-h) + 1.4rem);right:1.4rem;background:var(--surface2);border:1px solid var(--border2);border-radius:10px;padding:.65rem 1.2rem;font-family:'Space Mono',monospace;font-size:.68rem;color:var(--text);z-index:5000;transform:translateY(16px);opacity:0;transition:all .28s;pointer-events:none;display:flex;align-items:center;gap:.55rem;}
 #toast.show{transform:translateY(0);opacity:1;}
 #toast-dot{width:5px;height:5px;border-radius:50%;background:var(--accent3);}
 
@@ -355,9 +385,18 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
 }
 
 @media(max-width:600px){
+  .topbar-clock{display:none;}
   .home-name{font-size:clamp(1.9rem,9vw,2.8rem);}
+  
+  /* Teks typing pindah ke bawah di layar HP secara otomatis */
+  .typing-container {
+    display: block; 
+    margin-left: 0;
+    margin-top: 0.6rem;
+    font-size: 0.85rem;
+  }
+
   .home-bio{font-size:.9rem;}
-  .home-actions{gap:.55rem;}
   .btn{padding:.62rem 1.1rem;font-size:.76rem;}
   .home-stats{gap:1rem;}
   .hst-n{font-size:1.25rem;}
@@ -371,6 +410,9 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
   .album-art{width:62px;height:62px;font-size:1.6rem;}
   .socials-grid{grid-template-columns:repeat(2,1fr);}
   .page{padding: 1.5rem 1.2rem;}
+  
+  #footer-tabs { padding: 0 1rem; }
+  .f-tab { font-size: 0.58rem; padding: 0.28rem 0.65rem; }
 }
 
 /* Disable hover effects on touch devices */
@@ -407,6 +449,7 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
 
   <!-- MAIN AREA -->
   <div id="main-area">
+    
     <!-- TOPBAR -->
     <div id="topbar">
       <div class="win-controls">
@@ -414,8 +457,7 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
         <div class="win-dot yellow"></div>
         <div class="win-dot green"></div>
       </div>
-      <button class="topbar-home-btn" onclick="switchPage('home')">🏠 Home</button>
-      <div class="topbar-breadcrumb">
+      <div class="topbar-breadcrumb" style="margin-left: 0.5rem;">
         Portfolio <span style="color:var(--muted);">/</span> <span id="topbar-path">Home</span>
       </div>
       <div class="topbar-right">
@@ -424,7 +466,7 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
       </div>
     </div>
 
-    <!-- PAGES -->
+    <!-- PAGES CONTENT -->
     <div id="pages">
 
       <!-- ════ HOME ════ -->
@@ -436,29 +478,20 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
               <span class="home-tag-pill">Open to Opportunities</span>
             </div>
             
-            <!-- S.Kom ditambahkan & Efek Typing Bersebelahan -->
             <h1 class="home-name">
               Avankha <br> <span class="g">Barlian Kabuchi, S.Kom.</span>
-              <span style="font-size: clamp(1rem, 3vw, 1.3rem); display: inline-flex; align-items: center; margin-left: 0.5rem;">
-                <span class="typing-wrap" style="color: var(--accent2); font-family: 'Space Mono', monospace; font-weight: 500;">
-                  [ <span id="typing-out"></span><span class="cursor-blink"></span> ]
-                </span>
+              <!-- Wrapper untuk Typing text (Otomatis pindah baris bawah di HP) -->
+              <span class="typing-container">
+                <span class="typing-wrap">[ <span id="typing-out"></span><span class="cursor-blink"></span> ]</span>
               </span>
             </h1>
             
             <p class="home-bio">Lulusan Informatika yang passionate di bidang computer networking, software development, dan teknologi AI/IoT — menggabungkan keahlian teknis dengan jiwa kreatif untuk membangun hal-hal yang benar-benar berdampak.</p>
             
-            <!-- SEMUA TOMBOL TAB ADA DI SINI -->
             <div class="home-actions">
-              <span class="btn btn-primary" onclick="switchPage('connect')">
+              <button class="btn btn-primary" onclick="switchPage('connect')">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Hubungi Saya
-              </span>
-              <span class="btn btn-ghost" onclick="switchPage('about')">👤 About Me</span>
-              <span class="btn btn-ghost" onclick="switchPage('skills')">⚡ Skills</span>
-              <span class="btn btn-ghost" onclick="switchPage('experience')">🗓 Experience</span>
-              <span class="btn btn-ghost" onclick="switchPage('projects')">🗂 Projects</span>
-              <span class="btn btn-ghost" onclick="switchPage('certs')">🏅 Sertifikasi</span>
-              <span class="btn btn-ghost" onclick="switchPage('music')">🎵 Music</span>
+              </button>
             </div>
             
             <div class="home-stats">
@@ -643,18 +676,17 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
         </div>
         <div style="text-align:center;margin-top:2rem;">
           <p style="color:var(--muted);font-family:'Space Mono',monospace;font-size:.68rem;margin-bottom:.9rem;letter-spacing:.05em;">Tertarik berkolaborasi? Mari buat sesuatu yang luar biasa.</p>
-          <span class="btn btn-primary" onclick="switchPage('connect')">Mulai Kolaborasi →</span>
+          <button class="btn btn-primary" onclick="switchPage('connect')">Mulai Kolaborasi →</button>
         </div>
       </div>
 
-      <!-- ════ EXPERIENCE (Langsung Terbuka Semua) ════ -->
+      <!-- ════ EXPERIENCE ════ -->
       <div class="page" id="page-experience">
         <div class="pg-header">
           <div class="pg-eyebrow">Journey</div>
           <h2 class="pg-title">Perjalanan & <span class="accent">Pengalaman</span></h2>
         </div>
         <div class="timeline-expanded">
-          <!-- Item 1 -->
           <div class="tl-detail">
             <div class="tl-detail-period">2022 — 2026</div>
             <div class="tl-detail-title">S1 Informatika</div>
@@ -662,7 +694,6 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
             <div class="tl-detail-desc">Menempuh studi Sarjana Informatika dan aktif dalam berbagai kegiatan akademik, seminar nasional, dan kuliah umum yang memperkuat kompetensi di bidang networking, pengembangan perangkat lunak, dan teknologi informasi terkini.</div>
             <div class="tl-detail-tags"><span class="tl-tag">Informatika</span><span class="tl-tag">Networking</span><span class="tl-tag">Web Dev</span><span class="tl-tag">Akademik</span></div>
           </div>
-          <!-- Item 2 -->
           <div class="tl-detail">
             <div class="tl-detail-period">Agustus 2024</div>
             <div class="tl-detail-title">International Conference — AI & IoT, Industry 5.0</div>
@@ -670,7 +701,6 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
             <div class="tl-detail-desc">Berpartisipasi aktif sebagai peserta pada konferensi internasional bertema "The World in the Hands of Artificial Intelligence Technology and the Internet of Things in the Era of Industrial Revolution 5.0". Memperluas wawasan global tentang tren AI dan IoT.</div>
             <div class="tl-detail-tags"><span class="tl-tag">Artificial Intelligence</span><span class="tl-tag">IoT</span><span class="tl-tag">Industry 5.0</span><span class="tl-tag">International</span></div>
           </div>
-          <!-- Item 3 -->
           <div class="tl-detail">
             <div class="tl-detail-period">Januari 2024</div>
             <div class="tl-detail-title">Cisco CCNAv7: Introduction to Networks</div>
@@ -678,7 +708,6 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
             <div class="tl-detail-desc">Menyelesaikan program CCNAv7 melalui Cisco Networking Academy. Memperoleh keahlian fundamental dalam konfigurasi perangkat Cisco, protokol TCP/IP, routing, switching, dan keamanan jaringan dasar.</div>
             <div class="tl-detail-tags"><span class="tl-tag">Cisco</span><span class="tl-tag">TCP/IP</span><span class="tl-tag">Routing</span><span class="tl-tag">Switching</span><span class="tl-tag">VLAN</span></div>
           </div>
-          <!-- Item 4 -->
           <div class="tl-detail">
             <div class="tl-detail-period">Juni 2025</div>
             <div class="tl-detail-title">Seminar Nasional Informatika 2025</div>
@@ -686,7 +715,6 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
             <div class="tl-detail-desc">Berpartisipasi aktif dalam Seminar Nasional Informatika 2025 di MSV Cinema, Gedung 6, AMIKOM Yogyakarta — memperluas perspektif tentang perkembangan terkini dunia informatika di Indonesia.</div>
             <div class="tl-detail-tags"><span class="tl-tag">Seminar</span><span class="tl-tag">Informatika</span><span class="tl-tag">Nasional</span></div>
           </div>
-          <!-- Item 5 -->
           <div class="tl-detail">
             <div class="tl-detail-period">2022 — Present</div>
             <div class="tl-detail-title">Web Developer — Freelance</div>
@@ -694,7 +722,6 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
             <div class="tl-detail-desc">Membangun berbagai website profesional untuk klien lokal — dari landing page bisnis hingga toko online. Desain, development, hingga deployment di Vercel dengan hasil yang dapat diakses secara live.</div>
             <div class="tl-detail-tags"><span class="tl-tag">HTML/CSS</span><span class="tl-tag">JavaScript</span><span class="tl-tag">Vercel</span><span class="tl-tag">Freelance</span><span class="tl-tag">Deployment</span></div>
           </div>
-          <!-- Item 6 -->
           <div class="tl-detail">
             <div class="tl-detail-period">Ongoing</div>
             <div class="tl-detail-title">Musisi & Content Creator</div>
@@ -852,6 +879,19 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
       </div>
 
     </div><!-- /pages -->
+    
+    <!-- ════ FIXED FOOTER TABS (Kecil, Satu Baris) ════ -->
+    <div id="footer-tabs">
+      <button class="f-tab active" data-tab="home" onclick="switchPage('home')">🏠 Home</button>
+      <button class="f-tab" data-tab="about" onclick="switchPage('about')">👤 About</button>
+      <button class="f-tab" data-tab="skills" onclick="switchPage('skills')">⚡ Skills</button>
+      <button class="f-tab" data-tab="experience" onclick="switchPage('experience')">🗓 Experience</button>
+      <button class="f-tab" data-tab="projects" onclick="switchPage('projects')">🗂 Projects</button>
+      <button class="f-tab" data-tab="certs" onclick="switchPage('certs')">🏅 Certs</button>
+      <button class="f-tab" data-tab="music" onclick="switchPage('music')">🎵 Music</button>
+      <button class="f-tab" data-tab="connect" onclick="switchPage('connect')">📡 Connect</button>
+    </div>
+
   </div><!-- /main-area -->
 </div><!-- /os-shell -->
 
@@ -861,7 +901,7 @@ const cur=document.getElementById('cursor'),ring=document.getElementById('cursor
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
 (function ar(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(ar);})();
-document.querySelectorAll('a,[onclick],.filter-btn,.cert-card,.soc-card,.proj-card,.sk-item,.tl-nav-item,.track-row,.id-row,.btn,.topbar-home-btn').forEach(el=>{
+document.querySelectorAll('a,[onclick],.filter-btn,.cert-card,.soc-card,.proj-card,.sk-item,.tl-nav-item,.track-row,.id-row,.btn,.f-tab').forEach(el=>{
   el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-xl'));
   el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-xl'));
 });
@@ -917,11 +957,25 @@ function typeLoop(){
 
 /* ── PAGE SWITCH ── */
 const pageNames={home:'Home',about:'About Me',skills:'Skills',projects:'Projects',experience:'Experience',certs:'Certifications',music:'Music',connect:'Connect'};
+
 function switchPage(id){
+  // Ganti halaman aktif
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   const pg=document.getElementById('page-'+id);
   if(pg){pg.classList.add('active');pg.scrollTop=0;}
+  
+  // Ganti teks pada breadcrumb
   document.getElementById('topbar-path').textContent=pageNames[id]||id;
+
+  // Atur efek aktif pada tombol tab footer
+  document.querySelectorAll('.f-tab').forEach(b => b.classList.remove('active'));
+  const activeBtn = document.querySelector(`.f-tab[data-tab="${id}"]`);
+  if(activeBtn) {
+      activeBtn.classList.add('active');
+      // Otomatis scroll tab ke elemen yang di klik jika tertutup di layar kecil
+      activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  }
+
   if(id==='skills')setTimeout(animateBars,200);
   toast('📂 '+pageNames[id]);
 }
