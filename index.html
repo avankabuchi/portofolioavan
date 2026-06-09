@@ -2,1052 +2,1150 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Avankha Barlian Kabuchi — Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #07070d;
-  --surface: #0f0f1a;
-  --surface2: #16162a;
-  --accent: #7c6fff;
-  --accent2: #ff6b9d;
-  --accent3: #00e5b0;
-  --accent4: #ffd166;
-  --text: #eeeef5;
-  --muted: #6b6b8a;
-  --border: rgba(124,111,255,0.12);
-  --glow: rgba(124,111,255,0.3);
+/* ─── ROOT ─── */
+:root{
+  --bg:#060610;
+  --surface:#0d0d1f;
+  --surface2:#12122a;
+  --surface3:#181836;
+  --accent:#7c6fff;
+  --accent2:#ff6b9d;
+  --accent3:#00e5b0;
+  --accent4:#ffd166;
+  --text:#eeeef5;
+  --muted:#5a5a7a;
+  --muted2:#8a8aaa;
+  --border:rgba(124,111,255,.14);
+  --border2:rgba(124,111,255,.28);
+  --sidebar-w:72px;
+  --topbar-h:52px;
+  --bottom-nav-h:0px;
+  --safe-bottom:env(safe-area-inset-bottom,0px);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;cursor:none;}
+html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;}
+body{cursor:none;user-select:none;}
 
-/* ── CUSTOM CURSOR ── */
-#cursor{position:fixed;width:12px;height:12px;border-radius:50%;background:var(--accent);pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s,opacity .2s;mix-blend-mode:screen;}
-#cursor-ring{position:fixed;width:40px;height:40px;border-radius:50%;border:1px solid rgba(124,111,255,.5);pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .08s linear,width .25s,height .25s,border-color .25s;mix-blend-mode:screen;}
-body:hover #cursor{opacity:1;}
-.cursor-grow #cursor{width:20px;height:20px;opacity:.8;}
-.cursor-grow #cursor-ring{width:60px;height:60px;border-color:rgba(124,111,255,.8);}
+/* ─── CURSOR ─── */
+#cursor,#cursor-ring{position:fixed;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
+#cursor{width:10px;height:10px;background:var(--accent);mix-blend-mode:screen;transition:width .15s,height .15s;}
+#cursor-ring{width:36px;height:36px;border:1.5px solid rgba(124,111,255,.5);mix-blend-mode:screen;}
+body.cursor-xl #cursor{width:18px;height:18px;}
+body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255,.8);}
 
-/* ── SCROLL PROGRESS ── */
-#scroll-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3));z-index:500;transition:width .1s linear;box-shadow:0 0 10px var(--accent);}
+/* ─── BOOT ─── */
+#boot{position:fixed;inset:0;background:var(--bg);z-index:8000;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:1.8rem;transition:opacity .8s;}
+#boot.fade-out{opacity:0;pointer-events:none;}
+.boot-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.6rem,5vw,3rem);letter-spacing:-.04em;background:linear-gradient(120deg,var(--accent),var(--accent2),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:pulse-logo 1.5s ease-in-out infinite;}
+@keyframes pulse-logo{0%,100%{opacity:.7;}50%{opacity:1;}}
+.boot-sub{font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;}
+.boot-bar-wrap{width:260px;height:2px;background:rgba(124,111,255,.1);border-radius:100px;overflow:hidden;}
+.boot-bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent3));border-radius:100px;transition:width .05s linear;}
+.boot-log{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);height:60px;overflow:hidden;text-align:center;line-height:1.9;}
 
-/* ── NOISE TEXTURE ── */
-body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5;}
+/* ─── AMBIENT ─── */
+.ambient{position:fixed;border-radius:50%;filter:blur(130px);pointer-events:none;z-index:0;}
+.amb1{width:600px;height:600px;background:radial-gradient(circle,rgba(124,111,255,.07),transparent 65%);top:-20%;right:-10%;animation:drift 14s ease-in-out infinite;}
+.amb2{width:400px;height:400px;background:radial-gradient(circle,rgba(255,107,157,.05),transparent 65%);bottom:-10%;left:-8%;animation:drift 11s ease-in-out infinite reverse;}
+@keyframes drift{0%,100%{transform:translate(0,0);}50%{transform:translate(25px,-15px);}}
+#particle-canvas{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.3;}
 
-/* ── NAV ── */
-nav{position:fixed;top:0;width:100%;z-index:200;padding:1.2rem 5%;display:flex;justify-content:space-between;align-items:center;background:rgba(7,7,13,.8);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);transition:padding .3s;}
-nav.scrolled{padding:.8rem 5%;}
-.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;letter-spacing:-.03em;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.nav-links{display:flex;gap:2.5rem;list-style:none;}
-.nav-links a{font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--muted);transition:color .25s;position:relative;}
-.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--accent);transition:width .3s;}
-.nav-links a:hover{color:var(--text);}
-.nav-links a:hover::after,.nav-links a.active::after{width:100%;}
-.nav-links a.active{color:var(--text);}
-.nav-menu-btn{display:none;background:none;border:1px solid var(--border);color:var(--muted);padding:.4rem .7rem;border-radius:6px;cursor:none;font-size:1.1rem;}
-.mobile-menu{display:none;position:fixed;inset:0;background:rgba(7,7,13,.97);z-index:300;flex-direction:column;justify-content:center;align-items:center;gap:2rem;}
-.mobile-menu.open{display:flex;}
-.mobile-menu a{font-family:'Syne',sans-serif;font-weight:700;font-size:2rem;text-decoration:none;color:var(--muted);transition:color .2s;}
-.mobile-menu a:hover{color:var(--text);}
-.mobile-close{position:absolute;top:1.5rem;right:5%;background:none;border:none;color:var(--muted);font-size:1.5rem;cursor:none;}
+/* ─── SHELL ─── */
+#os-shell{display:flex;height:100vh;position:relative;z-index:1;}
 
-/* ── CANVAS PARTICLES ── */
-#particle-canvas{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.4;}
-
-/* ── HERO ── */
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:8rem 5% 5rem;position:relative;overflow:hidden;}
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(124,111,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(124,111,255,.06) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 40%,transparent 100%);}
-.orb{position:absolute;border-radius:50%;filter:blur(120px);pointer-events:none;}
-.orb1{width:700px;height:700px;background:radial-gradient(circle,rgba(124,111,255,.12),transparent 65%);top:-20%;right:-10%;animation:drift 12s ease-in-out infinite;}
-.orb2{width:500px;height:500px;background:radial-gradient(circle,rgba(255,107,157,.08),transparent 65%);bottom:-10%;left:-5%;animation:drift 10s ease-in-out infinite reverse;}
-.orb3{width:300px;height:300px;background:radial-gradient(circle,rgba(0,229,176,.06),transparent 65%);top:40%;left:30%;animation:drift 15s ease-in-out infinite 3s;}
-@keyframes drift{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(30px,-20px) scale(1.04);}66%{transform:translate(-20px,30px) scale(.97);}}
-
-.hero-tag{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);display:inline-flex;align-items:center;gap:.75rem;margin-bottom:1.5rem;opacity:0;animation:slideUp .7s .2s forwards;}
-.hero-tag::before{content:'';width:32px;height:1px;background:var(--accent);}
-.hero-tag-badge{background:rgba(124,111,255,.12);border:1px solid rgba(124,111,255,.25);border-radius:100px;padding:.2rem .8rem;font-size:.65rem;position:relative;overflow:hidden;}
-.hero-tag-badge::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(124,111,255,.2),transparent);animation:shimmer 2.5s ease-in-out infinite;}
-@keyframes shimmer{to{left:100%;}}
-
-.hero-name{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.8rem,8vw,7.5rem);line-height:.95;letter-spacing:-.04em;margin-bottom:.75rem;opacity:0;animation:slideUp .7s .35s forwards;}
-.hero-name .line2{background:linear-gradient(120deg,var(--accent) 0%,var(--accent2) 45%,var(--accent3) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:200%;animation:gradFlow 5s ease infinite;}
-@keyframes gradFlow{0%,100%{background-position:0%;}50%{background-position:100%;}}
-
-.hero-title{font-family:'Space Mono',monospace;font-size:.85rem;color:var(--muted);margin-bottom:1.8rem;letter-spacing:.05em;opacity:0;animation:slideUp .7s .45s forwards;}
-.hero-title span{color:var(--accent3);}
-
-/* ── TYPING EFFECT ── */
-.typing-wrap{display:inline-block;min-width:200px;}
-#typing-text{color:var(--accent2);}
-.cursor-blink{display:inline-block;width:2px;height:.85em;background:var(--accent2);margin-left:1px;vertical-align:-.1em;animation:blink .7s step-end infinite;}
-@keyframes blink{50%{opacity:0;}}
-
-.hero-bio{max-width:560px;font-size:1.1rem;line-height:1.8;color:rgba(238,238,245,.65);margin-bottom:2.5rem;opacity:0;animation:slideUp .7s .55s forwards;}
-
-.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3rem;opacity:0;animation:slideUp .7s .7s forwards;}
-.btn-glow{padding:.85rem 2rem;background:var(--accent);color:#fff;text-decoration:none;font-family:'Syne',sans-serif;font-weight:700;border-radius:6px;transition:all .25s;box-shadow:0 0 30px rgba(124,111,255,.35),0 0 60px rgba(124,111,255,.1);cursor:none;display:inline-flex;align-items:center;gap:.5rem;}
-.btn-glow:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(124,111,255,.55),0 0 80px rgba(124,111,255,.2);}
-.btn-outline{padding:.85rem 2rem;border:1px solid var(--border);color:var(--text);text-decoration:none;font-family:'Syne',sans-serif;font-weight:600;border-radius:6px;transition:all .25s;cursor:none;display:inline-flex;align-items:center;gap:.5rem;}
-.btn-outline:hover{border-color:rgba(124,111,255,.4);background:rgba(124,111,255,.05);}
-
-.hero-stats{display:flex;gap:2.5rem;opacity:0;animation:slideUp .7s .85s forwards;}
-.hstat{text-align:center;cursor:default;}
-.hstat-num{font-family:'Syne',sans-serif;font-weight:800;font-size:1.8rem;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;transition:transform .2s;}
-.hstat:hover .hstat-num{transform:scale(1.15);}
-.hstat-lbl{font-size:.72rem;color:var(--muted);margin-top:.2rem;font-family:'Space Mono',monospace;letter-spacing:.05em;}
-
-.scroll-hint{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.15em;color:var(--muted);text-transform:uppercase;opacity:0;animation:slideUp .7s 1.1s forwards;}
-.scroll-line{width:1px;height:48px;background:linear-gradient(var(--accent),transparent);animation:pulse 2s ease-in-out infinite;}
-@keyframes pulse{0%,100%{opacity:.3;transform:scaleY(.7);}50%{opacity:1;transform:scaleY(1);}}
-@keyframes slideUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
-
-/* ── SECTION BASE ── */
-section{padding:6rem 5%;position:relative;z-index:1;}
-.sec-label{font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:.8rem;margin-bottom:.8rem;}
-.sec-label::after{content:'';width:48px;height:1px;background:var(--border);}
-.sec-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.8rem,4vw,2.8rem);letter-spacing:-.025em;margin-bottom:3rem;}
-
-/* ── REVEAL ── */
-.reveal{opacity:0;transform:translateY(36px);transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1);}
-.reveal.in{opacity:1;transform:none;}
-.reveal-delay-1{transition-delay:.1s;}
-.reveal-delay-2{transition-delay:.2s;}
-.reveal-delay-3{transition-delay:.3s;}
-.reveal-left{opacity:0;transform:translateX(-36px);transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1);}
-.reveal-left.in{opacity:1;transform:none;}
-
-/* ── ABOUT ── */
-#about{background:var(--surface);}
-.about-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:5rem;align-items:start;}
-.about-text p{font-size:1.05rem;line-height:1.85;color:rgba(238,238,245,.68);margin-bottom:1.4rem;}
-.about-text p strong{color:var(--text);}
-.about-chips{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.5rem;}
-.chip{font-family:'Space Mono',monospace;font-size:.68rem;padding:.3rem .9rem;border:1px solid var(--border);border-radius:100px;color:var(--muted);transition:all .25s;cursor:none;}
-.chip:hover{border-color:var(--accent);color:var(--accent);background:rgba(124,111,255,.05);}
-.about-right{display:flex;flex-direction:column;gap:1rem;}
-.info-card{background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:1.6rem;transition:all .3s;position:relative;overflow:hidden;}
-.info-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(124,111,255,.04),transparent);opacity:0;transition:opacity .3s;}
-.info-card:hover{border-color:rgba(124,111,255,.3);transform:translateX(6px);}
-.info-card:hover::before{opacity:1;}
-.ic-num{font-family:'Syne',sans-serif;font-weight:800;font-size:2.2rem;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;}
-.ic-lbl{font-size:.8rem;color:var(--muted);margin-top:.3rem;}
-
-/* ── LIVE COUNTER ── */
-.counter-section{background:var(--surface2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:3rem 5%;position:relative;z-index:1;overflow:hidden;}
-.counter-section::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(124,111,255,.03),transparent);}
-.counters{display:flex;justify-content:center;gap:4rem;flex-wrap:wrap;}
-.counter-item{text-align:center;cursor:default;}
-.counter-num{font-family:'Syne',sans-serif;font-weight:800;font-size:3rem;background:linear-gradient(135deg,var(--accent),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;display:block;}
-.counter-label{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--muted);margin-top:.5rem;letter-spacing:.1em;text-transform:uppercase;}
-.counter-divider{width:1px;background:var(--border);}
-
-/* ── SKILLS ── */
-.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.2rem;}
-.skill-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.8rem;transition:all .3s;cursor:none;position:relative;overflow:hidden;}
-.skill-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--card-color,var(--accent));transform:scaleX(0);transition:transform .35s;}
-.skill-card:hover{transform:translateY(-5px);border-color:var(--card-color,var(--accent));box-shadow:0 20px 60px rgba(0,0,0,.4);}
-.skill-card:hover::after{transform:scaleX(1);}
-.sk-icon{font-size:2rem;margin-bottom:1rem;display:block;}
-.sk-name{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:1rem;}
-.sk-tags{display:flex;flex-wrap:wrap;gap:.45rem;}
-.sk-tag{font-family:'Space Mono',monospace;font-size:.65rem;padding:.25rem .7rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:100px;color:var(--muted);transition:all .2s;}
-.skill-card:hover .sk-tag{border-color:rgba(124,111,255,.25);}
-
-/* ── SKILL BARS ── */
-.skill-bars{margin-top:3rem;}
-.skill-bar-item{margin-bottom:1.5rem;}
-.skill-bar-header{display:flex;justify-content:space-between;margin-bottom:.5rem;}
-.skill-bar-name{font-family:'Space Mono',monospace;font-size:.75rem;color:var(--text);letter-spacing:.05em;}
-.skill-bar-pct{font-family:'Space Mono',monospace;font-size:.75rem;color:var(--accent);}
-.skill-bar-track{height:4px;background:rgba(255,255,255,.06);border-radius:100px;overflow:hidden;}
-.skill-bar-fill{height:100%;border-radius:100px;width:0;transition:width 1.2s cubic-bezier(.16,1,.3,1);background:linear-gradient(90deg,var(--bar-from,var(--accent)),var(--bar-to,var(--accent2)));}
-
-/* ── PROJECTS ── */
-#projects{background:var(--surface);}
-.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:1.5rem;}
-.project-card{background:var(--bg);border:1px solid var(--border);border-radius:20px;overflow:hidden;cursor:none;transition:all .35s;group:true;position:relative;}
-.project-card:hover{border-color:rgba(124,111,255,.4);transform:translateY(-8px);box-shadow:0 30px 80px rgba(0,0,0,.6);}
-.project-preview{height:220px;position:relative;overflow:hidden;background:var(--surface2);}
-.project-preview iframe{width:200%;height:200%;border:none;transform:scale(.5);transform-origin:top left;pointer-events:none;transition:transform .4s ease;}
-.project-card:hover .project-preview iframe{transform:scale(.5) translateY(-20px);}
-.project-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(7,7,13,.95));display:flex;align-items:flex-end;padding:1.2rem;opacity:0;transition:opacity .3s;}
-.project-card:hover .project-overlay{opacity:1;}
-.project-live-btn{font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;padding:.5rem 1.2rem;background:var(--accent);color:#fff;border-radius:100px;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;transition:all .2s;}
-.project-live-btn:hover{background:var(--accent2);}
-.project-body{padding:1.6rem;}
-.project-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.8rem;}
-.project-tag{font-family:'Space Mono',monospace;font-size:.62rem;padding:.2rem .65rem;border:1px solid var(--border);border-radius:100px;color:var(--muted);}
-.project-name{font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;margin-bottom:.5rem;}
-.project-desc{font-size:.9rem;line-height:1.7;color:rgba(238,238,245,.55);}
-.project-links{display:flex;gap:.8rem;margin-top:1.2rem;}
-.proj-link{font-family:'Space Mono',monospace;font-size:.68rem;color:var(--accent);text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;border:1px solid rgba(124,111,255,.2);padding:.3rem .8rem;border-radius:100px;transition:all .2s;}
-.proj-link:hover{background:rgba(124,111,255,.1);border-color:rgba(124,111,255,.5);}
-.project-number{position:absolute;top:1rem;right:1rem;font-family:'Syne',sans-serif;font-weight:800;font-size:3rem;color:rgba(124,111,255,.06);line-height:1;pointer-events:none;}
-
-/* ── TIMELINE ── */
-#experience{background:var(--bg);}
-.timeline{position:relative;padding-left:2rem;}
-.timeline::before{content:'';position:absolute;left:0;top:8px;bottom:0;width:1px;background:linear-gradient(to bottom,var(--accent),rgba(124,111,255,.1));}
-.tl-item{position:relative;padding-bottom:3rem;}
-.tl-item:last-child{padding-bottom:0;}
-.tl-dot{position:absolute;left:-2.38rem;top:.35rem;width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(124,111,255,.15),0 0 20px rgba(124,111,255,.5);transition:transform .2s,box-shadow .2s;}
-.tl-item:hover .tl-dot{transform:scale(1.4);box-shadow:0 0 0 6px rgba(124,111,255,.2),0 0 30px rgba(124,111,255,.7);}
-.tl-period{font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.1em;color:var(--accent);margin-bottom:.6rem;text-transform:uppercase;}
-.tl-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1.25rem;margin-bottom:.2rem;}
-.tl-org{font-size:.85rem;color:var(--accent2);margin-bottom:.8rem;}
-.tl-desc{font-size:.92rem;line-height:1.75;color:rgba(238,238,245,.6);}
-
-/* ── CERTIFICATIONS ── */
-#certs{background:var(--surface);}
-.cert-filter{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:2rem;}
-.filter-btn{font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.08em;padding:.4rem 1rem;border:1px solid var(--border);border-radius:100px;background:transparent;color:var(--muted);cursor:none;transition:all .25s;text-transform:uppercase;}
-.filter-btn.active,.filter-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(124,111,255,.08);}
-.cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:1.2rem;}
-.cert-card{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:1.6rem;display:flex;gap:1.2rem;align-items:flex-start;transition:all .3s;position:relative;overflow:hidden;}
-.cert-card:hover{border-color:rgba(124,111,255,.3);transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,.5);}
-.cert-badge{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;}
-.cert-name{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:.3rem;line-height:1.3;}
-.cert-issuer{font-size:.8rem;color:var(--accent2);margin-bottom:.5rem;}
-.cert-meta{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--muted);display:flex;align-items:center;gap:.5rem;}
-.cert-meta::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent3);flex-shrink:0;}
-.cert-id{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);opacity:.5;margin-top:.3rem;}
-.cert-type{position:absolute;top:1rem;right:1rem;font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;padding:.2rem .6rem;border-radius:100px;border:1px solid;}
-
-/* ── MUSIC PLAYER ── */
-#music{background:var(--bg);}
-.music-player{background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:2.5rem;max-width:600px;margin:0 auto;position:relative;overflow:hidden;}
-.music-player::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(124,111,255,.04),rgba(255,107,157,.04));pointer-events:none;}
-.now-playing-label{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.2em;color:var(--accent);text-transform:uppercase;margin-bottom:1.5rem;display:flex;align-items:center;gap:.5rem;}
-.now-playing-label::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent3);animation:pulse-dot 1.5s ease-in-out infinite;}
-@keyframes pulse-dot{0%,100%{opacity:.3;transform:scale(.8);}50%{opacity:1;transform:scale(1.2);}}
-.track-info{display:flex;align-items:center;gap:1.5rem;margin-bottom:2rem;}
-.track-art{width:72px;height:72px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:2rem;flex-shrink:0;animation:spin-art 8s linear infinite paused;}
-.track-art.playing{animation-play-state:running;}
-@keyframes spin-art{to{transform:rotate(360deg);}}
-.track-name{font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;}
-.track-artist{font-size:.85rem;color:var(--muted);margin-top:.2rem;}
-.track-platform{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--accent3);margin-top:.3rem;}
-.progress-bar{width:100%;height:3px;background:rgba(255,255,255,.08);border-radius:100px;margin-bottom:1.5rem;cursor:none;position:relative;overflow:hidden;}
-.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:100px;width:35%;animation:progress-anim 20s linear infinite paused;}
-.progress-fill.playing{animation-play-state:running;}
-@keyframes progress-anim{to{width:100%;}}
-.player-controls{display:flex;align-items:center;justify-content:center;gap:1.5rem;}
-.ctrl-btn{background:none;border:none;color:var(--muted);font-size:1.2rem;cursor:none;transition:color .2s,transform .2s;padding:.3rem;}
-.ctrl-btn:hover{color:var(--text);transform:scale(1.1);}
-.play-btn{width:52px;height:52px;border-radius:50%;background:var(--accent);border:none;color:#fff;font-size:1.1rem;cursor:none;transition:all .25s;display:flex;align-items:center;justify-content:center;box-shadow:0 0 20px rgba(124,111,255,.4);}
-.play-btn:hover{transform:scale(1.08);box-shadow:0 0 30px rgba(124,111,255,.6);}
-.player-links{display:flex;justify-content:center;gap:.8rem;margin-top:1.5rem;}
-.platform-link{font-family:'Space Mono',monospace;font-size:.65rem;padding:.35rem 1rem;border:1px solid var(--border);border-radius:100px;text-decoration:none;color:var(--muted);transition:all .2s;display:inline-flex;align-items:center;gap:.4rem;}
-.platform-link:hover{border-color:var(--accent);color:var(--accent);}
-
-/* ── SOCIALS ── */
-#contact{background:var(--surface);}
-.social-intro{font-size:1.05rem;line-height:1.8;color:rgba(238,238,245,.6);max-width:500px;margin-bottom:3rem;}
-.socials-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:1rem;}
-.soc-card{background:var(--bg);border:1px solid var(--border);border-radius:18px;padding:2rem 1.2rem;text-decoration:none;color:var(--text);display:flex;flex-direction:column;align-items:center;gap:.9rem;text-align:center;transition:all .3s;position:relative;overflow:hidden;cursor:none;}
-.soc-card::before{content:'';position:absolute;inset:0;background:var(--sc,rgba(124,111,255,.08));opacity:0;transition:opacity .3s;}
-.soc-card:hover{transform:translateY(-7px);border-color:var(--sc-border,rgba(124,111,255,.4));}
-.soc-card:hover::before{opacity:1;}
-.soc-card:hover{box-shadow:0 20px 60px var(--sc-shadow,rgba(124,111,255,.2));}
-.soc-icon{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);font-size:1.4rem;transition:transform .3s;}
-.soc-card:hover .soc-icon{transform:scale(1.15);}
-.soc-name{font-family:'Syne',sans-serif;font-weight:700;font-size:.85rem;}
-.soc-handle{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--muted);}
-
-/* ── TOAST ── */
-#toast{position:fixed;bottom:2rem;right:2rem;background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:.8rem 1.5rem;font-family:'Space Mono',monospace;font-size:.75rem;color:var(--text);z-index:1000;transform:translateY(20px);opacity:0;transition:all .3s;pointer-events:none;}
-#toast.show{transform:translateY(0);opacity:1;}
-
-/* ── FOOTER ── */
-footer{padding:3rem 5%;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;position:relative;z-index:1;}
-.footer-brand{font-family:'Syne',sans-serif;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.footer-copy{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--muted);}
-.footer-back-top{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--muted);text-decoration:none;cursor:none;transition:color .2s;border:1px solid var(--border);padding:.3rem .8rem;border-radius:100px;}
-.footer-back-top:hover{color:var(--accent);border-color:rgba(124,111,255,.3);}
-
-/* ── HIDDEN ── */
-.cert-card[data-hidden]{display:none;}
-
-/* ── RESPONSIVE ── */
-@media(max-width:900px){
-  .about-grid{grid-template-columns:1fr;gap:2.5rem;}
-  nav{padding:1rem 5%;}
-  .nav-links{display:none;}
-  .nav-menu-btn{display:block;}
-  .hero{padding:7rem 5% 5rem;}
-  .projects-grid{grid-template-columns:1fr;}
-  .counters{gap:2rem;}
-  .counter-divider{display:none;}
+/* ─── SIDEBAR (desktop) ─── */
+#sidebar{
+  width:var(--sidebar-w);background:rgba(13,13,31,.92);
+  backdrop-filter:blur(32px);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;align-items:center;
+  padding:1rem 0;gap:.25rem;z-index:100;flex-shrink:0;
 }
+.sidebar-logo{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:.9rem;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:.7rem;cursor:none;
+}
+.sidebar-sep{width:32px;height:1px;background:var(--border);margin:.4rem 0;}
+.nav-item{
+  width:48px;height:48px;border-radius:14px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+  cursor:none;transition:all .22s;position:relative;border:1px solid transparent;
+}
+.nav-item:hover{background:rgba(124,111,255,.1);border-color:var(--border2);}
+.nav-item.active{background:rgba(124,111,255,.18);border-color:rgba(124,111,255,.4);}
+.nav-item.active::before{
+  content:'';position:absolute;left:-1px;top:50%;transform:translateY(-50%);
+  width:3px;height:24px;border-radius:0 3px 3px 0;
+  background:linear-gradient(180deg,var(--accent),var(--accent3));
+}
+.nav-icon{font-size:1.15rem;line-height:1;}
+.nav-label{font-family:'Space Mono',monospace;font-size:.44rem;letter-spacing:.06em;color:var(--muted);text-transform:uppercase;}
+.nav-item.active .nav-label{color:var(--accent);}
+.nav-tooltip{
+  position:absolute;left:calc(100% + 14px);top:50%;transform:translateY(-50%);
+  background:var(--surface3);border:1px solid var(--border2);border-radius:8px;
+  padding:.3rem .8rem;font-family:'Space Mono',monospace;font-size:.65rem;
+  color:var(--text);white-space:nowrap;opacity:0;pointer-events:none;
+  transition:opacity .15s;letter-spacing:.05em;z-index:200;
+}
+.nav-item:hover .nav-tooltip{opacity:1;}
+.nav-dot{position:absolute;top:8px;right:8px;width:6px;height:6px;border-radius:50%;background:var(--accent3);box-shadow:0 0 8px var(--accent3);}
+.sidebar-bottom{margin-top:auto;}
+
+/* ─── MAIN AREA ─── */
+#main-area{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0;}
+
+/* ─── TOPBAR ─── */
+#topbar{
+  height:var(--topbar-h);background:rgba(13,13,31,.75);
+  backdrop-filter:blur(24px);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;padding:0 1.4rem;gap:1.2rem;
+  flex-shrink:0;z-index:50;
+}
+.topbar-breadcrumb{
+  font-family:'Space Mono',monospace;font-size:.66rem;
+  color:var(--muted);letter-spacing:.05em;
+  display:flex;align-items:center;gap:.45rem;
+}
+.topbar-breadcrumb span{color:var(--text);}
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:1rem;}
+.topbar-clock{font-family:'Space Mono',monospace;font-size:.66rem;color:var(--muted);}
+.topbar-status{display:flex;align-items:center;gap:.4rem;font-family:'Space Mono',monospace;font-size:.62rem;color:var(--accent3);}
+.status-dot{width:5px;height:5px;border-radius:50%;background:var(--accent3);animation:blink-dot 2s ease-in-out infinite;}
+@keyframes blink-dot{0%,100%{opacity:.4;}50%{opacity:1;}}
+.win-controls{display:flex;gap:.45rem;}
+.win-dot{width:12px;height:12px;border-radius:50%;cursor:none;transition:filter .2s;}
+.win-dot.red{background:#ff5f56;}
+.win-dot.yellow{background:#ffbd2e;}
+.win-dot.green{background:#28c840;}
+
+/* ─── PAGES ─── */
+#pages{flex:1;position:relative;overflow:hidden;}
+.page{
+  position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;
+  padding:2.2rem 2.8rem;opacity:0;
+  transform:translateY(14px) scale(.99);pointer-events:none;
+  transition:opacity .32s cubic-bezier(.16,1,.3,1),transform .32s cubic-bezier(.16,1,.3,1);
+  -webkit-overflow-scrolling:touch;
+}
+.page.active{opacity:1;transform:none;pointer-events:auto;}
+.page::-webkit-scrollbar{width:4px;}
+.page::-webkit-scrollbar-track{background:transparent;}
+.page::-webkit-scrollbar-thumb{background:rgba(124,111,255,.25);border-radius:100px;}
+
+/* ─── PAGE HEADERS ─── */
+.pg-header{margin-bottom:2.2rem;}
+.pg-eyebrow{
+  font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.2em;
+  color:var(--accent);text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:.6rem;margin-bottom:.5rem;
+}
+.pg-eyebrow::before{content:'';width:16px;height:1px;background:var(--accent);}
+.pg-title{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:clamp(1.7rem,3.5vw,2.6rem);letter-spacing:-.03em;line-height:1.05;
+}
+.pg-title .accent{background:linear-gradient(120deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+
+/* ════ HOME ════ */
+#page-home{display:flex;align-items:center;}
+.home-inner{display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center;max-width:1100px;width:100%;}
+.home-tag{
+  font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.15em;
+  color:var(--accent3);text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:.6rem;margin-bottom:1.2rem;
+  flex-wrap:wrap;
+}
+.home-tag-pill{
+  background:rgba(0,229,176,.08);border:1px solid rgba(0,229,176,.22);
+  border-radius:100px;padding:.18rem .75rem;font-size:.6rem;
+  position:relative;overflow:hidden;
+}
+.home-tag-pill::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(0,229,176,.15),transparent);animation:shimmer 2.8s infinite;}
+@keyframes shimmer{0%{transform:translateX(-100%);}100%{transform:translateX(100%);}}
+.home-name{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:clamp(2rem,5vw,4rem);letter-spacing:-.04em;line-height:.95;margin-bottom:.8rem;
+}
+.home-name .g{
+  background:linear-gradient(120deg,var(--accent) 0%,var(--accent2) 50%,var(--accent3) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-size:200%;animation:grad-flow 5s ease infinite;
+}
+@keyframes grad-flow{0%,100%{background-position:0%;}50%{background-position:100%;}}
+.home-role{
+  font-family:'Space Mono',monospace;font-size:.8rem;color:var(--muted2);
+  margin-bottom:1.5rem;display:flex;align-items:center;gap:.7rem;flex-wrap:wrap;
+}
+.role-sep{color:rgba(124,111,255,.4);}
+.typing-wrap{display:inline-flex;align-items:center;gap:2px;}
+.typing-wrap span{color:var(--accent2);}
+.cursor-blink{display:inline-block;width:2px;height:.75em;background:var(--accent2);animation:blink .7s step-end infinite;vertical-align:-.08em;}
+@keyframes blink{50%{opacity:0;}}
+.home-bio{font-size:.97rem;line-height:1.88;color:rgba(238,238,245,.6);max-width:520px;margin-bottom:1.8rem;}
+.home-actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-bottom:2.2rem;}
+.btn{
+  padding:.7rem 1.5rem;border-radius:8px;
+  font-family:'Syne',sans-serif;font-weight:700;font-size:.8rem;
+  text-decoration:none;cursor:none;transition:all .22s;
+  display:inline-flex;align-items:center;gap:.45rem;border:none;
+}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 0 28px rgba(124,111,255,.35);}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 42px rgba(124,111,255,.6);}
+.btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border2);}
+.btn-ghost:hover{background:rgba(124,111,255,.07);border-color:rgba(124,111,255,.4);}
+.home-stats{display:flex;gap:1.8rem;flex-wrap:wrap;}
+.hst{text-align:center;cursor:default;}
+.hst-n{font-family:'Syne',sans-serif;font-weight:800;font-size:1.5rem;background:linear-gradient(135deg,var(--accent),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;transition:transform .2s;}
+.hst:hover .hst-n{transform:scale(1.12);}
+.hst-l{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted);margin-top:.1rem;letter-spacing:.06em;text-transform:uppercase;}
+
+/* terminal */
+.home-terminal{width:330px;background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.5);flex-shrink:0;}
+.term-bar{background:var(--surface2);padding:.65rem 1rem;display:flex;align-items:center;gap:.5rem;border-bottom:1px solid var(--border);}
+.term-dot{width:11px;height:11px;border-radius:50%;}
+.term-dot.r{background:#ff5f56;}.term-dot.y{background:#ffbd2e;}.term-dot.g{background:#28c840;}
+.term-title{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);margin-left:auto;}
+.term-body{padding:1.1rem;font-family:'Space Mono',monospace;font-size:.68rem;line-height:1.9;color:var(--muted2);min-height:270px;}
+.term-line{display:flex;gap:.5rem;}
+.term-prompt{color:var(--accent3);}
+.term-cmd{color:var(--text);}
+.term-out{color:var(--muted2);padding-left:1rem;}
+.term-out.green{color:var(--accent3);}
+.term-out.purple{color:var(--accent);}
+.term-out.pink{color:var(--accent2);}
+.term-cursor{display:inline-block;width:7px;height:.85em;background:var(--accent);animation:blink .7s step-end infinite;vertical-align:-.12em;}
+
+/* ════ ABOUT ════ */
+.about-layout{display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
+.about-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.8rem;transition:all .3s;}
+.about-card:hover{border-color:var(--border2);}
+.about-bio p{font-size:.95rem;line-height:1.9;color:rgba(238,238,245,.63);margin-bottom:.95rem;}
+.about-bio strong{color:var(--text);}
+.chips{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.7rem;}
+.chip{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.04em;padding:.28rem .8rem;border:1px solid var(--border);border-radius:100px;color:var(--muted2);cursor:none;transition:all .2s;}
+.chip:hover{border-color:var(--accent);color:var(--accent);background:rgba(124,111,255,.06);}
+.id-list{display:flex;flex-direction:column;gap:.8rem;}
+.id-row{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;background:var(--surface2);border-radius:10px;border:1px solid var(--border);transition:all .25s;}
+.id-row:hover{border-color:var(--border2);transform:translateX(4px);}
+.id-icon{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;}
+.id-key{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;}
+.id-val{font-family:'Syne',sans-serif;font-weight:700;font-size:.86rem;margin-top:.1rem;}
+.about-quote{grid-column:1/-1;padding:1.6rem 1.8rem;background:var(--surface);border-radius:16px;border:1px solid var(--border);border-left:3px solid var(--accent);font-size:.97rem;line-height:1.88;color:rgba(238,238,245,.68);font-style:italic;}
+.about-quote strong{color:var(--accent);font-style:normal;}
+
+/* ════ SKILLS ════ */
+.skills-layout{display:grid;grid-template-columns:1fr 1fr;gap:1.8rem;}
+.skill-panel{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.6rem;}
+.skill-panel-title{font-family:'Syne',sans-serif;font-weight:700;font-size:.92rem;margin-bottom:1.3rem;display:flex;align-items:center;gap:.65rem;}
+.skill-panel-title .icon{width:30px;height:30px;border-radius:7px;background:rgba(124,111,255,.15);display:flex;align-items:center;justify-content:center;font-size:.9rem;}
+.skill-items{display:flex;flex-direction:column;gap:.7rem;}
+.sk-item{display:flex;align-items:center;justify-content:space-between;padding:.65rem .85rem;background:var(--surface2);border-radius:9px;border:1px solid var(--border);transition:all .2s;cursor:default;}
+.sk-item:hover{border-color:var(--border2);background:rgba(124,111,255,.06);}
+.sk-item-left{display:flex;align-items:center;gap:.55rem;}
+.sk-item-icon{font-size:.95rem;}
+.sk-item-name{font-size:.83rem;font-weight:500;}
+.sk-item-level{font-family:'Space Mono',monospace;font-size:.58rem;padding:.14rem .48rem;border-radius:100px;}
+.lv-expert{background:rgba(0,229,176,.1);color:var(--accent3);border:1px solid rgba(0,229,176,.22);}
+.lv-advanced{background:rgba(124,111,255,.1);color:var(--accent);border:1px solid rgba(124,111,255,.22);}
+.lv-intermediate{background:rgba(255,107,157,.1);color:var(--accent2);border:1px solid rgba(255,107,157,.22);}
+.skill-bars-panel{grid-column:1/-1;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.6rem;}
+.bar-item{margin-bottom:1.2rem;}
+.bar-header{display:flex;justify-content:space-between;margin-bottom:.5rem;}
+.bar-name{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--text);letter-spacing:.04em;}
+.bar-pct{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--accent);}
+.bar-track{height:5px;background:rgba(255,255,255,.05);border-radius:100px;overflow:hidden;}
+.bar-fill{height:100%;width:0;border-radius:100px;transition:width 1.2s cubic-bezier(.16,1,.3,1);}
+
+/* ════ PROJECTS ════ */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.3rem;}
+.proj-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;overflow:hidden;cursor:none;transition:all .3s;position:relative;}
+.proj-card:hover{border-color:rgba(124,111,255,.4);transform:translateY(-6px);box-shadow:0 28px 70px rgba(0,0,0,.5);}
+.proj-preview{height:190px;background:var(--surface2);overflow:hidden;position:relative;}
+.proj-preview iframe{width:200%;height:200%;border:none;transform:scale(.5);transform-origin:top left;pointer-events:none;}
+.proj-preview-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(6,6,16,.95));display:flex;align-items:flex-end;padding:1rem;opacity:0;transition:opacity .25s;}
+.proj-card:hover .proj-preview-overlay{opacity:1;}
+.proj-live-btn{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.07em;padding:.38rem .95rem;background:var(--accent);color:#fff;border-radius:100px;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;}
+.proj-body{padding:1.3rem 1.4rem;}
+.proj-tags{display:flex;flex-wrap:wrap;gap:.38rem;margin-bottom:.65rem;}
+.proj-tag{font-family:'Space Mono',monospace;font-size:.58rem;padding:.18rem .55rem;border:1px solid var(--border);border-radius:100px;color:var(--muted2);}
+.proj-name{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;margin-bottom:.38rem;}
+.proj-desc{font-size:.86rem;line-height:1.72;color:rgba(238,238,245,.5);}
+.proj-num{position:absolute;top:.8rem;right:1rem;font-family:'Syne',sans-serif;font-weight:800;font-size:3.2rem;color:rgba(124,111,255,.05);line-height:1;pointer-events:none;}
+.proj-links{display:flex;gap:.55rem;margin-top:.9rem;}
+.plink{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--accent);text-decoration:none;display:inline-flex;align-items:center;gap:.3rem;border:1px solid rgba(124,111,255,.2);padding:.22rem .7rem;border-radius:100px;transition:all .18s;}
+.plink:hover{background:rgba(124,111,255,.1);border-color:rgba(124,111,255,.5);}
+.proj-card.soon{opacity:.45;pointer-events:none;}
+.proj-soon-badge{position:absolute;top:1rem;left:1rem;background:rgba(255,209,102,.1);border:1px solid rgba(255,209,102,.3);color:var(--accent4);font-family:'Space Mono',monospace;font-size:.58rem;padding:.18rem .65rem;border-radius:100px;letter-spacing:.06em;}
+
+/* ════ EXPERIENCE ════ */
+.timeline-layout{display:grid;grid-template-columns:250px 1fr;gap:1.8rem;align-items:start;}
+.tl-nav{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;position:sticky;top:0;}
+.tl-nav-item{padding:.9rem 1.1rem;cursor:none;transition:all .2s;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.75rem;position:relative;}
+.tl-nav-item:last-child{border-bottom:none;}
+.tl-nav-item:hover{background:rgba(124,111,255,.06);}
+.tl-nav-item.active{background:rgba(124,111,255,.12);}
+.tl-nav-item.active::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--accent),var(--accent3));}
+.tl-nav-year{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--accent);letter-spacing:.07em;}
+.tl-nav-title{font-size:.8rem;font-weight:500;margin-top:.12rem;line-height:1.3;}
+.tl-detail{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.8rem;min-height:280px;}
+.tl-detail-period{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;margin-bottom:.65rem;display:flex;align-items:center;gap:.55rem;}
+.tl-detail-period::after{content:'';flex:1;height:1px;background:var(--border);}
+.tl-detail-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.35rem;margin-bottom:.28rem;}
+.tl-detail-org{font-size:.88rem;color:var(--accent2);margin-bottom:1.1rem;}
+.tl-detail-desc{font-size:.93rem;line-height:1.88;color:rgba(238,238,245,.63);}
+.tl-detail-tags{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1.2rem;}
+.tl-tag{font-family:'Space Mono',monospace;font-size:.6rem;padding:.22rem .7rem;border-radius:100px;border:1px solid var(--border);color:var(--muted2);}
+
+/* ════ CERTS ════ */
+.certs-layout{display:flex;flex-direction:column;gap:1.3rem;}
+.cert-filter{display:flex;gap:.45rem;flex-wrap:wrap;margin-bottom:.3rem;}
+.filter-btn{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.07em;padding:.32rem .85rem;border:1px solid var(--border);border-radius:100px;background:transparent;color:var(--muted2);cursor:none;transition:all .2s;text-transform:uppercase;}
+.filter-btn:hover,.filter-btn.active{border-color:var(--accent);color:var(--accent);background:rgba(124,111,255,.08);}
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:.9rem;}
+.cert-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.4rem;display:flex;gap:1.1rem;align-items:flex-start;transition:all .28s;position:relative;overflow:hidden;cursor:none;}
+.cert-card:hover{border-color:var(--border2);transform:translateY(-3px);box-shadow:0 14px 42px rgba(0,0,0,.42);}
+.cert-badge{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;}
+.cert-name{font-family:'Syne',sans-serif;font-weight:700;font-size:.88rem;margin-bottom:.18rem;line-height:1.3;}
+.cert-issuer{font-size:.76rem;color:var(--accent2);margin-bottom:.35rem;}
+.cert-meta{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);display:flex;align-items:center;gap:.38rem;}
+.cert-meta::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--accent3);flex-shrink:0;}
+.cert-id{font-family:'Space Mono',monospace;font-size:.52rem;color:var(--muted);opacity:.4;margin-top:.22rem;}
+.cert-type-badge{position:absolute;top:.85rem;right:.85rem;font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:.07em;text-transform:uppercase;padding:.15rem .5rem;border-radius:100px;border:1px solid;}
+
+/* ════ MUSIC ════ */
+.music-layout{display:grid;grid-template-columns:1fr 1fr;gap:1.8rem;align-items:start;}
+.music-player-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:1.8rem;overflow:hidden;position:relative;}
+.music-player-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 20%,rgba(124,111,255,.05),transparent 60%);pointer-events:none;}
+.np-label{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.2em;color:var(--accent);text-transform:uppercase;display:flex;align-items:center;gap:.5rem;margin-bottom:1.3rem;}
+.np-pulse{width:6px;height:6px;border-radius:50%;background:var(--accent3);animation:blink-dot 1.5s ease-in-out infinite;}
+.track-visual{display:flex;align-items:center;gap:1.3rem;margin-bottom:1.6rem;}
+.album-art{width:76px;height:76px;border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:2rem;flex-shrink:0;animation:spin-art 10s linear infinite paused;}
+.album-art.spin{animation-play-state:running;}
+@keyframes spin-art{to{transform:rotate(360deg);}}
+.track-meta .track-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;}
+.track-meta .track-artist{font-size:.8rem;color:var(--muted2);margin-top:.18rem;}
+.track-meta .track-platform{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--accent3);margin-top:.28rem;}
+.progress-wrap{margin-bottom:1.3rem;}
+.prog-bar{height:4px;background:rgba(255,255,255,.07);border-radius:100px;overflow:hidden;cursor:none;}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:100px;width:0;transition:width .5s linear;}
+.prog-times{display:flex;justify-content:space-between;margin-top:.38rem;}
+.prog-times span{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);}
+.player-btns{display:flex;align-items:center;justify-content:center;gap:1.1rem;}
+.p-btn{background:none;border:none;color:var(--muted2);cursor:none;font-size:1.05rem;padding:.3rem;transition:color .2s,transform .2s;}
+.p-btn:hover{color:var(--text);transform:scale(1.1);}
+.p-btn-play{width:48px;height:48px;border-radius:50%;background:var(--accent);border:none;color:#fff;cursor:none;font-size:1rem;display:flex;align-items:center;justify-content:center;box-shadow:0 0 22px rgba(124,111,255,.42);transition:all .22s;}
+.p-btn-play:hover{transform:scale(1.08);box-shadow:0 0 34px rgba(124,111,255,.62);}
+.music-links{display:flex;justify-content:center;gap:.6rem;margin-top:1.3rem;flex-wrap:wrap;}
+.m-link{font-family:'Space Mono',monospace;font-size:.6rem;padding:.28rem .85rem;border:1px solid var(--border);border-radius:100px;text-decoration:none;color:var(--muted2);transition:all .2s;display:inline-flex;align-items:center;gap:.3rem;}
+.m-link:hover{border-color:var(--accent);color:var(--accent);}
+.waveform{display:flex;align-items:center;gap:3px;height:38px;margin:.9rem 0;}
+.wave-bar{width:3px;border-radius:100px;background:var(--accent);opacity:.3;animation:wave-anim 1s ease-in-out infinite paused;}
+.waveform.playing .wave-bar{opacity:.65;animation-play-state:running;}
+@keyframes wave-anim{0%,100%{transform:scaleY(.3);}50%{transform:scaleY(1);}}
+.discography-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:1.8rem;}
+.disc-title{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:1.1rem;}
+.track-list{display:flex;flex-direction:column;gap:.55rem;}
+.track-row{display:flex;align-items:center;gap:.85rem;padding:.65rem .85rem;border-radius:10px;border:1px solid var(--border);background:var(--surface2);cursor:none;transition:all .2s;}
+.track-row:hover{border-color:var(--border2);background:rgba(124,111,255,.06);}
+.track-row.playing-row{border-color:rgba(124,111,255,.4);background:rgba(124,111,255,.1);}
+.tr-num{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--muted);width:16px;text-align:center;}
+.tr-art{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0;}
+.tr-name{font-size:.83rem;font-weight:600;}
+.tr-sub{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);margin-top:.08rem;}
+.tr-dur{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--muted);margin-left:auto;}
+
+/* ════ CONNECT ════ */
+.connect-layout{display:grid;grid-template-columns:1fr 1fr;gap:1.8rem;}
+.connect-intro{grid-column:1/-1;font-size:.97rem;line-height:1.88;color:rgba(238,238,245,.58);max-width:540px;margin-bottom:.3rem;}
+.socials-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:.85rem;grid-column:1/-1;}
+.soc-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.6rem 1rem;text-decoration:none;color:var(--text);display:flex;flex-direction:column;align-items:center;gap:.65rem;text-align:center;cursor:none;transition:all .28s;position:relative;overflow:hidden;}
+.soc-card::before{content:'';position:absolute;inset:0;background:var(--sc-bg,rgba(124,111,255,.07));opacity:0;transition:opacity .3s;}
+.soc-card:hover{transform:translateY(-6px);border-color:var(--sc-border,rgba(124,111,255,.4));box-shadow:0 16px 46px var(--sc-shadow,rgba(124,111,255,.16));}
+.soc-card:hover::before{opacity:1;}
+.soc-icon{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);font-size:1.2rem;transition:transform .3s;}
+.soc-card:hover .soc-icon{transform:scale(1.15);}
+.soc-name{font-family:'Syne',sans-serif;font-weight:700;font-size:.8rem;}
+.soc-handle{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);}
+.contact-cta{grid-column:1/-1;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.8rem;text-align:center;}
+.contact-cta p{font-size:.93rem;line-height:1.8;color:rgba(238,238,245,.58);margin-bottom:1.3rem;}
+
+/* ─── TOAST ─── */
+#toast{position:fixed;bottom:1.4rem;right:1.4rem;background:var(--surface2);border:1px solid var(--border2);border-radius:10px;padding:.65rem 1.2rem;font-family:'Space Mono',monospace;font-size:.68rem;color:var(--text);z-index:5000;transform:translateY(16px);opacity:0;transition:all .28s;pointer-events:none;display:flex;align-items:center;gap:.55rem;}
+#toast.show{transform:translateY(0);opacity:1;}
+#toast-dot{width:5px;height:5px;border-radius:50%;background:var(--accent3);}
+
+/* ════════════════════════════════
+   MOBILE BOTTOM NAV
+   — replaces hamburger drawer —
+════════════════════════════════ */
+#bottom-nav{
+  display:none;
+  position:fixed;bottom:0;left:0;right:0;z-index:500;
+  background:rgba(10,10,24,.92);
+  backdrop-filter:blur(28px) saturate(1.5);
+  -webkit-backdrop-filter:blur(28px) saturate(1.5);
+  border-top:1px solid var(--border);
+  padding:0 4px;
+  padding-bottom:var(--safe-bottom);
+  /* overflow-x for scrollable tabs on very small screens */
+  overflow-x:auto;
+  overflow-y:hidden;
+  scrollbar-width:none;
+}
+#bottom-nav::-webkit-scrollbar{display:none;}
+.bnav-inner{
+  display:flex;
+  min-width:max-content;
+  width:100%;
+  justify-content:space-around;
+}
+.bnav-item{
+  flex:0 0 auto;
+  min-width:52px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:2px;padding:.5rem .2rem .45rem;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  transition:opacity .15s;
+  position:relative;
+}
+.bnav-item:active{opacity:.65;}
+.bnav-item.active .bnav-icon{filter:drop-shadow(0 0 6px rgba(124,111,255,.7));}
+.bnav-item.active::after{
+  content:'';position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);
+  width:20px;height:2px;border-radius:100px;
+  background:linear-gradient(90deg,var(--accent),var(--accent3));
+}
+.bnav-icon{font-size:1.2rem;line-height:1;transition:transform .2s;}
+.bnav-item.active .bnav-icon{transform:translateY(-1px);}
+.bnav-label{
+  font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--muted2);transition:color .2s;
+}
+.bnav-item.active .bnav-label{color:var(--accent);}
+.bnav-dot{position:absolute;top:6px;right:8px;width:5px;height:5px;border-radius:50%;background:var(--accent3);box-shadow:0 0 6px var(--accent3);}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){
+  :root{--sidebar-w:0px;--bottom-nav-h:64px;}
+  #sidebar{display:none;}
+  #bottom-nav{display:block;}
+  /* make page scroll stop above bottom nav */
+  .page{padding:1.6rem 1.4rem calc(var(--bottom-nav-h) + 16px + var(--safe-bottom));}
+  /* adjust toast so it clears nav */
+  #toast{bottom:calc(var(--bottom-nav-h) + 12px + var(--safe-bottom));}
+
+  .topbar-clock{display:none;}
+  .home-inner{grid-template-columns:1fr;}
+  .home-terminal{display:none;}
+  .about-layout{grid-template-columns:1fr;}
+  .skills-layout{grid-template-columns:1fr;}
+  .skill-bars-panel{grid-column:1;}
+  .timeline-layout{grid-template-columns:1fr;gap:1.2rem;}
+  .tl-nav{position:static;display:grid;grid-template-columns:1fr 1fr;}
+  .tl-nav-item{border-bottom:1px solid var(--border);border-right:1px solid var(--border);}
+  .tl-nav-item:nth-child(even){border-right:none;}
+  .music-layout{grid-template-columns:1fr;}
+  .connect-layout{grid-template-columns:1fr;}
+  .projects-grid{grid-template-columns:1fr;}
+  .socials-grid{grid-template-columns:repeat(3,1fr);}
+  .certs-grid{grid-template-columns:1fr;}
+  .pg-title{font-size:clamp(1.5rem,5vw,2.2rem);}
+}
+
 @media(max-width:600px){
-  .hero-stats{gap:1.5rem;}
-  .cert-grid{grid-template-columns:1fr;}
-  footer{flex-direction:column;text-align:center;}
-  #cursor,#cursor-ring{display:none;}
-  body{cursor:auto;}
-  .btn-glow,.btn-outline,.chip,.skill-card,.cert-card,.soc-card,.filter-btn,.play-btn,.ctrl-btn,.proj-link,.platform-link,.footer-back-top{cursor:auto;}
+  :root{--bottom-nav-h:60px;}
+  .page{padding:1.2rem 1rem calc(var(--bottom-nav-h) + 14px + var(--safe-bottom));}
+  .home-name{font-size:clamp(1.9rem,9vw,2.8rem);}
+  .home-bio{font-size:.9rem;}
+  .home-actions{gap:.55rem;}
+  .btn{padding:.62rem 1.1rem;font-size:.76rem;}
+  .home-stats{gap:1rem;}
+  .hst-n{font-size:1.25rem;}
+  .about-layout{gap:1.1rem;}
+  .skills-layout{gap:.9rem;}
+  .proj-card .proj-preview{height:155px;}
+  .tl-nav{grid-template-columns:1fr;}
+  .tl-nav-item{border-right:none!important;}
+  .tl-detail{padding:1.1rem;}
+  .cert-card{padding:1rem;}
+  .cert-badge{width:40px;height:40px;font-size:1.05rem;}
+  .music-player-card{padding:1.3rem;}
+  .album-art{width:62px;height:62px;font-size:1.6rem;}
+  .socials-grid{grid-template-columns:repeat(2,1fr);}
+  /* bottom nav on tiny screens — smaller labels, still scrollable */
+  .bnav-label{font-size:.45rem;}
+  .bnav-icon{font-size:1.1rem;}
+  .bnav-item{min-width:46px;}
+}
+
+/* Disable hover effects on touch devices */
+@media(hover:none),(pointer:coarse){
+  #cursor,#cursor-ring{display:none!important;}
+  body{cursor:auto!important;}
+  *{cursor:auto!important;}
+  .proj-card:hover,.cert-card:hover,.soc-card:hover,
+  .skill-panel:hover,.about-card:hover,.music-player-card:hover,
+  .discography-card:hover,.tl-detail:hover,
+  .id-row:hover,.chip:hover,.track-row:hover{transform:none!important;}
 }
 </style>
 </head>
 <body>
 
+<div class="ambient amb1"></div>
+<div class="ambient amb2"></div>
 <div id="cursor"></div>
 <div id="cursor-ring"></div>
-<div id="scroll-progress" style="width:0;"></div>
+<div id="toast"><div id="toast-dot"></div><span id="toast-msg"></span></div>
 <canvas id="particle-canvas"></canvas>
-<div id="toast"></div>
 
-<!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobile-menu">
-  <button class="mobile-close" onclick="closeMobileMenu()">✕</button>
-  <a href="#about" onclick="closeMobileMenu()">About</a>
-  <a href="#skills" onclick="closeMobileMenu()">Skills</a>
-  <a href="#projects" onclick="closeMobileMenu()">Projects</a>
-  <a href="#experience" onclick="closeMobileMenu()">Experience</a>
-  <a href="#certs" onclick="closeMobileMenu()">Certifications</a>
-  <a href="#music" onclick="closeMobileMenu()">Music</a>
-  <a href="#contact" onclick="closeMobileMenu()">Connect</a>
+<!-- ════ BOOT ════ -->
+<div id="boot">
+  <div class="boot-logo">Portfolio Avan</div>
+  <div class="boot-sub">Avankha Barlian Kabuchi — Loading</div>
+  <div class="boot-bar-wrap"><div class="boot-bar" id="boot-bar"></div></div>
+  <div class="boot-log" id="boot-log"></div>
 </div>
 
-<!-- ═══ NAV ═══ -->
-<nav id="navbar">
-  <div class="nav-logo">Portofolio</div>
-  <ul class="nav-links" id="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#certs">Certs</a></li>
-    <li><a href="#music">Music</a></li>
-    <li><a href="#contact">Connect</a></li>
-  </ul>
-  <button class="nav-menu-btn" onclick="openMobileMenu()">☰</button>
+<!-- ════ OS SHELL ════ -->
+<div id="os-shell">
+
+  <!-- SIDEBAR (desktop) -->
+  <nav id="sidebar">
+    <div class="sidebar-logo">A</div>
+    <div class="sidebar-sep"></div>
+    <div class="nav-item active" data-page="home" onclick="switchPage('home',this)"><span class="nav-icon">🏠</span><span class="nav-label">Home</span><span class="nav-tooltip">Home</span></div>
+    <div class="nav-item" data-page="about" onclick="switchPage('about',this)"><span class="nav-icon">👤</span><span class="nav-label">About</span><span class="nav-tooltip">About Me</span></div>
+    <div class="nav-item" data-page="skills" onclick="switchPage('skills',this)"><span class="nav-icon">⚡</span><span class="nav-label">Skills</span><span class="nav-tooltip">Skills & Tools</span></div>
+    <div class="nav-item" data-page="projects" onclick="switchPage('projects',this)"><span class="nav-icon">🗂</span><span class="nav-label">Work</span><span class="nav-tooltip">Projects</span><span class="nav-dot"></span></div>
+    <div class="nav-item" data-page="experience" onclick="switchPage('experience',this)"><span class="nav-icon">🗓</span><span class="nav-label">XP</span><span class="nav-tooltip">Experience</span></div>
+    <div class="nav-item" data-page="certs" onclick="switchPage('certs',this)"><span class="nav-icon">🏅</span><span class="nav-label">Certs</span><span class="nav-tooltip">Certifications</span></div>
+    <div class="nav-item" data-page="music" onclick="switchPage('music',this)"><span class="nav-icon">🎵</span><span class="nav-label">Music</span><span class="nav-tooltip">Music & Art</span></div>
+    <div class="nav-item sidebar-bottom" data-page="connect" onclick="switchPage('connect',this)"><span class="nav-icon">📡</span><span class="nav-label">Connect</span><span class="nav-tooltip">Connect</span></div>
+  </nav>
+
+  <!-- MAIN -->
+  <div id="main-area">
+    <!-- TOPBAR -->
+    <div id="topbar">
+      <div class="win-controls">
+        <div class="win-dot red"></div>
+        <div class="win-dot yellow"></div>
+        <div class="win-dot green"></div>
+      </div>
+      <div class="topbar-breadcrumb">
+        Portfolio <span style="color:var(--muted);">/</span> <span id="topbar-path">Home</span>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-status"><div class="status-dot"></div>Available</div>
+        <div class="topbar-clock" id="topbar-clock">--:--</div>
+      </div>
+    </div>
+
+    <!-- PAGES -->
+    <div id="pages">
+
+      <!-- HOME -->
+      <div class="page active" id="page-home">
+        <div class="home-inner">
+          <div class="home-left">
+            <div class="home-tag">
+              <span>Informatika · AMIKOM Yogyakarta</span>
+              <span class="home-tag-pill">Open to Opportunities</span>
+            </div>
+            <h1 class="home-name">
+              Avankha<br><span class="g">Barlian Kabuchi</span>
+            </h1>
+            <div class="home-role">
+              <span>S.Kom.</span>
+              <span class="role-sep">·</span>
+              <span class="typing-wrap"><span id="typing-out"></span><span class="cursor-blink"></span></span>
+            </div>
+            <p class="home-bio">Lulusan Informatika yang passionate di bidang computer networking, software development, dan teknologi AI/IoT — menggabungkan keahlian teknis dengan jiwa kreatif untuk membangun hal-hal yang benar-benar berdampak.</p>
+            <div class="home-actions">
+              <span class="btn btn-primary" onclick="switchPage('connect',document.querySelector('[data-page=connect]'))">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                Hubungi Saya
+              </span>
+              <span class="btn btn-ghost" onclick="switchPage('projects',document.querySelector('[data-page=projects]'))">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                Lihat Projects
+              </span>
+              <span class="btn btn-ghost" onclick="switchPage('certs',document.querySelector('[data-page=certs]'))">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+                Sertifikasi
+              </span>
+            </div>
+            <div class="home-stats">
+              <div class="hst"><div class="hst-n">7+</div><div class="hst-l">Sertifikat</div></div>
+              <div class="hst"><div class="hst-n">Int'l</div><div class="hst-l">Conference</div></div>
+              <div class="hst"><div class="hst-n">2</div><div class="hst-l">Live Sites</div></div>
+              <div class="hst"><div class="hst-n">∞</div><div class="hst-l">Kreativitas</div></div>
+            </div>
+          </div>
+          <div class="home-terminal">
+            <div class="term-bar">
+              <div class="term-dot r"></div><div class="term-dot y"></div><div class="term-dot g"></div>
+              <div class="term-title">avan@portfolio ~ zsh</div>
+            </div>
+            <div class="term-body">
+              <div class="term-line"><span class="term-prompt">~$</span><span class="term-cmd"> whoami</span></div>
+              <div class="term-out green">Avankha Barlian Kabuchi, S.Kom.</div>
+              <div class="term-line" style="margin-top:.4rem;"><span class="term-prompt">~$</span><span class="term-cmd"> cat skills.txt</span></div>
+              <div class="term-out purple">[Networking]  Cisco CCNAv7, TCP/IP, VLAN</div>
+              <div class="term-out purple">[Web]         HTML, CSS, JS, PHP, Laravel</div>
+              <div class="term-out purple">[AI/IoT]      ML, Embedded, Industry 5.0</div>
+              <div class="term-out purple">[Creative]    Music, Video, Content</div>
+              <div class="term-line" style="margin-top:.4rem;"><span class="term-prompt">~$</span><span class="term-cmd"> ls projects/</span></div>
+              <div class="term-out pink">jawa-hair-studio/   toko-bung-edi/   ...</div>
+              <div class="term-line" style="margin-top:.4rem;"><span class="term-prompt">~$</span><span class="term-cmd"> open spotify</span></div>
+              <div class="term-out green">🎵 Playing: Avan Kabuchi — Artist</div>
+              <div class="term-line" style="margin-top:.4rem;"><span class="term-prompt">~$</span><span class="term-cmd"> <span class="term-cursor"></span></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ABOUT -->
+      <div class="page" id="page-about">
+        <div class="pg-header">
+          <div class="pg-eyebrow">About Me</div>
+          <h2 class="pg-title">Siapa <span class="accent">Saya</span>?</h2>
+        </div>
+        <div class="about-layout">
+          <div class="about-card about-bio">
+            <p>Halo! Saya <strong>Avankha Barlian Kabuchi, S.Kom.</strong> — lulusan Sarjana Informatika dari <strong>Universitas AMIKOM Yogyakarta</strong>, kampus yang dikenal sebagai pusat inovasi kreatif dan teknologi di Indonesia.</p>
+            <p>Dengan fondasi akademis yang kuat di bidang <strong>jaringan komputer, pengembangan perangkat lunak, dan sistem informasi</strong>, saya aktif mengembangkan diri melalui berbagai seminar, konferensi internasional, dan program sertifikasi profesional — termasuk <strong>Cisco CCNA</strong> dan konferensi internasional AI & IoT.</p>
+            <p>Di luar dunia tech, saya juga seorang <strong>musisi dan content creator</strong> aktif yang berkarya di Spotify, Apple Music, YouTube, dan TikTok di bawah nama <em>Avan Kabuchi</em>.</p>
+            <div class="chips">
+              <span class="chip">Computer Networks</span><span class="chip">Web Development</span>
+              <span class="chip">AI & IoT</span><span class="chip">Music Production</span>
+              <span class="chip">Geospasial</span><span class="chip">Content Creation</span>
+              <span class="chip">Problem Solving</span><span class="chip">UI/UX Design</span>
+            </div>
+          </div>
+          <div>
+            <div class="id-list">
+              <div class="id-row"><div class="id-icon" style="background:rgba(124,111,255,.15);">🎓</div><div><div class="id-key">Education</div><div class="id-val">S1 Informatika — AMIKOM Yogyakarta</div></div></div>
+              <div class="id-row"><div class="id-icon" style="background:rgba(255,107,157,.12);">📍</div><div><div class="id-key">Location</div><div class="id-val">Yogyakarta, Indonesia</div></div></div>
+              <div class="id-row"><div class="id-icon" style="background:rgba(255,209,102,.12);">🌐</div><div><div class="id-key">Network Cert</div><div class="id-val">Cisco CCNAv7 — Jan 2024</div></div></div>
+              <div class="id-row"><div class="id-icon" style="background:rgba(124,111,255,.15);">🌏</div><div><div class="id-key">International</div><div class="id-val">AI & IoT Conference 2024</div></div></div>
+              <div class="id-row"><div class="id-icon" style="background:rgba(29,185,84,.12);">🎵</div><div><div class="id-key">Music</div><div class="id-val">Avan Kabuchi — Spotify & Apple Music</div></div></div>
+              <div class="id-row"><div class="id-icon" style="background:rgba(0,229,176,.12);">💼</div><div><div class="id-key">Status</div><div class="id-val" style="color:var(--accent3);">Available for Opportunities</div></div></div>
+            </div>
+          </div>
+          <div class="about-quote">
+            "Saya percaya bahwa <strong>kreativitas adalah teknologi tertinggi</strong> — kemampuan untuk membayangkan sesuatu yang belum ada, lalu membangunnya dengan kode, melodi, atau apapun yang ada di tangan."
+          </div>
+        </div>
+      </div>
+
+      <!-- SKILLS -->
+      <div class="page" id="page-skills">
+        <div class="pg-header">
+          <div class="pg-eyebrow">Competencies</div>
+          <h2 class="pg-title">Kompetensi & <span class="accent">Keahlian</span></h2>
+        </div>
+        <div class="skills-layout">
+          <div class="skill-panel">
+            <div class="skill-panel-title"><div class="icon">🌐</div>Networking</div>
+            <div class="skill-items">
+              <div class="sk-item"><div class="sk-item-left"><span class="sk-item-icon">📡</span><span class="sk-item-name">Cisco IOS & Packet Tracer</span></div><span class="sk-item-level lv-expert">Expert</span></div>
+              <div class="sk-item"><div class="sk-item-left"><span class="sk-item-icon">🔀</span><span class="sk-item-name">Routing & Switching</span></div><span class="sk-item-level lv-expert">Expert</span></div>
+              <div class="sk-item"><div class="sk-item-left"><span class="sk-item-icon">🧩</span><span class="sk-item-name">TCP/IP · VLAN · Subnetting</span></div><span class="sk-item-level lv-advanced">Advanced</span></div>
+              <div class="sk-item"><div class="sk-item-left"><span class="sk-item-icon">🔒</span><span class="sk-item-name">Network Security · WLAN</span></div><span class="sk-item-level lv-advanced">Advanced</span></div>
+              <div class="sk-item"><div class="sk-item-left"><span class="sk-item-icon">🔬</span><span class="sk-item-name">Wireshark · OSI Model</span></div><span class="sk-item-level lv-advanced">Advanced</span></div>
+            </div>
+          </div>
+          <div class="skill-panel">
+            <div class="skill-panel-title"><div class="icon" style="background:rgba(255,107,157,.15);">💻</div>Web Development</div>
+            <div class="skill-items">
+              <div class="sk-item"><div class="sk-item-left"><span class="sk-item-icon">🎨</span><span class="sk-item-name">HTML5 / CSS3 / JS</span></div><span class="sk-item-level lv-expert">Expert</span></div>
+              <div class="sk-item"><div class="sk-item-left"><span class="sk-item-icon">⚛️</span><span class="sk-item-name">React · Bootstrap</span></div><span class="sk-item-level lv-advanced">Advanced</span></div>
+              <div class="sk-item"><div class="sk-item-left"><span class="sk-item-icon">🐘</span><span class="sk-item-name">PHP · Laravel · MySQL</span></div><span class="sk-item-level lv-advanced">Advanced</span></div>
+              <div class="sk-item"><div class="sk-item-left"><span class="sk-item-icon">🔌</span><span class="sk-item-name">REST API · Vercel Deploy</span></div><span class="sk-item-level lv-intermediate">Intermediate</span></div>
+              <div class="sk-item"><div class="sk-item-left"><span class="sk-item-icon">🎭</span><span class="sk-item-name">UI/UX Design · Figma</span></div><span class="sk-item-level lv-intermediate">Intermediate</span></div>
+            </div>
+          </div>
+          <div class="skill-panel">
+            <div class="skill-panel-title"><div class="icon" style="background:rgba(0,229,176,.12);">🤖</div>AI & IoT</div>
+            <div class="skill-items">
+              <div class="sk-item"><div class="sk-item-left"><span class="sk-item-icon">🧠</span><span class="sk-item-name">Machine Learning</span></div><span class="sk-item-level lv-intermediate">Intermediate</span></div>
+              <div class="sk-item"><div class="sk-item-left"><span class="sk-item-icon">📟</span><span class="sk-item-name">Internet of Things</span></div><span class="sk-item-level lv-intermediate">Intermediate</span></div>
+              <div class="sk-item"><div class="sk-item-left"><span class="sk-item-icon">🏭</span><span class="sk-item-name">Industri 5.0 / Embedded</span></div><span class="sk-item-level lv-intermediate">Intermediate</span></div>
+            </div>
+          </div>
+          <div class="skill-panel">
+            <div class="skill-panel-title"><div class="icon" style="background:rgba(255,157,28,.12);">🎵</div>Creative & Tools</div>
+            <div class="skill-items">
+              <div class="sk-item"><div class="sk-item-left"><span class="sk-item-icon">🎸</span><span class="sk-item-name">Music Production</span></div><span class="sk-item-level lv-expert">Expert</span></div>
+              <div class="sk-item"><div class="sk-item-left"><span class="sk-item-icon">📹</span><span class="sk-item-name">Video Editing · Content</span></div><span class="sk-item-level lv-advanced">Advanced</span></div>
+              <div class="sk-item"><div class="sk-item-left"><span class="sk-item-icon">🐙</span><span class="sk-item-name">Git & GitHub</span></div><span class="sk-item-level lv-advanced">Advanced</span></div>
+              <div class="sk-item"><div class="sk-item-left"><span class="sk-item-icon">🐧</span><span class="sk-item-name">Linux CLI · VS Code</span></div><span class="sk-item-level lv-advanced">Advanced</span></div>
+              <div class="sk-item"><div class="sk-item-left"><span class="sk-item-icon">🐳</span><span class="sk-item-name">Docker (Basic)</span></div><span class="sk-item-level lv-intermediate">Intermediate</span></div>
+            </div>
+          </div>
+          <div class="skill-bars-panel" id="skill-bars-panel">
+            <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.92rem;margin-bottom:1.3rem;display:flex;align-items:center;gap:.55rem;">
+              <span>📊</span> Proficiency Overview
+            </div>
+            <div class="bar-item"><div class="bar-header"><span class="bar-name">Computer Networking</span><span class="bar-pct">88%</span></div><div class="bar-track"><div class="bar-fill" data-w="88" style="background:linear-gradient(90deg,#7c6fff,#00e5b0);"></div></div></div>
+            <div class="bar-item"><div class="bar-header"><span class="bar-name">Web Development</span><span class="bar-pct">82%</span></div><div class="bar-track"><div class="bar-fill" data-w="82" style="background:linear-gradient(90deg,#ff6b9d,#ffd166);"></div></div></div>
+            <div class="bar-item"><div class="bar-header"><span class="bar-name">UI/UX Design</span><span class="bar-pct">75%</span></div><div class="bar-track"><div class="bar-fill" data-w="75" style="background:linear-gradient(90deg,#c77dff,#7c6fff);"></div></div></div>
+            <div class="bar-item"><div class="bar-header"><span class="bar-name">AI & IoT</span><span class="bar-pct">70%</span></div><div class="bar-track"><div class="bar-fill" data-w="70" style="background:linear-gradient(90deg,#00e5b0,#7c6fff);"></div></div></div>
+            <div class="bar-item"><div class="bar-header"><span class="bar-name">Music Production</span><span class="bar-pct">90%</span></div><div class="bar-track"><div class="bar-fill" data-w="90" style="background:linear-gradient(90deg,#ff9f1c,#ff6b9d);"></div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECTS -->
+      <div class="page" id="page-projects">
+        <div class="pg-header">
+          <div class="pg-eyebrow">Portfolio</div>
+          <h2 class="pg-title">Projects Yang <span class="accent">Saya Bangun</span></h2>
+        </div>
+        <div class="projects-grid">
+          <div class="proj-card">
+            <div class="proj-num">01</div>
+            <div class="proj-preview">
+              <iframe src="https://jawahairstudio-nu.vercel.app/" title="Jawa Hair Studio" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no"></iframe>
+              <div class="proj-preview-overlay">
+                <a href="https://jawahairstudio-nu.vercel.app/" target="_blank" rel="noopener" class="proj-live-btn">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                  Kunjungi Live Site
+                </a>
+              </div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-tags"><span class="proj-tag">HTML/CSS</span><span class="proj-tag">JavaScript</span><span class="proj-tag">Vercel</span><span class="proj-tag">Landing Page</span></div>
+              <div class="proj-name">Jawa Hair Studio</div>
+              <div class="proj-desc">Website landing page profesional untuk barbershop — galeri, layanan, dan kontak dengan tampilan modern.</div>
+              <div class="proj-links"><a href="https://jawahairstudio-nu.vercel.app/" target="_blank" rel="noopener" class="plink"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Live</a></div>
+            </div>
+          </div>
+          <div class="proj-card">
+            <div class="proj-num">02</div>
+            <div class="proj-preview">
+              <iframe src="https://tokobungedi.vercel.app/" title="Toko Bung Edi" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no"></iframe>
+              <div class="proj-preview-overlay">
+                <a href="https://tokobungedi.vercel.app/" target="_blank" rel="noopener" class="proj-live-btn">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                  Kunjungi Live Site
+                </a>
+              </div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-tags"><span class="proj-tag">HTML/CSS</span><span class="proj-tag">JavaScript</span><span class="proj-tag">Vercel</span><span class="proj-tag">E-Commerce</span></div>
+              <div class="proj-name">Toko Bung Edi</div>
+              <div class="proj-desc">Website e-commerce untuk toko kelontong — katalog produk, pemesanan, desain hangat dan elegan.</div>
+              <div class="proj-links"><a href="https://tokobungedi.vercel.app/" target="_blank" rel="noopener" class="plink"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Live</a></div>
+            </div>
+          </div>
+          <div class="proj-card soon">
+            <div class="proj-soon-badge">Coming Soon</div>
+            <div class="proj-num">03</div>
+            <div class="proj-preview" style="display:flex;align-items:center;justify-content:center;">
+              <div style="text-align:center;color:var(--muted);font-family:'Space Mono',monospace;font-size:.7rem;">
+                <div style="font-size:2rem;margin-bottom:.5rem;">🚧</div>In Development
+              </div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-tags"><span class="proj-tag">Laravel</span><span class="proj-tag">MySQL</span><span class="proj-tag">React</span></div>
+              <div class="proj-name">Project Berikutnya</div>
+              <div class="proj-desc">Proyek fullstack sedang dalam pengembangan — Stay tuned!</div>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center;margin-top:2rem;">
+          <p style="color:var(--muted);font-family:'Space Mono',monospace;font-size:.68rem;margin-bottom:.9rem;letter-spacing:.05em;">Tertarik berkolaborasi? Mari buat sesuatu yang luar biasa.</p>
+          <span class="btn btn-primary" onclick="switchPage('connect',document.querySelector('[data-page=connect]'))">Mulai Kolaborasi →</span>
+        </div>
+      </div>
+
+      <!-- EXPERIENCE -->
+      <div class="page" id="page-experience">
+        <div class="pg-header">
+          <div class="pg-eyebrow">Journey</div>
+          <h2 class="pg-title">Perjalanan & <span class="accent">Pengalaman</span></h2>
+        </div>
+        <div class="timeline-layout">
+          <div class="tl-nav" id="tl-nav">
+            <div class="tl-nav-item active" onclick="showTlDetail(0,this)"><div><div class="tl-nav-year">2022–2026</div><div class="tl-nav-title">S1 Informatika</div></div></div>
+            <div class="tl-nav-item" onclick="showTlDetail(1,this)"><div><div class="tl-nav-year">Ags 2024</div><div class="tl-nav-title">International Conference</div></div></div>
+            <div class="tl-nav-item" onclick="showTlDetail(2,this)"><div><div class="tl-nav-year">Jan 2024</div><div class="tl-nav-title">Cisco CCNAv7</div></div></div>
+            <div class="tl-nav-item" onclick="showTlDetail(3,this)"><div><div class="tl-nav-year">Jun 2025</div><div class="tl-nav-title">Seminar Nasional</div></div></div>
+            <div class="tl-nav-item" onclick="showTlDetail(4,this)"><div><div class="tl-nav-year">2022–Now</div><div class="tl-nav-title">Web Developer</div></div></div>
+            <div class="tl-nav-item" onclick="showTlDetail(5,this)"><div><div class="tl-nav-year">Ongoing</div><div class="tl-nav-title">Musisi & Creator</div></div></div>
+          </div>
+          <div class="tl-detail" id="tl-detail"></div>
+        </div>
+      </div>
+
+      <!-- CERTS -->
+      <div class="page" id="page-certs">
+        <div class="pg-header">
+          <div class="pg-eyebrow">Credentials</div>
+          <h2 class="pg-title">Sertifikasi & <span class="accent">Partisipasi</span></h2>
+        </div>
+        <div class="certs-layout">
+          <div class="cert-filter">
+            <button class="filter-btn active" onclick="filterCerts(this,'all')">Semua</button>
+            <button class="filter-btn" onclick="filterCerts(this,'professional')">Profesional</button>
+            <button class="filter-btn" onclick="filterCerts(this,'seminar')">Seminar</button>
+            <button class="filter-btn" onclick="filterCerts(this,'workshop')">Workshop</button>
+          </div>
+          <div class="certs-grid">
+            <div class="cert-card" data-cat="professional">
+              <div class="cert-badge" style="background:linear-gradient(135deg,#1ba5e1,#0055aa);">🌐</div>
+              <div><div class="cert-name">CCNAv7: Introduction to Networks</div><div class="cert-issuer">Cisco Networking Academy</div><div class="cert-meta">05 Januari 2024</div><div class="cert-id">ID: 34b115f0-b723-43c4-b6fd-0ce5fc89db76</div></div>
+              <div class="cert-type-badge" style="color:#00e5b0;border-color:rgba(0,229,176,.3);">Pro</div>
+            </div>
+            <div class="cert-card" data-cat="seminar">
+              <div class="cert-badge" style="background:linear-gradient(135deg,#c0392b,#a93226);">🌏</div>
+              <div><div class="cert-name">International Conference: AI, IoT & Industry 5.0</div><div class="cert-issuer">Universitas Islam Balitar</div><div class="cert-meta">26 Agustus 2024</div><div class="cert-id">No. 034/DK.04/E-Cert/071070/VIII/2024</div></div>
+              <div class="cert-type-badge" style="color:#ffd166;border-color:rgba(255,209,102,.3);">Seminar</div>
+            </div>
+            <div class="cert-card" data-cat="workshop">
+              <div class="cert-badge" style="background:linear-gradient(135deg,#f6c90e,#e09800);">🌱</div>
+              <div><div class="cert-name">Movers Workshop on Wellbeing for Changemakers</div><div class="cert-issuer">Movers Programme — Skill Our Future</div><div class="cert-meta">Certificate of Participation (2-Hour)</div></div>
+              <div class="cert-type-badge" style="color:#ff6b9d;border-color:rgba(255,107,157,.3);">WS</div>
+            </div>
+            <div class="cert-card" data-cat="seminar">
+              <div class="cert-badge" style="background:linear-gradient(135deg,#6a0dad,#9b59b6);">🎓</div>
+              <div><div class="cert-name">Seminar Nasional Informatika 2025</div><div class="cert-issuer">Universitas AMIKOM Yogyakarta</div><div class="cert-meta">5 Juni 2025</div><div class="cert-id">No. 1624/S-KMHS/AMIKOM/VI/2025</div></div>
+              <div class="cert-type-badge" style="color:#7c6fff;border-color:rgba(124,111,255,.3);">Seminar</div>
+            </div>
+            <div class="cert-card" data-cat="workshop">
+              <div class="cert-badge" style="background:linear-gradient(135deg,#16213e,#4a4e69);">💻</div>
+              <div><div class="cert-name">Introduction to Computer 2022</div><div class="cert-issuer">Universitas AMIKOM Yogyakarta</div><div class="cert-meta">1–13 September 2022</div><div class="cert-id">No. 220/KMHS/AMIKOM/IX/3385</div></div>
+              <div class="cert-type-badge" style="color:#ff6b9d;border-color:rgba(255,107,157,.3);">WS</div>
+            </div>
+            <div class="cert-card" data-cat="seminar">
+              <div class="cert-badge" style="background:linear-gradient(135deg,#4a4e69,#6b705c);">🎙️</div>
+              <div><div class="cert-name">Kuliah Umum: AMIKOM Creative Economy Park</div><div class="cert-issuer">Universitas AMIKOM Yogyakarta</div><div class="cert-meta">11 Juni 2022</div><div class="cert-id">No. 1605.S/A.DKUI/AMIKOM/VI/2022</div></div>
+              <div class="cert-type-badge" style="color:#7c6fff;border-color:rgba(124,111,255,.3);">Seminar</div>
+            </div>
+            <div class="cert-card" data-cat="seminar">
+              <div class="cert-badge" style="background:linear-gradient(135deg,#1a535c,#4ecdc4);">🗺️</div>
+              <div><div class="cert-name">Seminar: Potensi Karir Pemetaan & Geospasial</div><div class="cert-issuer">AMIKOM Yogyakarta — BPC & Alumni</div><div class="cert-meta">24 Juni 2025</div><div class="cert-id">No. 065/Sert.BPC/AMIKOM/VI/2025</div></div>
+              <div class="cert-type-badge" style="color:#00e5b0;border-color:rgba(0,229,176,.3);">Seminar</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MUSIC -->
+      <div class="page" id="page-music">
+        <div class="pg-header">
+          <div class="pg-eyebrow">Musik</div>
+          <h2 class="pg-title">Avan Kabuchi — <span class="accent">Artist</span></h2>
+        </div>
+        <div class="music-layout">
+          <div class="music-player-card">
+            <div class="np-label"><div class="np-pulse"></div>Now Playing</div>
+            <div class="track-visual">
+              <div class="album-art" id="album-art">🎵</div>
+              <div class="track-meta">
+                <div class="track-title" id="track-title">Avan Kabuchi</div>
+                <div class="track-artist">Original Artist · Singer-Songwriter</div>
+                <div class="track-platform" id="track-plat">🎵 Spotify & Apple Music</div>
+              </div>
+            </div>
+            <div class="waveform" id="waveform"></div>
+            <div class="progress-wrap">
+              <div class="prog-bar"><div class="prog-fill" id="prog-fill"></div></div>
+              <div class="prog-times"><span id="prog-cur">0:00</span><span id="prog-dur">3:30</span></div>
+            </div>
+            <div class="player-btns">
+              <button class="p-btn" onclick="prevTrack()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/></svg></button>
+              <button class="p-btn-play" id="play-btn" onclick="togglePlay()"><svg id="play-icon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+              <button class="p-btn" onclick="nextTrack()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></svg></button>
+            </div>
+            <div class="music-links">
+              <a href="https://open.spotify.com/artist/2fNzlKoGfAPpQQDQPpm6zD?si=S59taWq1Tti97nacValoRA" target="_blank" rel="noopener" class="m-link"><span style="color:#1db954">●</span>Spotify</a>
+              <a href="https://music.apple.com/id/artist/avan-kabuchi/1766126525?l=id" target="_blank" rel="noopener" class="m-link"><span style="color:#fc3c44">●</span>Apple Music</a>
+              <a href="https://youtube.com/@avankabuchi_" target="_blank" rel="noopener" class="m-link"><span style="color:#ff0000">●</span>YouTube</a>
+            </div>
+          </div>
+          <div class="discography-card">
+            <div class="disc-title">🎙️ Discography</div>
+            <div class="track-list" id="track-list"></div>
+            <div style="margin-top:1.3rem;padding:.9rem;background:var(--surface2);border-radius:10px;border:1px solid var(--border);">
+              <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.07em;">About the Artist</div>
+              <p style="font-size:.83rem;line-height:1.75;color:rgba(238,238,245,.58);">Avan Kabuchi adalah proyek musik dari Avankha Barlian Kabuchi — seorang developer yang juga musisi. Karya-karyanya tersedia di Spotify, Apple Music, dan YouTube.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONNECT -->
+      <div class="page" id="page-connect">
+        <div class="pg-header">
+          <div class="pg-eyebrow">Connect</div>
+          <h2 class="pg-title">Temukan Saya <span class="accent">Di Sini</span></h2>
+        </div>
+        <div class="connect-layout">
+          <p class="connect-intro">Saya aktif di berbagai platform. Jangan ragu untuk connect, kolaborasi, atau sekadar menyapa — pintu selalu terbuka!</p>
+          <div class="socials-grid">
+            <a href="https://www.instagram.com/avankabuchi_" target="_blank" rel="noopener" class="soc-card" style="--sc-border:#e1306c;--sc-shadow:rgba(225,48,108,.18);--sc-bg:rgba(225,48,108,.06);">
+              <div class="soc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><defs><radialGradient id="ig" cx="30%" cy="107%"><stop offset="0%" stop-color="#fdf497"/><stop offset="45%" stop-color="#fd5949"/><stop offset="60%" stop-color="#d6249f"/><stop offset="90%" stop-color="#285AEB"/></radialGradient></defs><rect x="2" y="2" width="20" height="20" rx="5" stroke="url(#ig)" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="url(#ig)" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.1" fill="url(#ig)"/></svg></div>
+              <div class="soc-name">Instagram</div><div class="soc-handle">@avankabuchi_</div>
+            </a>
+            <a href="https://www.tiktok.com/@avankabuchi_" target="_blank" rel="noopener" class="soc-card" style="--sc-border:#69c9d0;--sc-shadow:rgba(105,201,208,.18);--sc-bg:rgba(105,201,208,.05);">
+              <div class="soc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" stroke="#69c9d0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="soc-name">TikTok</div><div class="soc-handle">@avankabuchi_</div>
+            </a>
+            <a href="https://www.linkedin.com/in/avankha-barlian-kabuchi-080402274" target="_blank" rel="noopener" class="soc-card" style="--sc-border:#0a66c2;--sc-shadow:rgba(10,102,194,.18);--sc-bg:rgba(10,102,194,.06);">
+              <div class="soc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="#0a66c2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
+              <div class="soc-name">LinkedIn</div><div class="soc-handle">Avankha B. K.</div>
+            </a>
+            <a href="https://github.com/avankabuchi" target="_blank" rel="noopener" class="soc-card" style="--sc-border:#f0f6fc;--sc-shadow:rgba(240,246,252,.08);--sc-bg:rgba(240,246,252,.04);">
+              <div class="soc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="#f0f6fc"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></div>
+              <div class="soc-name">GitHub</div><div class="soc-handle">avankabuchi</div>
+            </a>
+            <a href="https://youtube.com/@avankabuchi_" target="_blank" rel="noopener" class="soc-card" style="--sc-border:#ff0000;--sc-shadow:rgba(255,0,0,.18);--sc-bg:rgba(255,0,0,.05);">
+              <div class="soc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="#ff0000"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-1.96C18.88 4 12 4 12 4s-6.88 0-8.6.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.4 19.54C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#fff"/></svg></div>
+              <div class="soc-name">YouTube</div><div class="soc-handle">@avankabuchi_</div>
+            </a>
+            <a href="https://open.spotify.com/artist/2fNzlKoGfAPpQQDQPpm6zD" target="_blank" rel="noopener" class="soc-card" style="--sc-border:#1db954;--sc-shadow:rgba(29,185,84,.18);--sc-bg:rgba(29,185,84,.05);">
+              <div class="soc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="#1db954"><circle cx="12" cy="12" r="10"/><path d="M8 14.5s1.5-1 4-1 4 1 4 1" stroke="#000" stroke-width="1.3" stroke-linecap="round"/><path d="M7 11.5s2-1.5 5-1.5 5 1.5 5 1.5" stroke="#000" stroke-width="1.3" stroke-linecap="round"/><path d="M6.5 8.5S9 6.5 12 6.5s5.5 2 5.5 2" stroke="#000" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+              <div class="soc-name">Spotify</div><div class="soc-handle">Avan Kabuchi</div>
+            </a>
+            <a href="https://music.apple.com/id/artist/avan-kabuchi/1766126525" target="_blank" rel="noopener" class="soc-card" style="--sc-border:#fc3c44;--sc-shadow:rgba(252,60,68,.18);--sc-bg:rgba(252,60,68,.05);">
+              <div class="soc-icon"><svg width="22" height="22" viewBox="0 0 24 24"><defs><linearGradient id="am" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fc3c44"/><stop offset="100%" stop-color="#ff8a80"/></linearGradient></defs><circle cx="12" cy="12" r="10" fill="url(#am)"/><path d="M10 17V8l8-2v9" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="17" r="2" fill="#fff"/><circle cx="16" cy="15" r="2" fill="#fff"/></svg></div>
+              <div class="soc-name">Apple Music</div><div class="soc-handle">Avan Kabuchi</div>
+            </a>
+          </div>
+          <div class="contact-cta">
+            <div class="pg-eyebrow" style="justify-content:center;margin-bottom:.75rem;">Let's Work Together</div>
+            <p>Punya proyek menarik atau ingin berkolaborasi? Reach out via LinkedIn atau Instagram — saya selalu terbuka untuk kesempatan baru.</p>
+            <div style="display:flex;justify-content:center;gap:.75rem;flex-wrap:wrap;">
+              <a href="https://www.linkedin.com/in/avankha-barlian-kabuchi-080402274" target="_blank" rel="noopener" class="btn btn-primary">LinkedIn →</a>
+              <a href="https://www.instagram.com/avankabuchi_" target="_blank" rel="noopener" class="btn btn-ghost">Instagram</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /pages -->
+  </div><!-- /main-area -->
+</div><!-- /os-shell -->
+
+<!-- ════ BOTTOM NAV (mobile) ════ -->
+<nav id="bottom-nav">
+  <div class="bnav-inner">
+    <div class="bnav-item active" data-page="home" onclick="switchPage('home',this)">
+      <span class="bnav-icon">🏠</span><span class="bnav-label">Home</span>
+    </div>
+    <div class="bnav-item" data-page="about" onclick="switchPage('about',this)">
+      <span class="bnav-icon">👤</span><span class="bnav-label">About</span>
+    </div>
+    <div class="bnav-item" data-page="skills" onclick="switchPage('skills',this)">
+      <span class="bnav-icon">⚡</span><span class="bnav-label">Skills</span>
+    </div>
+    <div class="bnav-item" data-page="projects" onclick="switchPage('projects',this)">
+      <span class="bnav-icon">🗂</span><span class="bnav-label">Work</span>
+      <span class="bnav-dot"></span>
+    </div>
+    <div class="bnav-item" data-page="experience" onclick="switchPage('experience',this)">
+      <span class="bnav-icon">🗓</span><span class="bnav-label">XP</span>
+    </div>
+    <div class="bnav-item" data-page="certs" onclick="switchPage('certs',this)">
+      <span class="bnav-icon">🏅</span><span class="bnav-label">Certs</span>
+    </div>
+    <div class="bnav-item" data-page="music" onclick="switchPage('music',this)">
+      <span class="bnav-icon">🎵</span><span class="bnav-label">Music</span>
+    </div>
+    <div class="bnav-item" data-page="connect" onclick="switchPage('connect',this)">
+      <span class="bnav-icon">📡</span><span class="bnav-label">Connect</span>
+    </div>
+  </div>
 </nav>
 
-<!-- ═══ HERO ═══ -->
-<section class="hero">
-  <div class="hero-grid"></div>
-  <div class="orb orb1"></div>
-  <div class="orb orb2"></div>
-  <div class="orb orb3"></div>
-  <div class="hero-tag">
-    <span>Informatika · AMIKOM Yogyakarta</span>
-    <span class="hero-tag-badge">Available for Opportunities</span>
-  </div>
-  <h1 class="hero-name">
-    Avankha<br><span class="line2">Barlian Kabuchi</span>
-  </h1>
-  <p class="hero-title">S.Kom. — Sarjana Komputer &nbsp;·&nbsp;
-    <span class="typing-wrap"><span id="typing-text"></span><span class="cursor-blink"></span></span>
-  </p>
-  <p class="hero-bio">Lulusan Informatika yang passionate di bidang computer networking, software development, dan teknologi AI/IoT. Menggabungkan keahlian teknis dengan jiwa kreatif untuk membangun hal-hal yang berdampak.</p>
-  <div class="hero-actions">
-    <a href="#contact" class="btn-glow">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-      Hubungi Saya
-    </a>
-    <a href="#projects" class="btn-outline">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-      Lihat Projects
-    </a>
-    <a href="#certs" class="btn-outline">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
-      Sertifikasi
-    </a>
-  </div>
-  <div class="hero-stats">
-    <div class="hstat"><div class="hstat-num" data-count="7">7+</div><div class="hstat-lbl">Sertifikat</div></div>
-    <div class="hstat"><div class="hstat-num" data-count="3">3+</div><div class="hstat-lbl">Tahun Studi</div></div>
-    <div class="hstat"><div class="hstat-num">Int'l</div><div class="hstat-lbl">Conference</div></div>
-    <div class="hstat"><div class="hstat-num">2</div><div class="hstat-lbl">Live Projects</div></div>
-    <div class="hstat"><div class="hstat-num">∞</div><div class="hstat-lbl">Kreativitas</div></div>
-  </div>
-  <div class="scroll-hint"><div class="scroll-line"></div>scroll</div>
-</section>
-
-<!-- ═══ ABOUT ═══ -->
-<section id="about">
-  <div class="sec-label">01 — About Me</div>
-  <h2 class="sec-title">Siapa Saya?</h2>
-  <div class="about-grid">
-    <div class="about-text reveal">
-      <p>Halo! Saya <strong>Avankha Barlian Kabuchi, S.Kom.</strong>lulusan Sarjana Informatika dari <strong>Universitas AMIKOM Yogyakarta</strong>, kampus yang dikenal sebagai pusat inovasi kreatif dan teknologi di Indonesia.</p>
-      <p>Dengan fondasi akademis yang kuat di bidang <strong>jaringan komputer, pengembangan perangkat lunak, dan sistem informasi</strong>, saya aktif mengembangkan diri melalui berbagai seminar, konferensi internasional, dan program sertifikasi profesional — termasuk <strong>Cisco CCNA</strong> dan konferensi internasional AI & IoT.</p>
-      <p>Di luar dunia tech, saya juga seorang <strong>musisi dan content creator</strong> aktif yang berkarya di Spotify, Apple Music, YouTube, dan TikTok. Saya percaya bahwa kreativitas dan teknologi saling melengkapi untuk menciptakan sesuatu yang berdampak nyata.</p>
-      <div class="about-chips">
-        <span class="chip">Computer Networks</span>
-        <span class="chip">Web Development</span>
-        <span class="chip">AI & IoT</span>
-        <span class="chip">Music Production</span>
-        <span class="chip">Geospasial</span>
-        <span class="chip">Content Creation</span>
-        <span class="chip">Problem Solving</span>
-        <span class="chip">UI/UX Design</span>
-      </div>
-    </div>
-    <div class="about-right">
-      <div class="info-card reveal reveal-delay-1">
-        <div class="ic-num">S1</div>
-        <div class="ic-lbl">Sarjana Informatika — AMIKOM Yogyakarta</div>
-      </div>
-      <div class="info-card reveal reveal-delay-2">
-        <div class="ic-num">7+</div>
-        <div class="ic-lbl">Sertifikat & Partisipasi Aktif</div>
-      </div>
-      <div class="info-card reveal reveal-delay-3">
-        <div class="ic-num">Int'l</div>
-        <div class="ic-lbl">Peserta International Conference — AI & IoT, 2024</div>
-      </div>
-      <div class="info-card reveal">
-        <div class="ic-num">Cisco</div>
-        <div class="ic-lbl">CCNAv7: Introduction to Networks Certified</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ COUNTER ═══ -->
-<div class="counter-section">
-  <div class="counters">
-    <div class="counter-item reveal">
-      <span class="counter-num" data-target="7">0</span>
-      <div class="counter-label">Sertifikat</div>
-    </div>
-    <div class="counter-divider reveal"></div>
-    <div class="counter-item reveal reveal-delay-1">
-      <span class="counter-num" data-target="2">0</span>
-      <div class="counter-label">Live Websites</div>
-    </div>
-    <div class="counter-divider reveal"></div>
-    <div class="counter-item reveal reveal-delay-2">
-      <span class="counter-num" data-target="4">0</span>
-      <div class="counter-label">Tahun Belajar</div>
-    </div>
-    <div class="counter-divider reveal"></div>
-    <div class="counter-item reveal reveal-delay-3">
-      <span class="counter-num" data-target="1">0</span>
-      <div class="counter-label">Konferensi Intl</div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══ SKILLS ═══ -->
-<section id="skills">
-  <div class="sec-label">02 — Competencies</div>
-  <h2 class="sec-title">Kompetensi & Keahlian</h2>
-  <div class="skills-grid">
-    <div class="skill-card reveal" style="--card-color:#7c6fff">
-      <span class="sk-icon">🌐</span>
-      <div class="sk-name">Computer Networking</div>
-      <div class="sk-tags">
-        <span class="sk-tag">Cisco IOS</span><span class="sk-tag">TCP/IP</span><span class="sk-tag">VLAN</span>
-        <span class="sk-tag">Routing & Switching</span><span class="sk-tag">Subnetting</span>
-        <span class="sk-tag">OSI Model</span><span class="sk-tag">WLAN</span><span class="sk-tag">Network Security</span>
-      </div>
-    </div>
-    <div class="skill-card reveal reveal-delay-1" style="--card-color:#ff6b9d">
-      <span class="sk-icon">💻</span>
-      <div class="sk-name">Web Development</div>
-      <div class="sk-tags">
-        <span class="sk-tag">HTML5 / CSS3</span><span class="sk-tag">JavaScript</span>
-        <span class="sk-tag">PHP</span><span class="sk-tag">Laravel</span>
-        <span class="sk-tag">MySQL</span><span class="sk-tag">React</span>
-        <span class="sk-tag">Bootstrap</span><span class="sk-tag">REST API</span>
-      </div>
-    </div>
-    <div class="skill-card reveal reveal-delay-2" style="--card-color:#00e5b0">
-      <span class="sk-icon">🤖</span>
-      <div class="sk-name">AI & IoT</div>
-      <div class="sk-tags">
-        <span class="sk-tag">Artificial Intelligence</span><span class="sk-tag">Internet of Things</span>
-        <span class="sk-tag">Industri 5.0</span><span class="sk-tag">Machine Learning</span>
-        <span class="sk-tag">Embedded Systems</span>
-      </div>
-    </div>
-    <div class="skill-card reveal" style="--card-color:#c77dff">
-      <span class="sk-icon">🛠️</span>
-      <div class="sk-name">Tools & Platform</div>
-      <div class="sk-tags">
-        <span class="sk-tag">Git & GitHub</span><span class="sk-tag">Cisco Packet Tracer</span>
-        <span class="sk-tag">VS Code</span><span class="sk-tag">Linux CLI</span>
-        <span class="sk-tag">Wireshark</span><span class="sk-tag">Figma</span><span class="sk-tag">Docker</span>
-      </div>
-    </div>
-    <div class="skill-card reveal reveal-delay-1" style="--card-color:#ff9f1c">
-      <span class="sk-icon">🎵</span>
-      <div class="sk-name">Creative & Content</div>
-      <div class="sk-tags">
-        <span class="sk-tag">Music Production</span><span class="sk-tag">Content Creation</span>
-        <span class="sk-tag">Video Editing</span><span class="sk-tag">Social Media</span>
-        <span class="sk-tag">Storytelling</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- SKILL BARS -->
-  <div class="skill-bars reveal" style="margin-top:3.5rem;max-width:600px;">
-    <div class="sec-label" style="margin-bottom:1.5rem;">Proficiency Level</div>
-    <div class="skill-bar-item">
-      <div class="skill-bar-header"><span class="skill-bar-name">Computer Networking</span><span class="skill-bar-pct">88%</span></div>
-      <div class="skill-bar-track"><div class="skill-bar-fill" data-width="88" style="--bar-from:#7c6fff;--bar-to:#00e5b0;"></div></div>
-    </div>
-    <div class="skill-bar-item">
-      <div class="skill-bar-header"><span class="skill-bar-name">Web Development</span><span class="skill-bar-pct">82%</span></div>
-      <div class="skill-bar-track"><div class="skill-bar-fill" data-width="82" style="--bar-from:#ff6b9d;--bar-to:#ffd166;"></div></div>
-    </div>
-    <div class="skill-bar-item">
-      <div class="skill-bar-header"><span class="skill-bar-name">UI/UX Design</span><span class="skill-bar-pct">75%</span></div>
-      <div class="skill-bar-track"><div class="skill-bar-fill" data-width="75" style="--bar-from:#c77dff;--bar-to:#7c6fff;"></div></div>
-    </div>
-    <div class="skill-bar-item">
-      <div class="skill-bar-header"><span class="skill-bar-name">AI & IoT</span><span class="skill-bar-pct">70%</span></div>
-      <div class="skill-bar-track"><div class="skill-bar-fill" data-width="70" style="--bar-from:#00e5b0;--bar-to:#7c6fff;"></div></div>
-    </div>
-    <div class="skill-bar-item">
-      <div class="skill-bar-header"><span class="skill-bar-name">Music Production</span><span class="skill-bar-pct">85%</span></div>
-      <div class="skill-bar-track"><div class="skill-bar-fill" data-width="85" style="--bar-from:#ff9f1c;--bar-to:#ff6b9d;"></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ PROJECTS ═══ -->
-<section id="projects">
-  <div class="sec-label">03 — Portfolio</div>
-  <h2 class="sec-title">Projects Yang Saya Bangun</h2>
-  <div class="projects-grid">
-
-    <!-- PROJECT 1: Jawa Hair Studio -->
-    <div class="project-card reveal">
-      <div class="project-number">01</div>
-      <div class="project-preview">
-        <iframe src="https://jawahairstudio-nu.vercel.app/" title="Jawa Hair Studio" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no"></iframe>
-        <div class="project-overlay">
-          <a href="https://jawahairstudio-nu.vercel.app/" target="_blank" rel="noopener" class="project-live-btn">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            Kunjungi Live Site
-          </a>
-        </div>
-      </div>
-      <div class="project-body">
-        <div class="project-tags">
-          <span class="project-tag">HTML/CSS</span>
-          <span class="project-tag">JavaScript</span>
-          <span class="project-tag">Vercel</span>
-          <span class="project-tag">Landing Page</span>
-        </div>
-        <div class="project-name">Jawa Hair Studio</div>
-        <div class="project-desc">Website landing page profesional untuk Jawa Hair Studio — menampilkan layanan barbershop, galeri, dan informasi kontak dengan tampilan modern yang menarik pelanggan secara online.</div>
-        <div class="project-links">
-          <a href="https://jawahairstudio-nu.vercel.app/" target="_blank" rel="noopener" class="proj-link">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            Live Site
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- PROJECT 2: Toko Bung Edi -->
-    <div class="project-card reveal reveal-delay-1">
-      <div class="project-number">02</div>
-      <div class="project-preview">
-        <iframe src="https://tokobungedi.vercel.app/" title="Toko Bung Edi" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no"></iframe>
-        <div class="project-overlay">
-          <a href="https://tokobungedi.vercel.app/" target="_blank" rel="noopener" class="project-live-btn">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            Kunjungi Live Site
-          </a>
-        </div>
-      </div>
-      <div class="project-body">
-        <div class="project-tags">
-          <span class="project-tag">HTML/CSS</span>
-          <span class="project-tag">JavaScript</span>
-          <span class="project-tag">Vercel</span>
-          <span class="project-tag">E-Commerce</span>
-        </div>
-        <div class="project-name">Toko Bung Edi</div>
-        <div class="project-desc">Website e-commerce untuk toko bung edi — menampilkan koleksi katalog produk, dan layanan pemesanan dengan desain yang hangat dan elegan sesuai karakter bisnis kelontong.</div>
-        <div class="project-links">
-          <a href="https://tokobungedi.vercel.app/" target="_blank" rel="noopener" class="proj-link">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            Live Site
-          </a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- CTA More Projects -->
-  <div style="text-align:center;margin-top:3rem;" class="reveal">
-    <p style="color:var(--muted);font-size:.9rem;margin-bottom:1.2rem;font-family:'Space Mono',monospace;font-size:.75rem;letter-spacing:.05em;">Tertarik berkolaborasi? Mari buat sesuatu yang luar biasa bersama.</p>
-    <a href="#contact" class="btn-glow">Mulai Kolaborasi</a>
-  </div>
-</section>
-
-<!-- ═══ EXPERIENCE ═══ -->
-<section id="experience">
-  <div class="sec-label">04 — Journey</div>
-  <h2 class="sec-title">Perjalanan & Pengalaman</h2>
-  <div class="timeline">
-    <div class="tl-item reveal">
-      <div class="tl-dot"></div>
-      <div class="tl-period">2022 — 2026</div>
-      <h3 class="tl-title">S1 Informatika</h3>
-      <p class="tl-org">Universitas AMIKOM Yogyakarta</p>
-      <p class="tl-desc">Menempuh studi Sarjana Informatika dengan NIM 22.11.4822. Aktif dalam berbagai kegiatan akademik, seminar nasional, dan kuliah umum yang memperkuat kompetensi di bidang networking, pengembangan perangkat lunak, dan teknologi informasi terkini.</p>
-    </div>
-    <div class="tl-item reveal">
-      <div class="tl-dot"></div>
-      <div class="tl-period">Agustus 2024</div>
-      <h3 class="tl-title">International Conference — AI & IoT, Industry 5.0</h3>
-      <p class="tl-org">Universitas Islam Balitar, Indonesia</p>
-      <p class="tl-desc">Berpartisipasi aktif sebagai peserta pada konferensi internasional bertema "The World in the Hands of Artificial Intelligence Technology and the Internet of Things in the Era of Industrial Revolution 5.0". Memperluas wawasan global tentang tren AI dan IoT terkini.</p>
-    </div>
-    <div class="tl-item reveal">
-      <div class="tl-dot"></div>
-      <div class="tl-period">Januari 2024</div>
-      <h3 class="tl-title">Cisco CCNAv7: Introduction to Networks</h3>
-      <p class="tl-org">Cisco Networking Academy</p>
-      <p class="tl-desc">Menyelesaikan program CCNAv7 melalui Cisco Networking Academy. Memperoleh keahlian fundamental dalam konfigurasi perangkat Cisco, protokol TCP/IP, routing, switching, dan keamanan jaringan dasar.</p>
-    </div>
-    <div class="tl-item reveal">
-      <div class="tl-dot"></div>
-      <div class="tl-period">Juni 2025</div>
-      <h3 class="tl-title">Seminar Nasional Informatika 2025</h3>
-      <p class="tl-org">Universitas AMIKOM Yogyakarta</p>
-      <p class="tl-desc">Berpartisipasi aktif dalam Seminar Nasional Informatika 2025 yang diselenggarakan di MSV Cinema, Gedung 6, AMIKOM Yogyakarta — memperluas perspektif tentang perkembangan terkini dunia informatika di Indonesia.</p>
-    </div>
-    <div class="tl-item reveal">
-      <div class="tl-dot"></div>
-      <div class="tl-period">2022 — Present</div>
-      <h3 class="tl-title">Web Developer — Freelance</h3>
-      <p class="tl-org">Jawa Hair Studio · Toko Bung Edi · dan proyek lainnya</p>
-      <p class="tl-desc">Membangun berbagai website profesional untuk klien lokal — dari landing page bisnis hingga toko online. Mengerjakan desain, development, hingga deployment di Vercel dengan hasil yang dapat diakses secara live.</p>
-    </div>
-    <div class="tl-item reveal">
-      <div class="tl-dot"></div>
-      <div class="tl-period">Ongoing</div>
-      <h3 class="tl-title">Musisi & Content Creator</h3>
-      <p class="tl-org">Spotify · Apple Music · YouTube · TikTok · Instagram</p>
-      <p class="tl-desc">Aktif berkarya sebagai musisi dengan rilisan resmi di Spotify dan Apple Music atas nama Avan Kabuchi. Menggabungkan passion di bidang teknologi dan seni — membuktikan bahwa developer pun bisa jadi kreator yang berdampak.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ CERTIFICATIONS ═══ -->
-<section id="certs">
-  <div class="sec-label">05 — Credentials</div>
-  <h2 class="sec-title">Sertifikasi & Partisipasi</h2>
-  <div class="cert-filter">
-    <button class="filter-btn active" data-filter="all" onclick="filterCerts(this,'all')">Semua</button>
-    <button class="filter-btn" data-filter="professional" onclick="filterCerts(this,'professional')">Profesional</button>
-    <button class="filter-btn" data-filter="seminar" onclick="filterCerts(this,'seminar')">Seminar</button>
-    <button class="filter-btn" data-filter="workshop" onclick="filterCerts(this,'workshop')">Workshop</button>
-  </div>
-  <div class="cert-grid">
-    <div class="cert-card reveal" data-cat="professional">
-      <div class="cert-badge" style="background:linear-gradient(135deg,#1ba5e1,#0055aa);">
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="rgba(255,255,255,.1)"/><path d="M6 14a8 8 0 1 0 16 0 8 8 0 0 0-16 0z" stroke="#fff" stroke-width="1.5"/><path d="M11 14h6M14 11v6" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg>
-      </div>
-      <div class="cert-info">
-        <div class="cert-name">CCNAv7: Introduction to Networks</div>
-        <div class="cert-issuer">Cisco Networking Academy</div>
-        <div class="cert-meta">05 Januari 2024</div>
-        <div class="cert-id">Cert ID: 34b115f0-b723-43c4-b6fd-0ce5fc89db76</div>
-      </div>
-      <div class="cert-type" style="color:#00e5b0;border-color:rgba(0,229,176,.3);">Profesional</div>
-    </div>
-    <div class="cert-card reveal reveal-delay-1" data-cat="seminar">
-      <div class="cert-badge" style="background:linear-gradient(135deg,#c0392b,#a93226);">
-        <span style="font-size:1.5rem;">🌏</span>
-      </div>
-      <div class="cert-info">
-        <div class="cert-name">International Conference: AI, IoT & Industry 5.0</div>
-        <div class="cert-issuer">Universitas Islam Balitar, Indonesia</div>
-        <div class="cert-meta">26 Agustus 2024</div>
-        <div class="cert-id">No. 034/DK.04/E-Cert/071070/VIII/2024</div>
-      </div>
-      <div class="cert-type" style="color:#ffd166;border-color:rgba(255,209,102,.3);">Seminar</div>
-    </div>
-    <div class="cert-card reveal reveal-delay-2" data-cat="workshop">
-      <div class="cert-badge" style="background:linear-gradient(135deg,#f6c90e,#e09800);">
-        <span style="font-size:1.5rem;">🌱</span>
-      </div>
-      <div class="cert-info">
-        <div class="cert-name">Movers Workshop on Wellbeing for Changemakers</div>
-        <div class="cert-issuer">Movers Programme — Skill Our Future</div>
-        <div class="cert-meta">Certificate of Participation (2-Hour Workshop)</div>
-      </div>
-      <div class="cert-type" style="color:#ff6b9d;border-color:rgba(255,107,157,.3);">Workshop</div>
-    </div>
-    <div class="cert-card reveal reveal-delay-3" data-cat="seminar">
-      <div class="cert-badge" style="background:linear-gradient(135deg,#6a0dad,#9b59b6);">
-        <span style="font-size:1.5rem;">🎓</span>
-      </div>
-      <div class="cert-info">
-        <div class="cert-name">Seminar Nasional Informatika 2025</div>
-        <div class="cert-issuer">Universitas AMIKOM Yogyakarta</div>
-        <div class="cert-meta">5 Juni 2025</div>
-        <div class="cert-id">No. 1624/S-KMHS/AMIKOM/VI/2025</div>
-      </div>
-      <div class="cert-type" style="color:#7c6fff;border-color:rgba(124,111,255,.3);">Seminar</div>
-    </div>
-    <div class="cert-card reveal" data-cat="workshop">
-      <div class="cert-badge" style="background:linear-gradient(135deg,#16213e,#4a4e69);">
-        <span style="font-size:1.5rem;">💻</span>
-      </div>
-      <div class="cert-info">
-        <div class="cert-name">Introduction to Computer 2022</div>
-        <div class="cert-issuer">Universitas AMIKOM Yogyakarta</div>
-        <div class="cert-meta">1–13 September 2022</div>
-        <div class="cert-id">No. 220/KMHS/AMIKOM/IX/3385</div>
-      </div>
-      <div class="cert-type" style="color:#ff6b9d;border-color:rgba(255,107,157,.3);">Workshop</div>
-    </div>
-    <div class="cert-card reveal reveal-delay-1" data-cat="seminar">
-      <div class="cert-badge" style="background:linear-gradient(135deg,#4a4e69,#6b705c);">
-        <span style="font-size:1.5rem;">🎙️</span>
-      </div>
-      <div class="cert-info">
-        <div class="cert-name">Kuliah Umum: AMIKOM Creative Economy Park</div>
-        <div class="cert-issuer">Universitas AMIKOM Yogyakarta</div>
-        <div class="cert-meta">11 Juni 2022</div>
-        <div class="cert-id">No. 1605.S/A.DKUI/AMIKOM/VI/2022</div>
-      </div>
-      <div class="cert-type" style="color:#7c6fff;border-color:rgba(124,111,255,.3);">Seminar</div>
-    </div>
-    <div class="cert-card reveal reveal-delay-2" data-cat="seminar">
-      <div class="cert-badge" style="background:linear-gradient(135deg,#1a535c,#4ecdc4);">
-        <span style="font-size:1.5rem;">🗺️</span>
-      </div>
-      <div class="cert-info">
-        <div class="cert-name">Seminar: Potensi Karir Pemetaan & Geospasial</div>
-        <div class="cert-issuer">Universitas AMIKOM Yogyakarta — BPC & Alumni</div>
-        <div class="cert-meta">24 Juni 2025</div>
-        <div class="cert-id">No. 065/Sert.BPC/AMIKOM/VI/2025</div>
-      </div>
-      <div class="cert-type" style="color:#00e5b0;border-color:rgba(0,229,176,.3);">Seminar</div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ MUSIC ═══ -->
-<section id="music">
-  <div class="sec-label">06 — Musik</div>
-  <h2 class="sec-title">Avan Kabuchi — Artist</h2>
-  <div class="music-player reveal">
-    <div class="now-playing-label">Now Playing</div>
-    <div class="track-info">
-      <div class="track-art" id="track-art">🎵</div>
-      <div>
-        <div class="track-name" id="track-name">Avan Kabuchi</div>
-        <div class="track-artist">Original Artist · Singer-Songwriter</div>
-        <div class="track-platform" id="track-platform">🎵 Tersedia di Spotify & Apple Music</div>
-      </div>
-    </div>
-    <div class="progress-bar">
-      <div class="progress-fill" id="progress-fill"></div>
-    </div>
-    <div class="player-controls">
-      <button class="ctrl-btn" onclick="prevTrack()">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/></svg>
-      </button>
-      <button class="play-btn" id="play-btn" onclick="togglePlay()">
-        <svg id="play-icon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-      </button>
-      <button class="ctrl-btn" onclick="nextTrack()">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></svg>
-      </button>
-    </div>
-    <div class="player-links">
-      <a href="https://open.spotify.com/artist/2fNzlKoGfAPpQQDQPpm6zD?si=S59taWq1Tti97nacValoRA" target="_blank" rel="noopener" class="platform-link">
-        <span style="color:#1db954">●</span> Spotify
-      </a>
-      <a href="https://music.apple.com/id/artist/avan-kabuchi/1766126525?l=id" target="_blank" rel="noopener" class="platform-link">
-        <span style="color:#fc3c44">●</span> Apple Music
-      </a>
-      <a href="https://youtube.com/@avankabuchi_" target="_blank" rel="noopener" class="platform-link">
-        <span style="color:#ff0000">●</span> YouTube
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ CONNECT ═══ -->
-<section id="contact">
-  <div class="sec-label">07 — Connect</div>
-  <h2 class="sec-title">Temukan Saya Di</h2>
-  <p class="social-intro">Saya aktif di berbagai platform. Jangan ragu untuk connect, kolaborasi, atau sekadar menyapa — pintu selalu terbuka!</p>
-  <div class="socials-grid">
-    <a href="https://www.instagram.com/avankabuchi_?igsh=Y3IyNG5oYjR4cGYz&utm_source=qr" target="_blank" rel="noopener" class="soc-card" style="--sc-border:#e1306c;--sc-shadow:rgba(225,48,108,.2);">
-      <div class="soc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><defs><radialGradient id="ig1" cx="30%" cy="107%"><stop offset="0%" stop-color="#fdf497"/><stop offset="45%" stop-color="#fd5949"/><stop offset="60%" stop-color="#d6249f"/><stop offset="90%" stop-color="#285AEB"/></radialGradient></defs><rect x="2" y="2" width="20" height="20" rx="5" stroke="url(#ig1)" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="url(#ig1)" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.1" fill="url(#ig1)"/></svg></div>
-      <div class="soc-name">Instagram</div>
-      <div class="soc-handle">@avankabuchi_</div>
-    </a>
-    <a href="https://www.tiktok.com/@avankabuchi_?_r=1&_t=ZS-970N0o4ivbR" target="_blank" rel="noopener" class="soc-card" style="--sc-border:#69c9d0;--sc-shadow:rgba(105,201,208,.2);">
-      <div class="soc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" stroke="#69c9d0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" stroke="#ee1d52" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" transform="translate(0.8,0.8)"/></svg></div>
-      <div class="soc-name">TikTok</div>
-      <div class="soc-handle">@avankabuchi_</div>
-    </a>
-    <a href="https://www.linkedin.com/in/avankha-barlian-kabuchi-080402274?originalSubdomain=id" target="_blank" rel="noopener" class="soc-card" style="--sc-border:#0a66c2;--sc-shadow:rgba(10,102,194,.2);">
-      <div class="soc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="#0a66c2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
-      <div class="soc-name">LinkedIn</div>
-      <div class="soc-handle">Avankha B. K.</div>
-    </a>
-    <a href="https://github.com/avankabuchi" target="_blank" rel="noopener" class="soc-card" style="--sc-border:#f0f6fc;--sc-shadow:rgba(240,246,252,.1);">
-      <div class="soc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="#f0f6fc"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></div>
-      <div class="soc-name">GitHub</div>
-      <div class="soc-handle">avankabuchi</div>
-    </a>
-    <a href="https://youtube.com/@avankabuchi_?si=B_xE3RLRkXb1kVw-" target="_blank" rel="noopener" class="soc-card" style="--sc-border:#ff0000;--sc-shadow:rgba(255,0,0,.2);">
-      <div class="soc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="#ff0000"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-1.96C18.88 4 12 4 12 4s-6.88 0-8.6.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.4 19.54C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#fff"/></svg></div>
-      <div class="soc-name">YouTube</div>
-      <div class="soc-handle">@avankabuchi_</div>
-    </a>
-    <a href="https://open.spotify.com/artist/2fNzlKoGfAPpQQDQPpm6zD?si=S59taWq1Tti97nacValoRA" target="_blank" rel="noopener" class="soc-card" style="--sc-border:#1db954;--sc-shadow:rgba(29,185,84,.2);">
-      <div class="soc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="#1db954"><circle cx="12" cy="12" r="10"/><path d="M8 14.5s1.5-1 4-1 4 1 4 1" stroke="#000" stroke-width="1.3" stroke-linecap="round"/><path d="M7 11.5s2-1.5 5-1.5 5 1.5 5 1.5" stroke="#000" stroke-width="1.3" stroke-linecap="round"/><path d="M6.5 8.5S9 6.5 12 6.5s5.5 2 5.5 2" stroke="#000" stroke-width="1.3" stroke-linecap="round"/></svg></div>
-      <div class="soc-name">Spotify</div>
-      <div class="soc-handle">Avan Kabuchi</div>
-    </a>
-    <a href="https://music.apple.com/id/artist/avan-kabuchi/1766126525?l=id" target="_blank" rel="noopener" class="soc-card" style="--sc-border:#fc3c44;--sc-shadow:rgba(252,60,68,.2);">
-      <div class="soc-icon"><svg width="24" height="24" viewBox="0 0 24 24"><defs><linearGradient id="am1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fc3c44"/><stop offset="100%" stop-color="#ff8a80"/></linearGradient></defs><circle cx="12" cy="12" r="10" fill="url(#am1)"/><path d="M10 17V8l8-2v9" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="17" r="2" fill="#fff"/><circle cx="16" cy="15" r="2" fill="#fff"/></svg></div>
-      <div class="soc-name">Apple Music</div>
-      <div class="soc-handle">Avan Kabuchi</div>
-    </a>
-  </div>
-</section>
-
-<!-- ═══ FOOTER ═══ -->
-<footer>
-  <div class="footer-brand">Avankha Barlian Kabuchi, S.Kom.</div>
-  <div class="footer-copy">Informatika · AMIKOM Yogyakarta · © 2025–2026</div>
-  <a href="#" class="footer-back-top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑ Kembali ke atas</a>
-</footer>
-
 <script>
-/* ── CUSTOM CURSOR ── */
-const cursor = document.getElementById('cursor');
-const ring = document.getElementById('cursor-ring');
+/* ── CURSOR ── */
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
 let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove', e => {
-  mx=e.clientX; my=e.clientY;
-  cursor.style.left=mx+'px'; cursor.style.top=my+'px';
-});
-function animRing(){
-  rx+=(mx-rx)*.1; ry+=(my-ry)*.1;
-  ring.style.left=rx+'px'; ring.style.top=ry+'px';
-  requestAnimationFrame(animRing);
-}
-animRing();
-document.querySelectorAll('a,button,.skill-card,.cert-card,.soc-card,.info-card,.project-card,.hstat,.chip').forEach(el=>{
-  el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-grow'));
-  el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-grow'));
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function ar(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(ar);})();
+document.querySelectorAll('a,[onclick],.nav-item,.filter-btn,.cert-card,.soc-card,.proj-card,.sk-item,.tl-nav-item,.track-row,.id-row,.btn,.bnav-item').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-xl'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-xl'));
 });
 
-/* ── SCROLL PROGRESS ── */
-window.addEventListener('scroll',()=>{
-  const scrollTop=document.documentElement.scrollTop;
-  const docH=document.documentElement.scrollHeight-document.documentElement.clientHeight;
-  document.getElementById('scroll-progress').style.width=(scrollTop/docH*100)+'%';
-},{ passive:true });
+/* ── CLOCK ── */
+function updateClock(){const n=new Date();document.getElementById('topbar-clock').textContent=n.getHours().toString().padStart(2,'0')+':'+n.getMinutes().toString().padStart(2,'0');}
+updateClock();setInterval(updateClock,30000);
 
 /* ── PARTICLES ── */
-const canvas=document.getElementById('particle-canvas');
-const ctx=canvas.getContext('2d');
-let W,H,particles=[];
-function resizeCanvas(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
-resizeCanvas();
-window.addEventListener('resize',resizeCanvas);
-for(let i=0;i<80;i++){
-  particles.push({
-    x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,
-    vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,
-    r:Math.random()*1.5+.5,
-    c:`rgba(${Math.random()>0.5?'124,111,255':'255,107,157'},${Math.random()*.4+.1})`
-  });
-}
-function drawParticles(){
-  ctx.clearRect(0,0,W,H);
-  particles.forEach((p,i)=>{
-    p.x+=p.vx; p.y+=p.vy;
-    if(p.x<0)p.x=W; if(p.x>W)p.x=0;
-    if(p.y<0)p.y=H; if(p.y>H)p.y=0;
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fillStyle=p.c;
-    ctx.fill();
-    // connect nearby
-    for(let j=i+1;j<particles.length;j++){
-      const d=Math.hypot(p.x-particles[j].x,p.y-particles[j].y);
-      if(d<120){
-        ctx.beginPath();
-        ctx.moveTo(p.x,p.y);
-        ctx.lineTo(particles[j].x,particles[j].y);
-        ctx.strokeStyle=`rgba(124,111,255,${.06*(1-d/120)})`;
-        ctx.stroke();
-      }
-    }
-  });
-  requestAnimationFrame(drawParticles);
-}
-drawParticles();
+const canvas=document.getElementById('particle-canvas'),ctx=canvas.getContext('2d');
+let W,H,pts=[];
+function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+resize();window.addEventListener('resize',resize);
+for(let i=0;i<55;i++)pts.push({x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.22,r:Math.random()*1.2+.4,c:Math.random()>.5?'rgba(124,111,255,.22)':'rgba(255,107,157,.15)'});
+(function dp(){ctx.clearRect(0,0,W,H);pts.forEach((p,i)=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.c;ctx.fill();for(let j=i+1;j<pts.length;j++){const d=Math.hypot(p.x-pts[j].x,p.y-pts[j].y);if(d<95){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle=`rgba(124,111,255,${.035*(1-d/95)})`;ctx.stroke();}}});requestAnimationFrame(dp);})();
 
-/* ── TYPING EFFECT ── */
-const phrases=['Cisco Certified','Web Developer','Content Creator','Musisi','Problem Solver','Freelancer'];
-let pi=0,ci=0,del=false;
-const typEl=document.getElementById('typing-text');
-function typeLoop(){
-  const word=phrases[pi];
-  if(!del){
-    typEl.textContent=word.slice(0,ci+1);
-    ci++;
-    if(ci===word.length){del=true;setTimeout(typeLoop,1800);return;}
+/* ── BOOT ── */
+const bootLogs=['Memuat portofolio...','Inisialisasi UI engine...','Connecting to AMIKOM network...','Mounting project filesystem...','Loading music daemon...','Verifying credentials...','Configuring assets...','Siap! 🚀'];
+let bi=0,bp=0;
+const bb=document.getElementById('boot-bar'),bl=document.getElementById('boot-log');
+function bootTick(){
+  if(bi<bootLogs.length){
+    bl.innerHTML=bootLogs.slice(Math.max(0,bi-2),bi+1).map((l,i,a)=>`<div style="opacity:${i===a.length-1?1:.45}">${l}</div>`).join('');
+    bp=Math.round((bi+1)/bootLogs.length*100);bb.style.width=bp+'%';bi++;
+    setTimeout(bootTick,bi===bootLogs.length?400:200);
   } else {
-    typEl.textContent=word.slice(0,ci-1);
-    ci--;
-    if(ci===0){del=false;pi=(pi+1)%phrases.length;}
+    document.getElementById('boot').classList.add('fade-out');
+    setTimeout(()=>{document.getElementById('boot').style.display='none';},800);
+    initPage();
   }
-  setTimeout(typeLoop,del?60:100);
 }
-typeLoop();
+setTimeout(bootTick,280);
 
-/* ── SCROLL REVEAL ── */
-const reveals=document.querySelectorAll('.reveal,.reveal-left');
-const ro=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      const d=e.target.classList.contains('reveal-delay-3')?300:e.target.classList.contains('reveal-delay-2')?200:e.target.classList.contains('reveal-delay-1')?100:0;
-      setTimeout(()=>e.target.classList.add('in'),d);
-      ro.unobserve(e.target);
-    }
-  });
-},{threshold:0.1});
-reveals.forEach(r=>ro.observe(r));
+/* ── INIT ── */
+function initPage(){initTyping();initTimeline();initTrackList();initWaveform();buildSkillBars();}
 
-/* ── ANIMATED COUNTERS ── */
-function animCounter(el){
-  const target=parseInt(el.dataset.target);
-  let cur=0;
-  const step=Math.ceil(target/60);
-  const int=setInterval(()=>{
-    cur+=step;
-    if(cur>=target){cur=target;clearInterval(int);}
-    el.textContent=cur+(cur>=target&&(target===7||target===2||target===4||target===1)?'':'');
-  },30);
+/* ── TYPING ── */
+const phrases=['Cisco Certified','Web Developer','Content Creator','Musisi & Artist','Problem Solver','Freelancer'];
+let pi=0,ci=0,del=false;
+const typEl=document.getElementById('typing-out');
+function typeLoop(){
+  if(!typEl)return;
+  const w=phrases[pi];
+  if(!del){typEl.textContent=w.slice(0,ci+1);ci++;if(ci===w.length){del=true;setTimeout(typeLoop,1900);return;}}
+  else{typEl.textContent=w.slice(0,ci-1);ci--;if(ci===0){del=false;pi=(pi+1)%phrases.length;}}
+  setTimeout(typeLoop,del?50:90);
 }
-const counterObs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.querySelectorAll('.counter-num[data-target]').forEach(animCounter);
-      counterObs.unobserve(e.target);
-    }
-  });
-},{threshold:0.3});
-document.querySelectorAll('.counter-section').forEach(s=>counterObs.observe(s));
+
+/* ── PAGE SWITCH ── */
+const pageNames={home:'Home',about:'About Me',skills:'Skills',projects:'Projects',experience:'Experience',certs:'Certifications',music:'Music',connect:'Connect'};
+function switchPage(id,el){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.querySelectorAll('.bnav-item').forEach(n=>n.classList.remove('active'));
+  const di=document.querySelector('#sidebar .nav-item[data-page="'+id+'"]');
+  if(di)di.classList.add('active');
+  const mi=document.querySelector('.bnav-item[data-page="'+id+'"]');
+  if(mi)mi.classList.add('active');
+  const pg=document.getElementById('page-'+id);
+  if(pg){pg.classList.add('active');pg.scrollTop=0;}
+  document.getElementById('topbar-path').textContent=pageNames[id]||id;
+  if(id==='skills')setTimeout(animateBars,200);
+  toast('📂 '+pageNames[id]);
+}
 
 /* ── SKILL BARS ── */
-const barObs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.querySelectorAll('.skill-bar-fill[data-width]').forEach(bar=>{
-        bar.style.width=bar.dataset.width+'%';
-      });
-      barObs.unobserve(e.target);
-    }
-  });
-},{threshold:0.2});
-document.querySelectorAll('.skill-bars').forEach(s=>barObs.observe(s));
+let barsAnimated=false;
+function buildSkillBars(){document.querySelectorAll('.bar-fill[data-w]').forEach(b=>b.style.width='0');}
+function animateBars(){if(barsAnimated)return;barsAnimated=true;document.querySelectorAll('.bar-fill[data-w]').forEach(b=>{b.style.width=b.dataset.w+'%';});}
 
-/* ── NAV SCROLL HIGHLIGHT ── */
-const sections=document.querySelectorAll('section[id]');
-const navLinks=document.querySelectorAll('.nav-links a');
-window.addEventListener('scroll',()=>{
-  const navbar=document.getElementById('navbar');
-  if(window.scrollY>80)navbar.classList.add('scrolled');
-  else navbar.classList.remove('scrolled');
-  let cur='';
-  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-160)cur=s.id;});
-  navLinks.forEach(a=>{
-    a.classList.toggle('active',a.getAttribute('href')==='#'+cur);
-  });
-},{passive:true});
+/* ── TIMELINE ── */
+const tlData=[
+  {period:'2022 — 2026',title:'S1 Informatika',org:'Universitas AMIKOM Yogyakarta',desc:'Menempuh studi Sarjana Informatika dan aktif dalam berbagai kegiatan akademik, seminar nasional, dan kuliah umum yang memperkuat kompetensi di bidang networking, pengembangan perangkat lunak, dan teknologi informasi terkini.',tags:['Informatika','Networking','Web Dev','Akademik']},
+  {period:'Agustus 2024',title:'International Conference — AI & IoT, Industry 5.0',org:'Universitas Islam Balitar, Indonesia',desc:'Berpartisipasi aktif sebagai peserta pada konferensi internasional bertema "The World in the Hands of Artificial Intelligence Technology and the Internet of Things in the Era of Industrial Revolution 5.0". Memperluas wawasan global tentang tren AI dan IoT.',tags:['Artificial Intelligence','IoT','Industry 5.0','International']},
+  {period:'Januari 2024',title:'Cisco CCNAv7: Introduction to Networks',org:'Cisco Networking Academy',desc:'Menyelesaikan program CCNAv7 melalui Cisco Networking Academy. Memperoleh keahlian fundamental dalam konfigurasi perangkat Cisco, protokol TCP/IP, routing, switching, dan keamanan jaringan dasar.',tags:['Cisco','TCP/IP','Routing','Switching','VLAN']},
+  {period:'Juni 2025',title:'Seminar Nasional Informatika 2025',org:'Universitas AMIKOM Yogyakarta',desc:'Berpartisipasi aktif dalam Seminar Nasional Informatika 2025 di MSV Cinema, Gedung 6, AMIKOM Yogyakarta — memperluas perspektif tentang perkembangan terkini dunia informatika di Indonesia.',tags:['Seminar','Informatika','Nasional']},
+  {period:'2022 — Present',title:'Web Developer — Freelance',org:'Jawa Hair Studio · Toko Bung Edi · dan lainnya',desc:'Membangun berbagai website profesional untuk klien lokal — dari landing page bisnis hingga toko online. Desain, development, hingga deployment di Vercel dengan hasil yang dapat diakses secara live.',tags:['HTML/CSS','JavaScript','Vercel','Freelance','Deployment']},
+  {period:'Ongoing',title:'Musisi & Content Creator',org:'Spotify · Apple Music · YouTube · TikTok · Instagram',desc:'Aktif berkarya sebagai musisi dengan rilisan resmi di Spotify dan Apple Music atas nama Avan Kabuchi — membuktikan bahwa developer pun bisa jadi kreator yang berdampak.',tags:['Music','Spotify','Content Creation','TikTok','YouTube']},
+];
+function initTimeline(){showTlDetail(0,document.querySelector('.tl-nav-item'));}
+function showTlDetail(idx,el){
+  document.querySelectorAll('.tl-nav-item').forEach(n=>n.classList.remove('active'));
+  const ni=el.closest?el.closest('.tl-nav-item'):el;
+  if(ni)ni.classList.add('active');
+  const d=tlData[idx];
+  document.getElementById('tl-detail').innerHTML=`
+    <div class="tl-detail-period">${d.period}</div>
+    <div class="tl-detail-title">${d.title}</div>
+    <div class="tl-detail-org">${d.org}</div>
+    <div class="tl-detail-desc">${d.desc}</div>
+    <div class="tl-detail-tags">${d.tags.map(t=>`<span class="tl-tag">${t}</span>`).join('')}</div>
+  `;
+}
+
+/* ── MUSIC PLAYER ── */
+const tracks=[
+  {name:'Track 1',art:'🎸',dur:'3:24',plat:'Spotify & Apple Music'},
+  {name:'Track 2',art:'🎹',dur:'2:58',plat:'Apple Music'},
+  {name:'Track 3',art:'🎧',dur:'4:10',plat:'YouTube & Spotify'},
+  {name:'Track 4',art:'🎻',dur:'3:45',plat:'Spotify'},
+];
+let trackIdx=0,isPlaying=false,progVal=0,progTimer;
+function initTrackList(){
+  const tl=document.getElementById('track-list');
+  if(!tl)return;
+  tl.innerHTML=tracks.map((t,i)=>`
+    <div class="track-row${i===0?' playing-row':''}" id="tr-${i}" onclick="selectTrack(${i})">
+      <div class="tr-num">${i+1}</div>
+      <div class="tr-art">${t.art}</div>
+      <div class="tr-info"><div class="tr-name">Avan Kabuchi — ${t.name}</div><div class="tr-sub">Avan Kabuchi</div></div>
+      <div class="tr-dur">${t.dur}</div>
+    </div>
+  `).join('');
+}
+function initWaveform(){
+  const wf=document.getElementById('waveform');if(!wf)return;
+  const h=[30,50,70,40,80,60,90,45,65,55,75,35,85,50,70,40,60,80,50,65,45,75,55,85,40];
+  wf.innerHTML=h.map((v,i)=>`<div class="wave-bar" style="height:${v}%;animation-delay:${i*.06}s;"></div>`).join('');
+}
+function updatePlayerUI(){
+  const t=tracks[trackIdx];
+  document.getElementById('track-title').textContent='Avan Kabuchi — '+t.name;
+  document.getElementById('album-art').textContent=t.art;
+  document.getElementById('track-plat').textContent='🎵 '+t.plat;
+  document.getElementById('prog-dur').textContent=t.dur;
+  document.querySelectorAll('.track-row').forEach((r,i)=>r.classList.toggle('playing-row',i===trackIdx));
+}
+function selectTrack(i){trackIdx=i;updatePlayerUI();if(!isPlaying)togglePlay();else{progVal=0;document.getElementById('prog-fill').style.width='0%';document.getElementById('prog-cur').textContent='0:00';}}
+function togglePlay(){
+  isPlaying=!isPlaying;
+  const btn=document.getElementById('play-btn'),art=document.getElementById('album-art'),wf=document.getElementById('waveform');
+  if(isPlaying){
+    btn.innerHTML='<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
+    art&&art.classList.add('spin');wf&&wf.classList.add('playing');startProg();
+    toast('▶ Playing: Avan Kabuchi — '+tracks[trackIdx].name);
+  } else {
+    btn.innerHTML='<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
+    art&&art.classList.remove('spin');wf&&wf.classList.remove('playing');clearInterval(progTimer);
+  }
+}
+function startProg(){
+  clearInterval(progTimer);const dur=parseDur(tracks[trackIdx].dur);
+  progTimer=setInterval(()=>{progVal++;if(progVal>=dur){progVal=0;nextTrack();return;}document.getElementById('prog-fill').style.width=(progVal/dur*100)+'%';document.getElementById('prog-cur').textContent=fmtTime(progVal);},1000);
+}
+function parseDur(s){const[m,sec]=s.split(':');return +m*60+(+sec||0);}
+function fmtTime(s){return Math.floor(s/60)+':'+(s%60).toString().padStart(2,'0');}
+function prevTrack(){trackIdx=(trackIdx-1+tracks.length)%tracks.length;progVal=0;updatePlayerUI();if(isPlaying)startProg();}
+function nextTrack(){trackIdx=(trackIdx+1)%tracks.length;progVal=0;updatePlayerUI();if(isPlaying)startProg();}
 
 /* ── CERT FILTER ── */
 function filterCerts(btn,cat){
   document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  document.querySelectorAll('.cert-card').forEach(c=>{
-    c.style.display=(cat==='all'||c.dataset.cat===cat)?'':'none';
-  });
-}
-
-/* ── 3D TILT ── */
-document.querySelectorAll('.skill-card,.cert-card,.soc-card,.info-card,.project-card').forEach(card=>{
-  card.addEventListener('mousemove',e=>{
-    const r=card.getBoundingClientRect();
-    const x=(e.clientX-r.left)/r.width-.5;
-    const y=(e.clientY-r.top)/r.height-.5;
-    card.style.transform=`translateY(-5px) rotateX(${-y*5}deg) rotateY(${x*5}deg)`;
-  });
-  card.addEventListener('mouseleave',()=>{card.style.transform='';});
-});
-
-/* ── MOBILE MENU ── */
-function openMobileMenu(){document.getElementById('mobile-menu').classList.add('open');}
-function closeMobileMenu(){document.getElementById('mobile-menu').classList.remove('open');}
-
-/* ── MUSIC PLAYER ── */
-let isPlaying=false;
-const tracks=[
-  {name:'Avan Kabuchi — Track 1',art:'🎸',platform:'Dengarkan di Spotify & Apple Music'},
-  {name:'Avan Kabuchi — Track 2',art:'🎹',platform:'Dengarkan di Apple Music'},
-  {name:'Avan Kabuchi — Track 3',art:'🎧',platform:'Dengarkan di YouTube & Spotify'},
-];
-let trackIdx=0;
-function updateTrack(){
-  const t=tracks[trackIdx];
-  document.getElementById('track-name').textContent=t.name;
-  document.getElementById('track-art').textContent=t.art;
-  document.getElementById('track-platform').textContent='🎵 '+t.platform;
-}
-function togglePlay(){
-  isPlaying=!isPlaying;
-  const btn=document.getElementById('play-btn');
-  const art=document.getElementById('track-art');
-  const pf=document.getElementById('progress-fill');
-  if(isPlaying){
-    btn.innerHTML='<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
-    art.classList.add('playing');
-    pf.classList.add('playing');
-    showToast('▶ Now playing: '+tracks[trackIdx].name);
-  } else {
-    btn.innerHTML='<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
-    art.classList.remove('playing');
-    pf.classList.remove('playing');
-  }
-}
-function prevTrack(){
-  trackIdx=(trackIdx-1+tracks.length)%tracks.length;
-  updateTrack();
-  if(isPlaying)showToast('⏮ '+tracks[trackIdx].name);
-}
-function nextTrack(){
-  trackIdx=(trackIdx+1)%tracks.length;
-  updateTrack();
-  if(isPlaying)showToast('⏭ '+tracks[trackIdx].name);
+  document.querySelectorAll('.cert-card').forEach(c=>{c.style.display=(cat==='all'||c.dataset.cat===cat)?'':'none';});
 }
 
 /* ── TOAST ── */
-let toastTimer;
-function showToast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg;
-  t.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer=setTimeout(()=>t.classList.remove('show'),2500);
+let toastT;
+function toast(msg){
+  const t=document.getElementById('toast'),m=document.getElementById('toast-msg');
+  m.textContent=msg;t.classList.add('show');
+  clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2100);
+}
+
+/* ── 3D TILT (desktop only) ── */
+if(window.matchMedia('(hover:hover)').matches){
+  document.querySelectorAll('.proj-card,.cert-card,.soc-card,.skill-panel,.about-card,.music-player-card,.discography-card,.tl-detail').forEach(card=>{
+    card.addEventListener('mousemove',e=>{const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;card.style.transform=`translateY(-4px) rotateX(${-y*4}deg) rotateY(${x*4}deg)`;});
+    card.addEventListener('mouseleave',()=>{card.style.transform='';});
+  });
 }
 </script>
 </body>
