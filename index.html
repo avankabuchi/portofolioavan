@@ -21,9 +21,7 @@
   --muted2:#8a8aaa;
   --border:rgba(124,111,255,.14);
   --border2:rgba(124,111,255,.28);
-  --sidebar-w:72px;
   --topbar-h:52px;
-  --bottom-nav-h:0px;
   --safe-bottom:env(safe-area-inset-bottom,0px);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -57,46 +55,6 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
 /* ─── SHELL ─── */
 #os-shell{display:flex;height:100vh;position:relative;z-index:1;}
 
-/* ─── SIDEBAR (desktop) ─── */
-#sidebar{
-  width:var(--sidebar-w);background:rgba(13,13,31,.92);
-  backdrop-filter:blur(32px);border-right:1px solid var(--border);
-  display:flex;flex-direction:column;align-items:center;
-  padding:1rem 0;gap:.25rem;z-index:100;flex-shrink:0;
-}
-.sidebar-logo{
-  font-family:'Syne',sans-serif;font-weight:800;font-size:.9rem;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  margin-bottom:.7rem;cursor:none;
-}
-.sidebar-sep{width:32px;height:1px;background:var(--border);margin:.4rem 0;}
-.nav-item{
-  width:48px;height:48px;border-radius:14px;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
-  cursor:none;transition:all .22s;position:relative;border:1px solid transparent;
-}
-.nav-item:hover{background:rgba(124,111,255,.1);border-color:var(--border2);}
-.nav-item.active{background:rgba(124,111,255,.18);border-color:rgba(124,111,255,.4);}
-.nav-item.active::before{
-  content:'';position:absolute;left:-1px;top:50%;transform:translateY(-50%);
-  width:3px;height:24px;border-radius:0 3px 3px 0;
-  background:linear-gradient(180deg,var(--accent),var(--accent3));
-}
-.nav-icon{font-size:1.15rem;line-height:1;}
-.nav-label{font-family:'Space Mono',monospace;font-size:.44rem;letter-spacing:.06em;color:var(--muted);text-transform:uppercase;}
-.nav-item.active .nav-label{color:var(--accent);}
-.nav-tooltip{
-  position:absolute;left:calc(100% + 14px);top:50%;transform:translateY(-50%);
-  background:var(--surface3);border:1px solid var(--border2);border-radius:8px;
-  padding:.3rem .8rem;font-family:'Space Mono',monospace;font-size:.65rem;
-  color:var(--text);white-space:nowrap;opacity:0;pointer-events:none;
-  transition:opacity .15s;letter-spacing:.05em;z-index:200;
-}
-.nav-item:hover .nav-tooltip{opacity:1;}
-.nav-dot{position:absolute;top:8px;right:8px;width:6px;height:6px;border-radius:50%;background:var(--accent3);box-shadow:0 0 8px var(--accent3);}
-.sidebar-bottom{margin-top:auto;}
-
 /* ─── MAIN AREA ─── */
 #main-area{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0;}
 
@@ -107,6 +65,13 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
   display:flex;align-items:center;padding:0 1.4rem;gap:1.2rem;
   flex-shrink:0;z-index:50;
 }
+.topbar-home-btn {
+  background: rgba(124,111,255,.15); border: 1px solid var(--border2);
+  color: var(--text); border-radius: 6px; padding: 0.3rem 0.8rem;
+  font-family: 'Space Mono', monospace; font-size: 0.65rem;
+  cursor: none; transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.3rem;
+}
+.topbar-home-btn:hover { background: rgba(124,111,255,.3); }
 .topbar-breadcrumb{
   font-family:'Space Mono',monospace;font-size:.66rem;
   color:var(--muted);letter-spacing:.05em;
@@ -128,7 +93,7 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
 #pages{flex:1;position:relative;overflow:hidden;}
 .page{
   position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;
-  padding:2.2rem 2.8rem;opacity:0;
+  padding:2.2rem 4rem; opacity:0; max-width: 1300px; margin: 0 auto;
   transform:translateY(14px) scale(.99);pointer-events:none;
   transition:opacity .32s cubic-bezier(.16,1,.3,1),transform .32s cubic-bezier(.16,1,.3,1);
   -webkit-overflow-scrolling:touch;
@@ -154,7 +119,7 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
 
 /* ════ HOME ════ */
 #page-home{display:flex;align-items:center;}
-.home-inner{display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center;max-width:1100px;width:100%;}
+.home-inner{display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center;width:100%;}
 .home-tag{
   font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.15em;
   color:var(--accent3);text-transform:uppercase;
@@ -170,7 +135,7 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
 @keyframes shimmer{0%{transform:translateX(-100%);}100%{transform:translateX(100%);}}
 .home-name{
   font-family:'Syne',sans-serif;font-weight:800;
-  font-size:clamp(2rem,5vw,4rem);letter-spacing:-.04em;line-height:.95;margin-bottom:.8rem;
+  font-size:clamp(2rem,5vw,4rem);letter-spacing:-.04em;line-height:1.1;margin-bottom:1.2rem;
 }
 .home-name .g{
   background:linear-gradient(120deg,var(--accent) 0%,var(--accent2) 50%,var(--accent3) 100%);
@@ -178,16 +143,15 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
   background-size:200%;animation:grad-flow 5s ease infinite;
 }
 @keyframes grad-flow{0%,100%{background-position:0%;}50%{background-position:100%;}}
-.home-role{
-  font-family:'Space Mono',monospace;font-size:.8rem;color:var(--muted2);
-  margin-bottom:1.5rem;display:flex;align-items:center;gap:.7rem;flex-wrap:wrap;
-}
-.role-sep{color:rgba(124,111,255,.4);}
+
 .typing-wrap{display:inline-flex;align-items:center;gap:2px;}
 .typing-wrap span{color:var(--accent2);}
-.cursor-blink{display:inline-block;width:2px;height:.75em;background:var(--accent2);animation:blink .7s step-end infinite;vertical-align:-.08em;}
+.cursor-blink{display:inline-block;width:3px;height:1em;background:var(--accent2);animation:blink .7s step-end infinite;vertical-align:-.08em;}
 @keyframes blink{50%{opacity:0;}}
-.home-bio{font-size:.97rem;line-height:1.88;color:rgba(238,238,245,.6);max-width:520px;margin-bottom:1.8rem;}
+
+.home-bio{font-size:.97rem;line-height:1.88;color:rgba(238,238,245,.6);max-width:580px;margin-bottom:1.8rem;}
+
+/* Tab Buttons in Home */
 .home-actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-bottom:2.2rem;}
 .btn{
   padding:.7rem 1.5rem;border-radius:8px;
@@ -197,8 +161,9 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
 }
 .btn-primary{background:var(--accent);color:#fff;box-shadow:0 0 28px rgba(124,111,255,.35);}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 42px rgba(124,111,255,.6);}
-.btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border2);}
-.btn-ghost:hover{background:rgba(124,111,255,.07);border-color:rgba(124,111,255,.4);}
+.btn-ghost{background:rgba(255,255,255,0.03);color:var(--text);border:1px solid var(--border2);}
+.btn-ghost:hover{background:rgba(124,111,255,.1);border-color:rgba(124,111,255,.5); transform:translateY(-2px);}
+
 .home-stats{display:flex;gap:1.8rem;flex-wrap:wrap;}
 .hst{text-align:center;cursor:default;}
 .hst-n{font-family:'Syne',sans-serif;font-weight:800;font-size:1.5rem;background:linear-gradient(135deg,var(--accent),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;transition:transform .2s;}
@@ -206,7 +171,7 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
 .hst-l{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted);margin-top:.1rem;letter-spacing:.06em;text-transform:uppercase;}
 
 /* terminal */
-.home-terminal{width:330px;background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.5);flex-shrink:0;}
+.home-terminal{width:340px;background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.5);flex-shrink:0;}
 .term-bar{background:var(--surface2);padding:.65rem 1rem;display:flex;align-items:center;gap:.5rem;border-bottom:1px solid var(--border);}
 .term-dot{width:11px;height:11px;border-radius:50%;}
 .term-dot.r{background:#ff5f56;}.term-dot.y{background:#ffbd2e;}.term-dot.g{background:#28c840;}
@@ -283,17 +248,10 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
 .proj-card.soon{opacity:.45;pointer-events:none;}
 .proj-soon-badge{position:absolute;top:1rem;left:1rem;background:rgba(255,209,102,.1);border:1px solid rgba(255,209,102,.3);color:var(--accent4);font-family:'Space Mono',monospace;font-size:.58rem;padding:.18rem .65rem;border-radius:100px;letter-spacing:.06em;}
 
-/* ════ EXPERIENCE ════ */
-.timeline-layout{display:grid;grid-template-columns:250px 1fr;gap:1.8rem;align-items:start;}
-.tl-nav{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;position:sticky;top:0;}
-.tl-nav-item{padding:.9rem 1.1rem;cursor:none;transition:all .2s;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.75rem;position:relative;}
-.tl-nav-item:last-child{border-bottom:none;}
-.tl-nav-item:hover{background:rgba(124,111,255,.06);}
-.tl-nav-item.active{background:rgba(124,111,255,.12);}
-.tl-nav-item.active::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--accent),var(--accent3));}
-.tl-nav-year{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--accent);letter-spacing:.07em;}
-.tl-nav-title{font-size:.8rem;font-weight:500;margin-top:.12rem;line-height:1.3;}
-.tl-detail{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.8rem;min-height:280px;}
+/* ════ EXPERIENCE (Expanded / Langsung Terbuka) ════ */
+.timeline-expanded{display:flex;flex-direction:column;gap:1.5rem;}
+.tl-detail{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.8rem;transition:all .3s;}
+.tl-detail:hover{border-color:var(--border2);transform:translateY(-3px);box-shadow:0 14px 42px rgba(0,0,0,.3);}
 .tl-detail-period{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;margin-bottom:.65rem;display:flex;align-items:center;gap:.55rem;}
 .tl-detail-period::after{content:'';flex:1;height:1px;background:var(--border);}
 .tl-detail-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.35rem;margin-bottom:.28rem;}
@@ -380,88 +338,23 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
 #toast.show{transform:translateY(0);opacity:1;}
 #toast-dot{width:5px;height:5px;border-radius:50%;background:var(--accent3);}
 
-/* ════════════════════════════════
-   MOBILE BOTTOM NAV
-   — replaces hamburger drawer —
-════════════════════════════════ */
-#bottom-nav{
-  display:none;
-  position:fixed;bottom:0;left:0;right:0;z-index:500;
-  background:rgba(10,10,24,.92);
-  backdrop-filter:blur(28px) saturate(1.5);
-  -webkit-backdrop-filter:blur(28px) saturate(1.5);
-  border-top:1px solid var(--border);
-  padding:0 4px;
-  padding-bottom:var(--safe-bottom);
-  /* overflow-x for scrollable tabs on very small screens */
-  overflow-x:auto;
-  overflow-y:hidden;
-  scrollbar-width:none;
-}
-#bottom-nav::-webkit-scrollbar{display:none;}
-.bnav-inner{
-  display:flex;
-  min-width:max-content;
-  width:100%;
-  justify-content:space-around;
-}
-.bnav-item{
-  flex:0 0 auto;
-  min-width:52px;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:2px;padding:.5rem .2rem .45rem;
-  cursor:pointer;
-  -webkit-tap-highlight-color:transparent;
-  transition:opacity .15s;
-  position:relative;
-}
-.bnav-item:active{opacity:.65;}
-.bnav-item.active .bnav-icon{filter:drop-shadow(0 0 6px rgba(124,111,255,.7));}
-.bnav-item.active::after{
-  content:'';position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);
-  width:20px;height:2px;border-radius:100px;
-  background:linear-gradient(90deg,var(--accent),var(--accent3));
-}
-.bnav-icon{font-size:1.2rem;line-height:1;transition:transform .2s;}
-.bnav-item.active .bnav-icon{transform:translateY(-1px);}
-.bnav-label{
-  font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:.05em;
-  text-transform:uppercase;color:var(--muted2);transition:color .2s;
-}
-.bnav-item.active .bnav-label{color:var(--accent);}
-.bnav-dot{position:absolute;top:6px;right:8px;width:5px;height:5px;border-radius:50%;background:var(--accent3);box-shadow:0 0 6px var(--accent3);}
-
 /* ─── RESPONSIVE ─── */
 @media(max-width:900px){
-  :root{--sidebar-w:0px;--bottom-nav-h:64px;}
-  #sidebar{display:none;}
-  #bottom-nav{display:block;}
-  /* make page scroll stop above bottom nav */
-  .page{padding:1.6rem 1.4rem calc(var(--bottom-nav-h) + 16px + var(--safe-bottom));}
-  /* adjust toast so it clears nav */
-  #toast{bottom:calc(var(--bottom-nav-h) + 12px + var(--safe-bottom));}
-
-  .topbar-clock{display:none;}
   .home-inner{grid-template-columns:1fr;}
   .home-terminal{display:none;}
   .about-layout{grid-template-columns:1fr;}
   .skills-layout{grid-template-columns:1fr;}
   .skill-bars-panel{grid-column:1;}
-  .timeline-layout{grid-template-columns:1fr;gap:1.2rem;}
-  .tl-nav{position:static;display:grid;grid-template-columns:1fr 1fr;}
-  .tl-nav-item{border-bottom:1px solid var(--border);border-right:1px solid var(--border);}
-  .tl-nav-item:nth-child(even){border-right:none;}
   .music-layout{grid-template-columns:1fr;}
   .connect-layout{grid-template-columns:1fr;}
   .projects-grid{grid-template-columns:1fr;}
   .socials-grid{grid-template-columns:repeat(3,1fr);}
   .certs-grid{grid-template-columns:1fr;}
   .pg-title{font-size:clamp(1.5rem,5vw,2.2rem);}
+  .page{padding: 2rem 1.8rem;}
 }
 
 @media(max-width:600px){
-  :root{--bottom-nav-h:60px;}
-  .page{padding:1.2rem 1rem calc(var(--bottom-nav-h) + 14px + var(--safe-bottom));}
   .home-name{font-size:clamp(1.9rem,9vw,2.8rem);}
   .home-bio{font-size:.9rem;}
   .home-actions{gap:.55rem;}
@@ -471,18 +364,13 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
   .about-layout{gap:1.1rem;}
   .skills-layout{gap:.9rem;}
   .proj-card .proj-preview{height:155px;}
-  .tl-nav{grid-template-columns:1fr;}
-  .tl-nav-item{border-right:none!important;}
   .tl-detail{padding:1.1rem;}
   .cert-card{padding:1rem;}
   .cert-badge{width:40px;height:40px;font-size:1.05rem;}
   .music-player-card{padding:1.3rem;}
   .album-art{width:62px;height:62px;font-size:1.6rem;}
   .socials-grid{grid-template-columns:repeat(2,1fr);}
-  /* bottom nav on tiny screens — smaller labels, still scrollable */
-  .bnav-label{font-size:.45rem;}
-  .bnav-icon{font-size:1.1rem;}
-  .bnav-item{min-width:46px;}
+  .page{padding: 1.5rem 1.2rem;}
 }
 
 /* Disable hover effects on touch devices */
@@ -517,21 +405,7 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
 <!-- ════ OS SHELL ════ -->
 <div id="os-shell">
 
-  <!-- SIDEBAR (desktop) -->
-  <nav id="sidebar">
-    <div class="sidebar-logo">A</div>
-    <div class="sidebar-sep"></div>
-    <div class="nav-item active" data-page="home" onclick="switchPage('home',this)"><span class="nav-icon">🏠</span><span class="nav-label">Home</span><span class="nav-tooltip">Home</span></div>
-    <div class="nav-item" data-page="about" onclick="switchPage('about',this)"><span class="nav-icon">👤</span><span class="nav-label">About</span><span class="nav-tooltip">About Me</span></div>
-    <div class="nav-item" data-page="skills" onclick="switchPage('skills',this)"><span class="nav-icon">⚡</span><span class="nav-label">Skills</span><span class="nav-tooltip">Skills & Tools</span></div>
-    <div class="nav-item" data-page="projects" onclick="switchPage('projects',this)"><span class="nav-icon">🗂</span><span class="nav-label">Work</span><span class="nav-tooltip">Projects</span><span class="nav-dot"></span></div>
-    <div class="nav-item" data-page="experience" onclick="switchPage('experience',this)"><span class="nav-icon">🗓</span><span class="nav-label">XP</span><span class="nav-tooltip">Experience</span></div>
-    <div class="nav-item" data-page="certs" onclick="switchPage('certs',this)"><span class="nav-icon">🏅</span><span class="nav-label">Certs</span><span class="nav-tooltip">Certifications</span></div>
-    <div class="nav-item" data-page="music" onclick="switchPage('music',this)"><span class="nav-icon">🎵</span><span class="nav-label">Music</span><span class="nav-tooltip">Music & Art</span></div>
-    <div class="nav-item sidebar-bottom" data-page="connect" onclick="switchPage('connect',this)"><span class="nav-icon">📡</span><span class="nav-label">Connect</span><span class="nav-tooltip">Connect</span></div>
-  </nav>
-
-  <!-- MAIN -->
+  <!-- MAIN AREA -->
   <div id="main-area">
     <!-- TOPBAR -->
     <div id="topbar">
@@ -540,6 +414,7 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
         <div class="win-dot yellow"></div>
         <div class="win-dot green"></div>
       </div>
+      <button class="topbar-home-btn" onclick="switchPage('home')">🏠 Home</button>
       <div class="topbar-breadcrumb">
         Portfolio <span style="color:var(--muted);">/</span> <span id="topbar-path">Home</span>
       </div>
@@ -552,7 +427,7 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
     <!-- PAGES -->
     <div id="pages">
 
-      <!-- HOME -->
+      <!-- ════ HOME ════ -->
       <div class="page active" id="page-home">
         <div class="home-inner">
           <div class="home-left">
@@ -560,29 +435,32 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
               <span>Informatika · AMIKOM Yogyakarta</span>
               <span class="home-tag-pill">Open to Opportunities</span>
             </div>
+            
+            <!-- S.Kom ditambahkan & Efek Typing Bersebelahan -->
             <h1 class="home-name">
-              Avankha<br><span class="g">Barlian Kabuchi</span>
+              Avankha <br> <span class="g">Barlian Kabuchi, S.Kom.</span>
+              <span style="font-size: clamp(1rem, 3vw, 1.3rem); display: inline-flex; align-items: center; margin-left: 0.5rem;">
+                <span class="typing-wrap" style="color: var(--accent2); font-family: 'Space Mono', monospace; font-weight: 500;">
+                  [ <span id="typing-out"></span><span class="cursor-blink"></span> ]
+                </span>
+              </span>
             </h1>
-            <div class="home-role">
-              <span>S.Kom.</span>
-              <span class="role-sep">·</span>
-              <span class="typing-wrap"><span id="typing-out"></span><span class="cursor-blink"></span></span>
-            </div>
+            
             <p class="home-bio">Lulusan Informatika yang passionate di bidang computer networking, software development, dan teknologi AI/IoT — menggabungkan keahlian teknis dengan jiwa kreatif untuk membangun hal-hal yang benar-benar berdampak.</p>
+            
+            <!-- SEMUA TOMBOL TAB ADA DI SINI -->
             <div class="home-actions">
-              <span class="btn btn-primary" onclick="switchPage('connect',document.querySelector('[data-page=connect]'))">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                Hubungi Saya
+              <span class="btn btn-primary" onclick="switchPage('connect')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Hubungi Saya
               </span>
-              <span class="btn btn-ghost" onclick="switchPage('projects',document.querySelector('[data-page=projects]'))">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-                Lihat Projects
-              </span>
-              <span class="btn btn-ghost" onclick="switchPage('certs',document.querySelector('[data-page=certs]'))">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
-                Sertifikasi
-              </span>
+              <span class="btn btn-ghost" onclick="switchPage('about')">👤 About Me</span>
+              <span class="btn btn-ghost" onclick="switchPage('skills')">⚡ Skills</span>
+              <span class="btn btn-ghost" onclick="switchPage('experience')">🗓 Experience</span>
+              <span class="btn btn-ghost" onclick="switchPage('projects')">🗂 Projects</span>
+              <span class="btn btn-ghost" onclick="switchPage('certs')">🏅 Sertifikasi</span>
+              <span class="btn btn-ghost" onclick="switchPage('music')">🎵 Music</span>
             </div>
+            
             <div class="home-stats">
               <div class="hst"><div class="hst-n">7+</div><div class="hst-l">Sertifikat</div></div>
               <div class="hst"><div class="hst-n">Int'l</div><div class="hst-l">Conference</div></div>
@@ -604,7 +482,7 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
               <div class="term-out purple">[AI/IoT]      ML, Embedded, Industry 5.0</div>
               <div class="term-out purple">[Creative]    Music, Video, Content</div>
               <div class="term-line" style="margin-top:.4rem;"><span class="term-prompt">~$</span><span class="term-cmd"> ls projects/</span></div>
-              <div class="term-out pink">jawa-hair-studio/   toko-bung-edi/   ...</div>
+              <div class="term-out pink">jawa-hair-studio/  toko-bung-edi/  ...</div>
               <div class="term-line" style="margin-top:.4rem;"><span class="term-prompt">~$</span><span class="term-cmd"> open spotify</span></div>
               <div class="term-out green">🎵 Playing: Avan Kabuchi — Artist</div>
               <div class="term-line" style="margin-top:.4rem;"><span class="term-prompt">~$</span><span class="term-cmd"> <span class="term-cursor"></span></span></div>
@@ -613,7 +491,7 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
         </div>
       </div>
 
-      <!-- ABOUT -->
+      <!-- ════ ABOUT ════ -->
       <div class="page" id="page-about">
         <div class="pg-header">
           <div class="pg-eyebrow">About Me</div>
@@ -647,7 +525,7 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
         </div>
       </div>
 
-      <!-- SKILLS -->
+      <!-- ════ SKILLS ════ -->
       <div class="page" id="page-skills">
         <div class="pg-header">
           <div class="pg-eyebrow">Competencies</div>
@@ -705,7 +583,7 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
         </div>
       </div>
 
-      <!-- PROJECTS -->
+      <!-- ════ PROJECTS ════ -->
       <div class="page" id="page-projects">
         <div class="pg-header">
           <div class="pg-eyebrow">Portfolio</div>
@@ -765,30 +643,69 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
         </div>
         <div style="text-align:center;margin-top:2rem;">
           <p style="color:var(--muted);font-family:'Space Mono',monospace;font-size:.68rem;margin-bottom:.9rem;letter-spacing:.05em;">Tertarik berkolaborasi? Mari buat sesuatu yang luar biasa.</p>
-          <span class="btn btn-primary" onclick="switchPage('connect',document.querySelector('[data-page=connect]'))">Mulai Kolaborasi →</span>
+          <span class="btn btn-primary" onclick="switchPage('connect')">Mulai Kolaborasi →</span>
         </div>
       </div>
 
-      <!-- EXPERIENCE -->
+      <!-- ════ EXPERIENCE (Langsung Terbuka Semua) ════ -->
       <div class="page" id="page-experience">
         <div class="pg-header">
           <div class="pg-eyebrow">Journey</div>
           <h2 class="pg-title">Perjalanan & <span class="accent">Pengalaman</span></h2>
         </div>
-        <div class="timeline-layout">
-          <div class="tl-nav" id="tl-nav">
-            <div class="tl-nav-item active" onclick="showTlDetail(0,this)"><div><div class="tl-nav-year">2022–2026</div><div class="tl-nav-title">S1 Informatika</div></div></div>
-            <div class="tl-nav-item" onclick="showTlDetail(1,this)"><div><div class="tl-nav-year">Ags 2024</div><div class="tl-nav-title">International Conference</div></div></div>
-            <div class="tl-nav-item" onclick="showTlDetail(2,this)"><div><div class="tl-nav-year">Jan 2024</div><div class="tl-nav-title">Cisco CCNAv7</div></div></div>
-            <div class="tl-nav-item" onclick="showTlDetail(3,this)"><div><div class="tl-nav-year">Jun 2025</div><div class="tl-nav-title">Seminar Nasional</div></div></div>
-            <div class="tl-nav-item" onclick="showTlDetail(4,this)"><div><div class="tl-nav-year">2022–Now</div><div class="tl-nav-title">Web Developer</div></div></div>
-            <div class="tl-nav-item" onclick="showTlDetail(5,this)"><div><div class="tl-nav-year">Ongoing</div><div class="tl-nav-title">Musisi & Creator</div></div></div>
+        <div class="timeline-expanded">
+          <!-- Item 1 -->
+          <div class="tl-detail">
+            <div class="tl-detail-period">2022 — 2026</div>
+            <div class="tl-detail-title">S1 Informatika</div>
+            <div class="tl-detail-org">Universitas AMIKOM Yogyakarta</div>
+            <div class="tl-detail-desc">Menempuh studi Sarjana Informatika dan aktif dalam berbagai kegiatan akademik, seminar nasional, dan kuliah umum yang memperkuat kompetensi di bidang networking, pengembangan perangkat lunak, dan teknologi informasi terkini.</div>
+            <div class="tl-detail-tags"><span class="tl-tag">Informatika</span><span class="tl-tag">Networking</span><span class="tl-tag">Web Dev</span><span class="tl-tag">Akademik</span></div>
           </div>
-          <div class="tl-detail" id="tl-detail"></div>
+          <!-- Item 2 -->
+          <div class="tl-detail">
+            <div class="tl-detail-period">Agustus 2024</div>
+            <div class="tl-detail-title">International Conference — AI & IoT, Industry 5.0</div>
+            <div class="tl-detail-org">Universitas Islam Balitar, Indonesia</div>
+            <div class="tl-detail-desc">Berpartisipasi aktif sebagai peserta pada konferensi internasional bertema "The World in the Hands of Artificial Intelligence Technology and the Internet of Things in the Era of Industrial Revolution 5.0". Memperluas wawasan global tentang tren AI dan IoT.</div>
+            <div class="tl-detail-tags"><span class="tl-tag">Artificial Intelligence</span><span class="tl-tag">IoT</span><span class="tl-tag">Industry 5.0</span><span class="tl-tag">International</span></div>
+          </div>
+          <!-- Item 3 -->
+          <div class="tl-detail">
+            <div class="tl-detail-period">Januari 2024</div>
+            <div class="tl-detail-title">Cisco CCNAv7: Introduction to Networks</div>
+            <div class="tl-detail-org">Cisco Networking Academy</div>
+            <div class="tl-detail-desc">Menyelesaikan program CCNAv7 melalui Cisco Networking Academy. Memperoleh keahlian fundamental dalam konfigurasi perangkat Cisco, protokol TCP/IP, routing, switching, dan keamanan jaringan dasar.</div>
+            <div class="tl-detail-tags"><span class="tl-tag">Cisco</span><span class="tl-tag">TCP/IP</span><span class="tl-tag">Routing</span><span class="tl-tag">Switching</span><span class="tl-tag">VLAN</span></div>
+          </div>
+          <!-- Item 4 -->
+          <div class="tl-detail">
+            <div class="tl-detail-period">Juni 2025</div>
+            <div class="tl-detail-title">Seminar Nasional Informatika 2025</div>
+            <div class="tl-detail-org">Universitas AMIKOM Yogyakarta</div>
+            <div class="tl-detail-desc">Berpartisipasi aktif dalam Seminar Nasional Informatika 2025 di MSV Cinema, Gedung 6, AMIKOM Yogyakarta — memperluas perspektif tentang perkembangan terkini dunia informatika di Indonesia.</div>
+            <div class="tl-detail-tags"><span class="tl-tag">Seminar</span><span class="tl-tag">Informatika</span><span class="tl-tag">Nasional</span></div>
+          </div>
+          <!-- Item 5 -->
+          <div class="tl-detail">
+            <div class="tl-detail-period">2022 — Present</div>
+            <div class="tl-detail-title">Web Developer — Freelance</div>
+            <div class="tl-detail-org">Jawa Hair Studio · Toko Bung Edi · dan lainnya</div>
+            <div class="tl-detail-desc">Membangun berbagai website profesional untuk klien lokal — dari landing page bisnis hingga toko online. Desain, development, hingga deployment di Vercel dengan hasil yang dapat diakses secara live.</div>
+            <div class="tl-detail-tags"><span class="tl-tag">HTML/CSS</span><span class="tl-tag">JavaScript</span><span class="tl-tag">Vercel</span><span class="tl-tag">Freelance</span><span class="tl-tag">Deployment</span></div>
+          </div>
+          <!-- Item 6 -->
+          <div class="tl-detail">
+            <div class="tl-detail-period">Ongoing</div>
+            <div class="tl-detail-title">Musisi & Content Creator</div>
+            <div class="tl-detail-org">Spotify · Apple Music · YouTube · TikTok · Instagram</div>
+            <div class="tl-detail-desc">Aktif berkarya sebagai musisi dengan rilisan resmi di Spotify dan Apple Music atas nama Avan Kabuchi — membuktikan bahwa developer pun bisa jadi kreator yang berdampak.</div>
+            <div class="tl-detail-tags"><span class="tl-tag">Music</span><span class="tl-tag">Spotify</span><span class="tl-tag">Content Creation</span><span class="tl-tag">TikTok</span><span class="tl-tag">YouTube</span></div>
+          </div>
         </div>
       </div>
 
-      <!-- CERTS -->
+      <!-- ════ CERTS ════ -->
       <div class="page" id="page-certs">
         <div class="pg-header">
           <div class="pg-eyebrow">Credentials</div>
@@ -841,7 +758,7 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
         </div>
       </div>
 
-      <!-- MUSIC -->
+      <!-- ════ MUSIC ════ -->
       <div class="page" id="page-music">
         <div class="pg-header">
           <div class="pg-eyebrow">Musik</div>
@@ -885,7 +802,7 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
         </div>
       </div>
 
-      <!-- CONNECT -->
+      <!-- ════ CONNECT ════ -->
       <div class="page" id="page-connect">
         <div class="pg-header">
           <div class="pg-eyebrow">Connect</div>
@@ -938,44 +855,13 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
   </div><!-- /main-area -->
 </div><!-- /os-shell -->
 
-<!-- ════ BOTTOM NAV (mobile) ════ -->
-<nav id="bottom-nav">
-  <div class="bnav-inner">
-    <div class="bnav-item active" data-page="home" onclick="switchPage('home',this)">
-      <span class="bnav-icon">🏠</span><span class="bnav-label">Home</span>
-    </div>
-    <div class="bnav-item" data-page="about" onclick="switchPage('about',this)">
-      <span class="bnav-icon">👤</span><span class="bnav-label">About</span>
-    </div>
-    <div class="bnav-item" data-page="skills" onclick="switchPage('skills',this)">
-      <span class="bnav-icon">⚡</span><span class="bnav-label">Skills</span>
-    </div>
-    <div class="bnav-item" data-page="projects" onclick="switchPage('projects',this)">
-      <span class="bnav-icon">🗂</span><span class="bnav-label">Work</span>
-      <span class="bnav-dot"></span>
-    </div>
-    <div class="bnav-item" data-page="experience" onclick="switchPage('experience',this)">
-      <span class="bnav-icon">🗓</span><span class="bnav-label">XP</span>
-    </div>
-    <div class="bnav-item" data-page="certs" onclick="switchPage('certs',this)">
-      <span class="bnav-icon">🏅</span><span class="bnav-label">Certs</span>
-    </div>
-    <div class="bnav-item" data-page="music" onclick="switchPage('music',this)">
-      <span class="bnav-icon">🎵</span><span class="bnav-label">Music</span>
-    </div>
-    <div class="bnav-item" data-page="connect" onclick="switchPage('connect',this)">
-      <span class="bnav-icon">📡</span><span class="bnav-label">Connect</span>
-    </div>
-  </div>
-</nav>
-
 <script>
 /* ── CURSOR ── */
 const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
 (function ar(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(ar);})();
-document.querySelectorAll('a,[onclick],.nav-item,.filter-btn,.cert-card,.soc-card,.proj-card,.sk-item,.tl-nav-item,.track-row,.id-row,.btn,.bnav-item').forEach(el=>{
+document.querySelectorAll('a,[onclick],.filter-btn,.cert-card,.soc-card,.proj-card,.sk-item,.tl-nav-item,.track-row,.id-row,.btn,.topbar-home-btn').forEach(el=>{
   el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-xl'));
   el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-xl'));
 });
@@ -1010,10 +896,15 @@ function bootTick(){
 setTimeout(bootTick,280);
 
 /* ── INIT ── */
-function initPage(){initTyping();initTimeline();initTrackList();initWaveform();buildSkillBars();}
+function initPage(){
+  initTyping();
+  initTrackList();
+  initWaveform();
+  buildSkillBars();
+}
 
 /* ── TYPING ── */
-const phrases=['Cisco Certified','Web Developer','Content Creator','Musisi & Artist','Problem Solver','Freelancer'];
+const phrases=['Networking Engineer','Web Developer','Content Creator','Musisi & Artist','Problem Solver','Freelancer'];
 let pi=0,ci=0,del=false;
 const typEl=document.getElementById('typing-out');
 function typeLoop(){
@@ -1026,14 +917,8 @@ function typeLoop(){
 
 /* ── PAGE SWITCH ── */
 const pageNames={home:'Home',about:'About Me',skills:'Skills',projects:'Projects',experience:'Experience',certs:'Certifications',music:'Music',connect:'Connect'};
-function switchPage(id,el){
+function switchPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  document.querySelectorAll('.bnav-item').forEach(n=>n.classList.remove('active'));
-  const di=document.querySelector('#sidebar .nav-item[data-page="'+id+'"]');
-  if(di)di.classList.add('active');
-  const mi=document.querySelector('.bnav-item[data-page="'+id+'"]');
-  if(mi)mi.classList.add('active');
   const pg=document.getElementById('page-'+id);
   if(pg){pg.classList.add('active');pg.scrollTop=0;}
   document.getElementById('topbar-path').textContent=pageNames[id]||id;
@@ -1045,30 +930,6 @@ function switchPage(id,el){
 let barsAnimated=false;
 function buildSkillBars(){document.querySelectorAll('.bar-fill[data-w]').forEach(b=>b.style.width='0');}
 function animateBars(){if(barsAnimated)return;barsAnimated=true;document.querySelectorAll('.bar-fill[data-w]').forEach(b=>{b.style.width=b.dataset.w+'%';});}
-
-/* ── TIMELINE ── */
-const tlData=[
-  {period:'2022 — 2026',title:'S1 Informatika',org:'Universitas AMIKOM Yogyakarta',desc:'Menempuh studi Sarjana Informatika dan aktif dalam berbagai kegiatan akademik, seminar nasional, dan kuliah umum yang memperkuat kompetensi di bidang networking, pengembangan perangkat lunak, dan teknologi informasi terkini.',tags:['Informatika','Networking','Web Dev','Akademik']},
-  {period:'Agustus 2024',title:'International Conference — AI & IoT, Industry 5.0',org:'Universitas Islam Balitar, Indonesia',desc:'Berpartisipasi aktif sebagai peserta pada konferensi internasional bertema "The World in the Hands of Artificial Intelligence Technology and the Internet of Things in the Era of Industrial Revolution 5.0". Memperluas wawasan global tentang tren AI dan IoT.',tags:['Artificial Intelligence','IoT','Industry 5.0','International']},
-  {period:'Januari 2024',title:'Cisco CCNAv7: Introduction to Networks',org:'Cisco Networking Academy',desc:'Menyelesaikan program CCNAv7 melalui Cisco Networking Academy. Memperoleh keahlian fundamental dalam konfigurasi perangkat Cisco, protokol TCP/IP, routing, switching, dan keamanan jaringan dasar.',tags:['Cisco','TCP/IP','Routing','Switching','VLAN']},
-  {period:'Juni 2025',title:'Seminar Nasional Informatika 2025',org:'Universitas AMIKOM Yogyakarta',desc:'Berpartisipasi aktif dalam Seminar Nasional Informatika 2025 di MSV Cinema, Gedung 6, AMIKOM Yogyakarta — memperluas perspektif tentang perkembangan terkini dunia informatika di Indonesia.',tags:['Seminar','Informatika','Nasional']},
-  {period:'2022 — Present',title:'Web Developer — Freelance',org:'Jawa Hair Studio · Toko Bung Edi · dan lainnya',desc:'Membangun berbagai website profesional untuk klien lokal — dari landing page bisnis hingga toko online. Desain, development, hingga deployment di Vercel dengan hasil yang dapat diakses secara live.',tags:['HTML/CSS','JavaScript','Vercel','Freelance','Deployment']},
-  {period:'Ongoing',title:'Musisi & Content Creator',org:'Spotify · Apple Music · YouTube · TikTok · Instagram',desc:'Aktif berkarya sebagai musisi dengan rilisan resmi di Spotify dan Apple Music atas nama Avan Kabuchi — membuktikan bahwa developer pun bisa jadi kreator yang berdampak.',tags:['Music','Spotify','Content Creation','TikTok','YouTube']},
-];
-function initTimeline(){showTlDetail(0,document.querySelector('.tl-nav-item'));}
-function showTlDetail(idx,el){
-  document.querySelectorAll('.tl-nav-item').forEach(n=>n.classList.remove('active'));
-  const ni=el.closest?el.closest('.tl-nav-item'):el;
-  if(ni)ni.classList.add('active');
-  const d=tlData[idx];
-  document.getElementById('tl-detail').innerHTML=`
-    <div class="tl-detail-period">${d.period}</div>
-    <div class="tl-detail-title">${d.title}</div>
-    <div class="tl-detail-org">${d.org}</div>
-    <div class="tl-detail-desc">${d.desc}</div>
-    <div class="tl-detail-tags">${d.tags.map(t=>`<span class="tl-tag">${t}</span>`).join('')}</div>
-  `;
-}
 
 /* ── MUSIC PLAYER ── */
 const tracks=[
@@ -1147,6 +1008,9 @@ if(window.matchMedia('(hover:hover)').matches){
     card.addEventListener('mouseleave',()=>{card.style.transform='';});
   });
 }
+
+// Start typing script manually in case it didn't trigger from boot
+typeLoop();
 </script>
 </body>
 </html>
