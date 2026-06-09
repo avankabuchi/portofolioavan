@@ -22,8 +22,7 @@
   --border:rgba(124,111,255,.14);
   --border2:rgba(124,111,255,.28);
   --topbar-h:52px;
-  --footer-h:48px;
-  --safe-bottom:env(safe-area-inset-bottom,0px);
+  --tabbar-h:48px;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;}
@@ -61,8 +60,8 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
 
 /* ─── TOPBAR ─── */
 #topbar{
-  height:var(--topbar-h);background:rgba(13,13,31,.75);
-  backdrop-filter:blur(24px);border-bottom:1px solid var(--border);
+  height:var(--topbar-h);background:rgba(13,13,31,.95);
+  border-bottom:1px solid var(--border);
   display:flex;align-items:center;padding:0 1.4rem;gap:1.2rem;
   flex-shrink:0;z-index:50;
 }
@@ -84,6 +83,34 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
 .status-dot{width:5px;height:5px;border-radius:50%;background:var(--accent3);animation:blink-dot 2s ease-in-out infinite;}
 @keyframes blink-dot{0%,100%{opacity:.4;}50%{opacity:1;}}
 
+/* ─── TOP TABS NAVIGATION (SATU BARIS) ─── */
+#top-tabs {
+  height: var(--tabbar-h);
+  background: rgba(10,10,24,.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0 1.4rem;
+  overflow-x: auto;
+  white-space: nowrap; /* Menjaga tab tetap di satu garis */
+  scrollbar-width: none; /* Firefox */
+  -webkit-overflow-scrolling: touch; /* Smooth scroll iOS */
+  flex-shrink: 0;
+  z-index: 40;
+}
+#top-tabs::-webkit-scrollbar { display: none; } /* Chrome, Safari */
+
+.t-tab {
+  background: transparent; border: 1px solid transparent; border-radius: 6px;
+  color: var(--muted2); font-family: 'Space Mono', monospace; font-size: 0.62rem;
+  padding: 0.3rem 0.8rem; cursor: none; transition: all 0.2s;
+  text-transform: uppercase; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 0.3rem;
+}
+.t-tab:hover { color: var(--text); background: rgba(255,255,255,.04); }
+.t-tab.active { color: var(--accent); background: rgba(124,111,255,.1); border-color: rgba(124,111,255,.3); }
+
 /* ─── PAGES ─── */
 #pages{flex:1;position:relative;overflow:hidden;}
 .page{
@@ -97,34 +124,6 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
 .page::-webkit-scrollbar{width:4px;}
 .page::-webkit-scrollbar-track{background:transparent;}
 .page::-webkit-scrollbar-thumb{background:rgba(124,111,255,.25);border-radius:100px;}
-
-/* ─── FOOTER TABS (SATU BARIS KECIL) ─── */
-#footer-tabs {
-  height: var(--footer-h);
-  background: rgba(10,10,24,.85);
-  backdrop-filter: blur(20px);
-  border-top: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0 1.4rem;
-  padding-bottom: var(--safe-bottom);
-  overflow-x: auto;
-  white-space: nowrap; /* Menjaga tab tetap di satu garis */
-  scrollbar-width: none; /* Firefox */
-  flex-shrink: 0;
-  z-index: 100;
-}
-#footer-tabs::-webkit-scrollbar { display: none; } /* Chrome, Safari */
-
-.f-tab {
-  background: transparent; border: 1px solid transparent; border-radius: 6px;
-  color: var(--muted2); font-family: 'Space Mono', monospace; font-size: 0.62rem;
-  padding: 0.3rem 0.8rem; cursor: none; transition: all 0.2s;
-  text-transform: uppercase; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 0.3rem;
-}
-.f-tab:hover { color: var(--text); background: rgba(255,255,255,.04); }
-.f-tab.active { color: var(--accent); background: rgba(124,111,255,.1); border-color: rgba(124,111,255,.3); }
 
 /* ─── PAGE HEADERS ─── */
 .pg-header{margin-bottom:2.2rem;}
@@ -171,7 +170,7 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
 .typing-container {
   display: inline-flex;
   align-items: center;
-  font-size: clamp(0.65rem, 1.5vw, 0.95rem); /* Diperkecil */
+  font-size: clamp(0.65rem, 1.5vw, 0.95rem); /* Ukuran font diatur agar mungil dan estetik */
   margin-left: 0.8rem;
   vertical-align: middle;
   font-family: 'Space Mono', monospace;
@@ -364,7 +363,7 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
 .contact-cta p{font-size:.93rem;line-height:1.8;color:rgba(238,238,245,.58);margin-bottom:1.3rem;}
 
 /* ─── TOAST ─── */
-#toast{position:fixed;bottom:calc(var(--footer-h) + 1.4rem);right:1.4rem;background:var(--surface2);border:1px solid var(--border2);border-radius:10px;padding:.65rem 1.2rem;font-family:'Space Mono',monospace;font-size:.68rem;color:var(--text);z-index:5000;transform:translateY(16px);opacity:0;transition:all .28s;pointer-events:none;display:flex;align-items:center;gap:.55rem;}
+#toast{position:fixed;bottom:1.4rem;right:1.4rem;background:var(--surface2);border:1px solid var(--border2);border-radius:10px;padding:.65rem 1.2rem;font-family:'Space Mono',monospace;font-size:.68rem;color:var(--text);z-index:5000;transform:translateY(16px);opacity:0;transition:all .28s;pointer-events:none;display:flex;align-items:center;gap:.55rem;}
 #toast.show{transform:translateY(0);opacity:1;}
 #toast-dot{width:5px;height:5px;border-radius:50%;background:var(--accent3);}
 
@@ -411,8 +410,8 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
   .socials-grid{grid-template-columns:repeat(2,1fr);}
   .page{padding: 1.5rem 1.2rem;}
   
-  #footer-tabs { padding: 0 1rem; }
-  .f-tab { font-size: 0.58rem; padding: 0.28rem 0.65rem; }
+  #top-tabs { padding: 0 1rem; }
+  .t-tab { font-size: 0.58rem; padding: 0.28rem 0.65rem; }
 }
 
 /* Disable hover effects on touch devices */
@@ -464,6 +463,18 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
         <div class="topbar-status"><div class="status-dot"></div>Available</div>
         <div class="topbar-clock" id="topbar-clock">--:--</div>
       </div>
+    </div>
+
+    <!-- ════ FIXED TOP TABS (Kecil, Satu Baris) TANPA ICON ════ -->
+    <div id="top-tabs">
+      <button class="t-tab active" data-tab="home" onclick="switchPage('home')">Home</button>
+      <button class="t-tab" data-tab="about" onclick="switchPage('about')">About</button>
+      <button class="t-tab" data-tab="skills" onclick="switchPage('skills')">Skills</button>
+      <button class="t-tab" data-tab="experience" onclick="switchPage('experience')">Experience</button>
+      <button class="t-tab" data-tab="projects" onclick="switchPage('projects')">Projects</button>
+      <button class="t-tab" data-tab="certs" onclick="switchPage('certs')">Certs</button>
+      <button class="t-tab" data-tab="music" onclick="switchPage('music')">Music</button>
+      <button class="t-tab" data-tab="connect" onclick="switchPage('connect')">Connect</button>
     </div>
 
     <!-- PAGES CONTENT -->
@@ -879,19 +890,6 @@ body.cursor-xl #cursor-ring{width:56px;height:56px;border-color:rgba(124,111,255
       </div>
 
     </div><!-- /pages -->
-    
-    <!-- ════ FIXED FOOTER TABS (Kecil, Satu Baris) ════ -->
-    <div id="footer-tabs">
-      <button class="f-tab active" data-tab="home" onclick="switchPage('home')">🏠 Home</button>
-      <button class="f-tab" data-tab="about" onclick="switchPage('about')">👤 About</button>
-      <button class="f-tab" data-tab="skills" onclick="switchPage('skills')">⚡ Skills</button>
-      <button class="f-tab" data-tab="experience" onclick="switchPage('experience')">🗓 Experience</button>
-      <button class="f-tab" data-tab="projects" onclick="switchPage('projects')">🗂 Projects</button>
-      <button class="f-tab" data-tab="certs" onclick="switchPage('certs')">🏅 Certs</button>
-      <button class="f-tab" data-tab="music" onclick="switchPage('music')">🎵 Music</button>
-      <button class="f-tab" data-tab="connect" onclick="switchPage('connect')">📡 Connect</button>
-    </div>
-
   </div><!-- /main-area -->
 </div><!-- /os-shell -->
 
@@ -901,7 +899,7 @@ const cur=document.getElementById('cursor'),ring=document.getElementById('cursor
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
 (function ar(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(ar);})();
-document.querySelectorAll('a,[onclick],.filter-btn,.cert-card,.soc-card,.proj-card,.sk-item,.tl-nav-item,.track-row,.id-row,.btn,.f-tab').forEach(el=>{
+document.querySelectorAll('a,[onclick],.filter-btn,.cert-card,.soc-card,.proj-card,.sk-item,.tl-nav-item,.track-row,.id-row,.btn,.t-tab').forEach(el=>{
   el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-xl'));
   el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-xl'));
 });
@@ -967,12 +965,12 @@ function switchPage(id){
   // Ganti teks pada breadcrumb
   document.getElementById('topbar-path').textContent=pageNames[id]||id;
 
-  // Atur efek aktif pada tombol tab footer
-  document.querySelectorAll('.f-tab').forEach(b => b.classList.remove('active'));
-  const activeBtn = document.querySelector(`.f-tab[data-tab="${id}"]`);
+  // Atur efek aktif pada tombol tab TOP
+  document.querySelectorAll('.t-tab').forEach(b => b.classList.remove('active'));
+  const activeBtn = document.querySelector(`.t-tab[data-tab="${id}"]`);
   if(activeBtn) {
       activeBtn.classList.add('active');
-      // Otomatis scroll tab ke elemen yang di klik jika tertutup di layar kecil
+      // Otomatis scroll menu ke tombol yang di-klik agar di HP tidak tertutup
       activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
   }
 
