@@ -935,7 +935,7 @@ setTimeout(bootTick,280);
 
 /* ── INIT ── */
 function initPage(){
-  initTyping();
+  typeLoop();
   initTrackList();
   initWaveform();
   buildSkillBars();
@@ -1016,7 +1016,7 @@ function updatePlayerUI(){
   document.getElementById('prog-dur').textContent=t.dur;
   document.querySelectorAll('.track-row').forEach((r,i)=>r.classList.toggle('playing-row',i===trackIdx));
 }
-function selectTrack(i){trackIdx=i;updatePlayerUI();if(!isPlaying)togglePlay();else{progVal=0;document.getElementById('prog-fill').style.width='0%';document.getElementById('prog-cur').textContent='0:00';}}
+function selectTrack(i){trackIdx=i;updatePlayerUI();if(!isPlaying)togglePlay();else{progVal=0;document.getElementById('prog-fill').style.width='0%';document.getElementById('prog-cur').textContent='0:00';startProg();}}
 function togglePlay(){
   isPlaying=!isPlaying;
   const btn=document.getElementById('play-btn'),art=document.getElementById('album-art'),wf=document.getElementById('waveform');
@@ -1062,7 +1062,7 @@ if(window.matchMedia('(hover:hover)').matches){
 }
 
 // Start typing script manually in case it didn't trigger from boot
-typeLoop();
+// typeLoop();
 </script>
 </body>
 </html>
