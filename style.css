@@ -633,12 +633,12 @@ ul { list-style: none; }
 }
 
 /* ─────────────────────────────────────────
-   PROJECTS
+   PROJECTS (FIXED & OPTIMIZED)
 ───────────────────────────────────────── */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  gap: 24px; /* Sedikit dilebarkan agar lebih lega */
   margin-bottom: 40px;
 }
 .proj-card {
@@ -648,80 +648,107 @@ ul { list-style: none; }
   overflow: hidden;
   box-shadow: var(--sh-sm);
   transition: box-shadow var(--t), transform var(--t), border-color var(--t);
+  display: flex;
+  flex-direction: column;
 }
 .proj-card:hover {
-  box-shadow: var(--sh-lg);
-  transform: translateY(-2px);
-  border-color: #D4D4D8;
+  box-shadow: 0 12px 30px rgba(99, 102, 241, 0.2);
+  transform: translateY(-4px);
+  border-color: var(--accent);
 }
+
+/* --- PERBAIKAN UTAMA DI SINI --- */
 .proj-preview {
-  height: 200px;
+  height: 220px; /* Tinggi kotak preview */
   background: var(--bg-alt);
-  overflow: hidden;
   position: relative;
+  overflow: hidden;
+  width: 100%;
 }
 .proj-preview iframe {
-  width: 200%;
-  height: 200%;
+  width: 100%;
+  height: 100%;
   border: none;
-  transform: scale(0.5);
+  display: block;
+  object-fit: cover; /* Memastikan konten mengisi ruang */
+  pointer-events: none; /* Supaya scroll mouse tidak tersangkut di dalam iframe */
+}
+
+/* Jika Anda tetap ingin efek visual website desktop yang dikecilkan (scaled zoom), 
+   gunakan kombinasi yang sudah dikalibrasi ulang ini: */
+/*
+.proj-preview iframe {
+  width: 133.33%;
+  height: 133.33%;
+  transform: scale(0.75);
   transform-origin: top left;
+  border: none;
   pointer-events: none;
 }
+*/
+
 .proj-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(9,9,11,0.5);
+  background: rgba(13, 14, 18, 0.6); /* Menggunakan warna gelap tema baru */
+  backdrop-filter: blur(4px); /* Efek blur estetik saat di-hover */
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
-  transition: opacity var(--t);
+  transition: opacity var(--t) var(--ease);
+  z-index: 2;
 }
 .proj-card:hover .proj-overlay { opacity: 1; }
+
 .proj-visit {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   font-size: 13px;
   font-weight: 600;
-  padding: 8px 16px;
-  background: var(--surface);
-  color: var(--text);
+  padding: 10px 18px;
+  background: var(--text);
+  color: var(--bg);
   border-radius: var(--r-md);
   box-shadow: var(--sh-md);
   transition: transform var(--t);
 }
-.proj-visit:hover { transform: scale(1.03); }
+.proj-visit:hover { transform: scale(1.05); }
+
 .proj-info {
-  padding: 20px 22px 22px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Memastikan tinggi konten seimbang */
 }
 .proj-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
-  margin-bottom: 10px;
+  gap: 6px;
+  margin-bottom: 12px;
 }
 .proj-tags span {
   font-family: var(--mono);
   font-size: 10px;
-  padding: 2px 8px;
+  padding: 3px 8px;
   border: 1px solid var(--border);
   border-radius: 100px;
-  color: var(--text-3);
+  color: var(--text-2);
+  background: var(--bg-alt);
 }
 .proj-name {
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 700;
   color: var(--text);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   letter-spacing: -0.01em;
 }
 .proj-desc {
   font-size: 13px;
   color: var(--text-2);
   line-height: 1.65;
-  margin-bottom: 14px;
+  margin-bottom: 20px;
 }
 .proj-link {
   display: inline-flex;
@@ -731,10 +758,11 @@ ul { list-style: none; }
   font-size: 11px;
   color: var(--accent);
   transition: opacity var(--t);
+  margin-top: auto; /* Memaksa link berada di paling bawah kartu */
 }
-.proj-link:hover { opacity: 0.7; }
+.proj-link:hover { opacity: 0.8; }
 .proj-soon {
-  opacity: 0.5;
+  opacity: 0.4;
   pointer-events: none;
 }
 .proj-preview-empty {
@@ -743,6 +771,7 @@ ul { list-style: none; }
   justify-content: center;
   flex-direction: column;
   gap: 10px;
+  height: 100%;
 }
 .coming-soon-badge {
   font-family: var(--mono);
@@ -751,23 +780,7 @@ ul { list-style: none; }
   border: 1px solid var(--border);
   border-radius: 100px;
   color: var(--text-3);
-}
-.coming-soon-icon {
-  font-size: 32px;
-}
-.projects-cta {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-}
-.projects-cta p {
-  font-size: 14px;
-  color: var(--text-2);
-  font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: 0.04em;
+
 }
 
 /* ─────────────────────────────────────────
@@ -865,235 +878,6 @@ ul { list-style: none; }
 .cert-badge-type.professional { color: #16A34A; border-color: #BBF7D0; background: #F0FDF4; }
 .cert-badge-type.seminar      { color: var(--accent); border-color: var(--accent-mid); background: var(--accent-dim); }
 .cert-badge-type.workshop     { color: #D97706; border-color: #FDE68A; background: #FFFBEB; }
-
-/* ─────────────────────────────────────────
-   MUSIC
-───────────────────────────────────────── */
-.music-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  align-items: start;
-}
-.music-player {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--r-xl);
-  padding: 28px;
-  box-shadow: var(--sh-sm);
-}
-.player-header { margin-bottom: 20px; }
-.player-live {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--mono);
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text-3);
-}
-.live-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #16A34A;
-  animation: live-pulse 2s ease-in-out infinite;
-}
-@keyframes live-pulse {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 1; }
-}
-.player-track {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 24px;
-}
-.player-art {
-  width: 60px;
-  height: 60px;
-  border-radius: var(--r-md);
-  background: linear-gradient(135deg, #DBEAFE, #EDE9FE);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  flex-shrink: 0;
-  transition: transform 0.3s;
-}
-.player-art.spinning {
-  animation: spin-art 8s linear infinite;
-}
-@keyframes spin-art { to { transform: rotate(360deg); } }
-.player-title {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 3px;
-}
-.player-sub {
-  font-size: 12px;
-  color: var(--text-2);
-  margin-bottom: 4px;
-}
-.player-platform {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--accent);
-}
-.player-progress { margin-bottom: 20px; }
-.progress-bar {
-  height: 3px;
-  background: var(--border);
-  border-radius: 100px;
-  overflow: hidden;
-  cursor: pointer;
-  margin-bottom: 6px;
-}
-.progress-fill {
-  height: 100%;
-  width: 0;
-  background: var(--accent);
-  border-radius: 100px;
-  transition: width 0.5s linear;
-}
-.progress-times {
-  display: flex;
-  justify-content: space-between;
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--text-3);
-}
-.player-controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  margin-bottom: 20px;
-}
-.ctrl-btn {
-  color: var(--text-2);
-  padding: 6px;
-  border-radius: var(--r-sm);
-  transition: color var(--t), background var(--t);
-}
-.ctrl-btn:hover { color: var(--text); background: var(--bg-alt); }
-.ctrl-play {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: var(--text);
-  color: var(--bg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: var(--sh-sm);
-  transition: opacity var(--t), transform var(--t);
-}
-.ctrl-play:hover { opacity: 0.85; transform: scale(1.05); }
-.player-links {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.music-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-family: var(--mono);
-  font-size: 11px;
-  font-weight: 500;
-  padding: 5px 12px;
-  border: 1px solid var(--border);
-  border-radius: 100px;
-  color: var(--text-2);
-  transition: all var(--t);
-}
-.music-link:hover { color: var(--text); border-color: var(--text-3); background: var(--bg-alt); }
-.music-link.spotify:hover { color: #16A34A; border-color: #BBF7D0; background: #F0FDF4; }
-.music-link.apple:hover { color: #DC2626; border-color: #FECACA; background: #FEF2F2; }
-.music-link.youtube:hover { color: #DC2626; border-color: #FECACA; background: #FEF2F2; }
-
-.music-tracks {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--r-xl);
-  padding: 28px;
-  box-shadow: var(--sh-sm);
-}
-.tracks-label {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 16px;
-}
-.track-list {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-bottom: 20px;
-}
-.track-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 12px;
-  border-radius: var(--r-md);
-  border: 1px solid var(--border-sm);
-  cursor: pointer;
-  transition: all var(--t);
-}
-.track-row:hover { background: var(--bg-alt); border-color: var(--border); }
-.track-row.active-track {
-  background: var(--accent-dim);
-  border-color: var(--accent-mid);
-}
-.tr-num {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--text-3);
-  width: 16px;
-  text-align: center;
-}
-.tr-art {
-  width: 32px;
-  height: 32px;
-  border-radius: var(--r-sm);
-  background: linear-gradient(135deg, #DBEAFE, #EDE9FE);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  flex-shrink: 0;
-}
-.tr-name {
-  flex: 1;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text);
-  min-width: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.tr-dur {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--text-3);
-  flex-shrink: 0;
-}
-.artist-note {
-  padding: 14px 16px;
-  background: var(--bg-alt);
-  border-radius: var(--r-md);
-}
-.artist-note p {
-  font-size: 13px;
-  color: var(--text-2);
-  line-height: 1.65;
-}
 
 /* ─────────────────────────────────────────
    CONTACT

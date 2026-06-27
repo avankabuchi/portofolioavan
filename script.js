@@ -93,14 +93,6 @@ document.getElementById('cert-filter')?.addEventListener('click', e => {
   });
 });
 
-/* ─── MUSIC PLAYER ─── */
-const tracks = [
-  { name: 'Track 1', art: '🎸', dur: '3:24', plat: 'Spotify & Apple Music' },
-  { name: 'Track 2', art: '🎹', dur: '2:58', plat: 'Apple Music' },
-  { name: 'Track 3', art: '🎧', dur: '4:10', plat: 'YouTube & Spotify' },
-  { name: 'Track 4', art: '🎻', dur: '3:45', plat: 'Spotify' },
-];
-let trackIdx = 0, isPlaying = false, progVal = 0, progTimer;
 
 function initTrackList() {
   const tl = document.getElementById('track-list');
