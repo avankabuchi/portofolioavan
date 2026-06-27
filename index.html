@@ -2,495 +2,605 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Avankha Barlian Kabuchi — Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="ambient amb1"></div>
-<div class="ambient amb2"></div>
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
-<div id="toast"><div id="toast-dot"></div><span id="toast-msg"></span></div>
-<canvas id="particle-canvas"></canvas>
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#home" class="nav-logo">Avan<span>.</span></a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#certs">Certs</a>
+      <a href="#music">Music</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="#contact" class="nav-cta">Let's Talk</a>
+    <button class="nav-menu-btn" id="menu-btn" aria-label="Menu">
+      <span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-mobile" id="nav-mobile">
+    <a href="#about" onclick="closeMobile()">About</a>
+    <a href="#skills" onclick="closeMobile()">Skills</a>
+    <a href="#experience" onclick="closeMobile()">Experience</a>
+    <a href="#projects" onclick="closeMobile()">Projects</a>
+    <a href="#certs" onclick="closeMobile()">Certs</a>
+    <a href="#music" onclick="closeMobile()">Music</a>
+    <a href="#contact" onclick="closeMobile()">Contact</a>
+  </div>
+</nav>
 
-<!-- ════ BOOT ════ -->
-<div id="boot">
-  <div class="boot-logo">Portfolio Avan</div>
-  <div class="boot-sub">Avankha Barlian Kabuchi — Loading</div>
-  <div class="boot-bar-wrap"><div class="boot-bar" id="boot-bar"></div></div>
-  <div class="boot-log" id="boot-log"></div>
-</div>
-
-<!-- ════ OS SHELL ════ -->
-<div id="os-shell">
-
-  <!-- MAIN AREA -->
-  <div id="main-area">
-    
-    <!-- TOPBAR -->
-    <div id="topbar">
-      <div class="win-controls">
-        <div class="win-dot red"></div>
-        <div class="win-dot yellow"></div>
-        <div class="win-dot green"></div>
-      </div>
-      <div class="topbar-breadcrumb" style="margin-left: 0.5rem;">
-        Portfolio <span style="color:var(--muted);">/</span> <span id="topbar-path">Home</span>
-      </div>
-      <div class="topbar-right">
-        <div class="topbar-status"><div class="status-dot"></div>Available</div>
-        <div class="topbar-clock" id="topbar-clock">--:--</div>
+<!-- HERO -->
+<section id="home" class="hero">
+  <div class="container">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      Available for Opportunities
+    </div>
+    <h1 class="hero-name">
+      Avankha<br>Barlian<br><span class="hero-name-light">Kabuchi, S.Kom.</span>
+    </h1>
+    <div class="hero-sub">
+      <p class="hero-desc">Informatika graduate · Computer Networking · Web Development · AI & IoT · Music</p>
+      <div class="hero-role">
+        <span class="role-label">Currently</span>
+        <span id="typing-role">Networking Engineer</span><span class="type-cursor">|</span>
       </div>
     </div>
-
-    <!-- ════ FIXED TOP TABS (Kecil, Satu Baris) TANPA ICON ════ -->
-    <div id="top-tabs">
-      <button class="t-tab active" data-tab="home" onclick="switchPage('home')">Home</button>
-      <button class="t-tab" data-tab="about" onclick="switchPage('about')">About</button>
-      <button class="t-tab" data-tab="skills" onclick="switchPage('skills')">Skills</button>
-      <button class="t-tab" data-tab="experience" onclick="switchPage('experience')">Experience</button>
-      <button class="t-tab" data-tab="projects" onclick="switchPage('projects')">Projects</button>
-      <button class="t-tab" data-tab="certs" onclick="switchPage('certs')">Certs</button>
-      <button class="t-tab" data-tab="music" onclick="switchPage('music')">Music</button>
-      <button class="t-tab" data-tab="connect" onclick="switchPage('connect')">Connect</button>
+    <div class="hero-actions">
+      <a href="#contact" class="btn btn-primary">Get in Touch</a>
+      <a href="#projects" class="btn btn-ghost">View Projects</a>
     </div>
+    <div class="hero-meta">
+      <div class="meta-item"><span class="meta-num">7+</span><span class="meta-label">Certificates</span></div>
+      <div class="meta-div"></div>
+      <div class="meta-item"><span class="meta-num">Int'l</span><span class="meta-label">Conference</span></div>
+      <div class="meta-div"></div>
+      <div class="meta-item"><span class="meta-num">3+</span><span class="meta-label">Live Sites</span></div>
+      <div class="meta-div"></div>
+      <div class="meta-item"><span class="meta-num">2+</span><span class="meta-label">Years Dev</span></div>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">
+    <span>Scroll</span>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+  </div>
+</section>
 
-    <!-- PAGES CONTENT -->
-    <div id="pages">
-
-      <!-- ════ HOME ════ -->
-      <div class="page active" id="page-home">
-        <div class="home-inner">
-          <div class="home-left">
-            <div class="home-tag">
-              <span>Informatika · AMIKOM Yogyakarta</span>
-              <span class="home-tag-pill">Open to Opportunities</span>
-            </div>
-            
-            <h1 class="home-name">
-              Avankha <br> <span class="g">Barlian Kabuchi, S.Kom.</span>
-              <!-- Wrapper untuk Typing text (Otomatis pindah baris bawah di HP) -->
-              <span class="typing-container">
-                <span class="typing-wrap">[ <span id="typing-out"></span><span class="cursor-blink"></span> ]</span>
-              </span>
-            </h1>
-            
-            <p class="home-bio">Lulusan Informatika yang passionate di bidang computer networking, software development, dan teknologi AI/IoT — menggabungkan keahlian teknis dengan jiwa kreatif untuk membangun hal-hal yang benar-benar berdampak.</p>
-            
-            <div class="home-actions">
-              <button class="btn btn-primary" onclick="switchPage('connect')">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Hubungi Saya
-              </button>
-            </div>
-            
-            <div class="home-stats">
-              <div class="hst"><div class="hst-n">7+</div><div class="hst-l">Sertifikat</div></div>
-              <div class="hst"><div class="hst-n">Int'l</div><div class="hst-l">Conference</div></div>
-              <div class="hst"><div class="hst-n">2</div><div class="hst-l">Live Sites</div></div>
-              <div class="hst"><div class="hst-n">∞</div><div class="hst-l">Kreativitas</div></div>
-            </div>
-          </div>
-          <div class="home-terminal">
-            <div class="term-bar">
-              <div class="term-dot r"></div><div class="term-dot y"></div><div class="term-dot g"></div>
-              <div class="term-title">avan@portfolio ~ zsh</div>
-            </div>
-            <div class="term-body">
-              <div class="term-line"><span class="term-prompt">~$</span><span class="term-cmd"> whoami</span></div>
-              <div class="term-out green">Avankha Barlian Kabuchi, S.Kom.</div>
-              <div class="term-line" style="margin-top:.4rem;"><span class="term-prompt">~$</span><span class="term-cmd"> cat skills.txt</span></div>
-              <div class="term-out purple">[Networking]  Cisco CCNAv7, TCP/IP, VLAN</div>
-              <div class="term-out purple">[Web]         HTML, CSS, JS, PHP, Laravel</div>
-              <div class="term-out purple">[AI/IoT]      ML, Embedded, Industry 5.0</div>
-              <div class="term-out purple">[Creative]    Music, Video, Content</div>
-              <div class="term-line" style="margin-top:.4rem;"><span class="term-prompt">~$</span><span class="term-cmd"> ls projects/</span></div>
-              <div class="term-out pink">jawa-hair-studio/  toko-bung-edi/  ...</div>
-              <div class="term-line" style="margin-top:.4rem;"><span class="term-prompt">~$</span><span class="term-cmd"> open spotify</span></div>
-              <div class="term-out green">🎵 Playing: Avan Kabuchi — Artist</div>
-              <div class="term-line" style="margin-top:.4rem;"><span class="term-prompt">~$</span><span class="term-cmd"> <span class="term-cursor"></span></span></div>
-            </div>
-          </div>
+<!-- ABOUT -->
+<section id="about" class="section">
+  <div class="container">
+    <div class="section-eyebrow">About</div>
+    <div class="about-grid">
+      <div class="about-left">
+        <h2 class="section-title">Building things that matter<span class="dot">.</span></h2>
+      </div>
+      <div class="about-right">
+        <p>Halo! Saya <strong>Avankha Barlian Kabuchi, S.Kom.</strong> — lulusan Sarjana Informatika dari <strong>Universitas AMIKOM Yogyakarta</strong>, kampus pusat inovasi kreatif dan teknologi di Indonesia.</p>
+        <p>Saya aktif mengembangkan diri melalui seminar, konferensi internasional, dan sertifikasi profesional termasuk <strong>Cisco CCNAv7</strong> dan konferensi internasional AI & IoT. Di luar dunia tech, saya juga seorang <strong>musisi dan content creator</strong> aktif di Spotify, Apple Music, YouTube, dan TikTok.</p>
+        <div class="about-tags">
+          <span>Computer Networks</span><span>Web Development</span><span>AI & IoT</span>
+          <span>Music Production</span><span>Geospasial</span><span>Content Creation</span>
+          <span>UI/UX Design</span><span>Problem Solving</span>
+        </div>
+        <div class="about-info">
+          <div class="info-row"><span class="info-key">Education</span><span class="info-val">S1 Informatika — AMIKOM Yogyakarta</span></div>
+          <div class="info-row"><span class="info-key">Location</span><span class="info-val">Yogyakarta, Indonesia</span></div>
+          <div class="info-row"><span class="info-key">Cert</span><span class="info-val">Cisco CCNAv7 — Jan 2024</span></div>
+          <div class="info-row"><span class="info-key">Status</span><span class="info-val status-open">Open to Work</span></div>
         </div>
       </div>
+    </div>
+    <blockquote class="about-quote">
+      "Kreativitas adalah teknologi tertinggi — kemampuan untuk membayangkan sesuatu yang belum ada, lalu membangunnya dengan kode, melodi, atau apapun yang ada di tangan."
+    </blockquote>
+  </div>
+</section>
 
-      <!-- ════ ABOUT ════ -->
-      <div class="page" id="page-about">
-        <div class="pg-header">
-          <div class="pg-eyebrow">About Me</div>
-          <h2 class="pg-title">Siapa <span class="accent">Saya</span>?</h2>
+<!-- SKILLS -->
+<section id="skills" class="section section-alt">
+  <div class="container">
+    <div class="section-eyebrow">Skills</div>
+    <h2 class="section-title">Kompetensi & Keahlian<span class="dot">.</span></h2>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-header">
+          <span class="skill-group-icon">🌐</span>
+          <span class="skill-group-name">Networking</span>
         </div>
-        <div class="about-layout">
-          <div class="about-card about-bio">
-            <p>Halo! Saya <strong>Avankha Barlian Kabuchi, S.Kom.</strong> — lulusan Sarjana Informatika dari <strong>Universitas AMIKOM Yogyakarta</strong>, kampus yang dikenal sebagai pusat inovasi kreatif dan teknologi di Indonesia.</p>
-            <p>Dengan fondasi akademis yang kuat di bidang <strong>jaringan komputer, pengembangan perangkat lunak, dan sistem informasi</strong>, saya aktif mengembangkan diri melalui berbagai seminar, konferensi internasional, dan program sertifikasi profesional — termasuk <strong>Cisco CCNA</strong> dan konferensi internasional AI & IoT.</p>
-            <p>Di luar dunia tech, saya juga seorang <strong>musisi dan content creator</strong> aktif yang berkarya di Spotify, Apple Music, YouTube, dan TikTok di bawah nama <em>Avan Kabuchi</em>.</p>
-            <div class="chips">
-              <span class="chip">Computer Networks</span><span class="chip">Web Development</span>
-              <span class="chip">AI & IoT</span><span class="chip">Music Production</span>
-              <span class="chip">Geospasial</span><span class="chip">Content Creation</span>
-              <span class="chip">Problem Solving</span><span class="chip">UI/UX Design</span>
-            </div>
-          </div>
-          <div>
-            <div class="id-list">
-              <div class="id-row"><div class="id-icon" style="background:rgba(124,111,255,.15);">🎓</div><div><div class="id-key">Education</div><div class="id-val">S1 Informatika — AMIKOM Yogyakarta</div></div></div>
-              <div class="id-row"><div class="id-icon" style="background:rgba(255,107,157,.12);">📍</div><div><div class="id-key">Location</div><div class="id-val">Yogyakarta, Indonesia</div></div></div>
-              <div class="id-row"><div class="id-icon" style="background:rgba(255,209,102,.12);">🌐</div><div><div class="id-key">Network Cert</div><div class="id-val">Cisco CCNAv7 — Jan 2024</div></div></div>
-              <div class="id-row"><div class="id-icon" style="background:rgba(124,111,255,.15);">🌏</div><div><div class="id-key">International</div><div class="id-val">AI & IoT Conference 2024</div></div></div>
-              <div class="id-row"><div class="id-icon" style="background:rgba(29,185,84,.12);">🎵</div><div><div class="id-key">Music</div><div class="id-val">Avan Kabuchi — Spotify & Apple Music</div></div></div>
-              <div class="id-row"><div class="id-icon" style="background:rgba(0,229,176,.12);">💼</div><div><div class="id-key">Status</div><div class="id-val" style="color:var(--accent3);">Available for Opportunities</div></div></div>
-            </div>
-          </div>
-          <div class="about-quote">
-            "Saya percaya bahwa <strong>kreativitas adalah teknologi tertinggi</strong> — kemampuan untuk membayangkan sesuatu yang belum ada, lalu membangunnya dengan kode, melodi, atau apapun yang ada di tangan."
-          </div>
+        <ul class="skill-list">
+          <li><span>Cisco IOS & Packet Tracer</span><span class="skill-lvl lvl-e">Expert</span></li>
+          <li><span>Routing & Switching</span><span class="skill-lvl lvl-e">Expert</span></li>
+          <li><span>TCP/IP · VLAN · Subnetting</span><span class="skill-lvl lvl-a">Advanced</span></li>
+          <li><span>Network Security · WLAN</span><span class="skill-lvl lvl-a">Advanced</span></li>
+          <li><span>Wireshark · OSI Model</span><span class="skill-lvl lvl-a">Advanced</span></li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-header">
+          <span class="skill-group-icon">💻</span>
+          <span class="skill-group-name">Web Dev</span>
+        </div>
+        <ul class="skill-list">
+          <li><span>HTML5 / CSS3 / JavaScript</span><span class="skill-lvl lvl-e">Expert</span></li>
+          <li><span>React · Bootstrap</span><span class="skill-lvl lvl-a">Advanced</span></li>
+          <li><span>PHP · Laravel · MySQL</span><span class="skill-lvl lvl-a">Advanced</span></li>
+          <li><span>REST API · Vercel Deploy</span><span class="skill-lvl lvl-i">Intermediate</span></li>
+          <li><span>UI/UX Design · Figma</span><span class="skill-lvl lvl-i">Intermediate</span></li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-header">
+          <span class="skill-group-icon">🤖</span>
+          <span class="skill-group-name">AI & IoT</span>
+        </div>
+        <ul class="skill-list">
+          <li><span>Machine Learning</span><span class="skill-lvl lvl-i">Intermediate</span></li>
+          <li><span>Internet of Things</span><span class="skill-lvl lvl-i">Intermediate</span></li>
+          <li><span>Industri 5.0 / Embedded</span><span class="skill-lvl lvl-i">Intermediate</span></li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-header">
+          <span class="skill-group-icon">🎵</span>
+          <span class="skill-group-name">Creative & Tools</span>
+        </div>
+        <ul class="skill-list">
+          <li><span>Music Production</span><span class="skill-lvl lvl-e">Expert</span></li>
+          <li><span>Video Editing · Content</span><span class="skill-lvl lvl-a">Advanced</span></li>
+          <li><span>Git & GitHub</span><span class="skill-lvl lvl-a">Advanced</span></li>
+          <li><span>Linux CLI · VS Code</span><span class="skill-lvl lvl-a">Advanced</span></li>
+          <li><span>Docker (Basic)</span><span class="skill-lvl lvl-i">Intermediate</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="proficiency-bars">
+      <div class="prof-title">Proficiency Overview</div>
+      <div class="bars-grid">
+        <div class="bar-row">
+          <div class="bar-label"><span>Computer Networking</span><span>88%</span></div>
+          <div class="bar-track"><div class="bar-fill" data-w="88"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>Web Development</span><span>82%</span></div>
+          <div class="bar-track"><div class="bar-fill" data-w="82"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>Music Production</span><span>90%</span></div>
+          <div class="bar-track"><div class="bar-fill" data-w="90"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>UI/UX Design</span><span>75%</span></div>
+          <div class="bar-track"><div class="bar-fill" data-w="75"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>AI & IoT</span><span>70%</span></div>
+          <div class="bar-track"><div class="bar-fill" data-w="70"></div></div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
 
-      <!-- ════ SKILLS ════ -->
-      <div class="page" id="page-skills">
-        <div class="pg-header">
-          <div class="pg-eyebrow">Competencies</div>
-          <h2 class="pg-title">Kompetensi & <span class="accent">Keahlian</span></h2>
+<!-- EXPERIENCE -->
+<section id="experience" class="section">
+  <div class="container">
+    <div class="section-eyebrow">Experience</div>
+    <h2 class="section-title">Perjalanan<span class="dot">.</span></h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-period">2022 — 2026</div>
         </div>
-        <div class="skills-layout">
-          <div class="skill-panel">
-            <div class="skill-panel-title"><div class="icon">🌐</div>Networking</div>
-            <div class="skill-items">
-              <div class="sk-item"><div class="sk-item-left"><span class="sk-item-icon">📡</span><span class="sk-item-name">Cisco IOS & Packet Tracer</span></div><span class="sk-item-level lv-expert">Expert</span></div>
-              <div class="sk-item"><div class="sk-item-left"><span class="sk-item-icon">🔀</span><span class="sk-item-name">Routing & Switching</span></div><span class="sk-item-level lv-expert">Expert</span></div>
-              <div class="sk-item"><div class="sk-item-left"><span class="sk-item-icon">🧩</span><span class="sk-item-name">TCP/IP · VLAN · Subnetting</span></div><span class="sk-item-level lv-advanced">Advanced</span></div>
-              <div class="sk-item"><div class="sk-item-left"><span class="sk-item-icon">🔒</span><span class="sk-item-name">Network Security · WLAN</span></div><span class="sk-item-level lv-advanced">Advanced</span></div>
-              <div class="sk-item"><div class="sk-item-left"><span class="sk-item-icon">🔬</span><span class="sk-item-name">Wireshark · OSI Model</span></div><span class="sk-item-level lv-advanced">Advanced</span></div>
-            </div>
-          </div>
-          <div class="skill-panel">
-            <div class="skill-panel-title"><div class="icon" style="background:rgba(255,107,157,.15);">💻</div>Web Development</div>
-            <div class="skill-items">
-              <div class="sk-item"><div class="sk-item-left"><span class="sk-item-icon">🎨</span><span class="sk-item-name">HTML5 / CSS3 / JS</span></div><span class="sk-item-level lv-expert">Expert</span></div>
-              <div class="sk-item"><div class="sk-item-left"><span class="sk-item-icon">⚛️</span><span class="sk-item-name">React · Bootstrap</span></div><span class="sk-item-level lv-advanced">Advanced</span></div>
-              <div class="sk-item"><div class="sk-item-left"><span class="sk-item-icon">🐘</span><span class="sk-item-name">PHP · Laravel · MySQL</span></div><span class="sk-item-level lv-advanced">Advanced</span></div>
-              <div class="sk-item"><div class="sk-item-left"><span class="sk-item-icon">🔌</span><span class="sk-item-name">REST API · Vercel Deploy</span></div><span class="sk-item-level lv-intermediate">Intermediate</span></div>
-              <div class="sk-item"><div class="sk-item-left"><span class="sk-item-icon">🎭</span><span class="sk-item-name">UI/UX Design · Figma</span></div><span class="sk-item-level lv-intermediate">Intermediate</span></div>
-            </div>
-          </div>
-          <div class="skill-panel">
-            <div class="skill-panel-title"><div class="icon" style="background:rgba(0,229,176,.12);">🤖</div>AI & IoT</div>
-            <div class="skill-items">
-              <div class="sk-item"><div class="sk-item-left"><span class="sk-item-icon">🧠</span><span class="sk-item-name">Machine Learning</span></div><span class="sk-item-level lv-intermediate">Intermediate</span></div>
-              <div class="sk-item"><div class="sk-item-left"><span class="sk-item-icon">📟</span><span class="sk-item-name">Internet of Things</span></div><span class="sk-item-level lv-intermediate">Intermediate</span></div>
-              <div class="sk-item"><div class="sk-item-left"><span class="sk-item-icon">🏭</span><span class="sk-item-name">Industri 5.0 / Embedded</span></div><span class="sk-item-level lv-intermediate">Intermediate</span></div>
-            </div>
-          </div>
-          <div class="skill-panel">
-            <div class="skill-panel-title"><div class="icon" style="background:rgba(255,157,28,.12);">🎵</div>Creative & Tools</div>
-            <div class="skill-items">
-              <div class="sk-item"><div class="sk-item-left"><span class="sk-item-icon">🎸</span><span class="sk-item-name">Music Production</span></div><span class="sk-item-level lv-expert">Expert</span></div>
-              <div class="sk-item"><div class="sk-item-left"><span class="sk-item-icon">📹</span><span class="sk-item-name">Video Editing · Content</span></div><span class="sk-item-level lv-advanced">Advanced</span></div>
-              <div class="sk-item"><div class="sk-item-left"><span class="sk-item-icon">🐙</span><span class="sk-item-name">Git & GitHub</span></div><span class="sk-item-level lv-advanced">Advanced</span></div>
-              <div class="sk-item"><div class="sk-item-left"><span class="sk-item-icon">🐧</span><span class="sk-item-name">Linux CLI · VS Code</span></div><span class="sk-item-level lv-advanced">Advanced</span></div>
-              <div class="sk-item"><div class="sk-item-left"><span class="sk-item-icon">🐳</span><span class="sk-item-name">Docker (Basic)</span></div><span class="sk-item-level lv-intermediate">Intermediate</span></div>
-            </div>
-          </div>
-          <div class="skill-bars-panel" id="skill-bars-panel">
-            <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.92rem;margin-bottom:1.3rem;display:flex;align-items:center;gap:.55rem;">
-              <span>📊</span> Proficiency Overview
-            </div>
-            <div class="bar-item"><div class="bar-header"><span class="bar-name">Computer Networking</span><span class="bar-pct">88%</span></div><div class="bar-track"><div class="bar-fill" data-w="88" style="background:linear-gradient(90deg,#7c6fff,#00e5b0);"></div></div></div>
-            <div class="bar-item"><div class="bar-header"><span class="bar-name">Web Development</span><span class="bar-pct">82%</span></div><div class="bar-track"><div class="bar-fill" data-w="82" style="background:linear-gradient(90deg,#ff6b9d,#ffd166);"></div></div></div>
-            <div class="bar-item"><div class="bar-header"><span class="bar-name">UI/UX Design</span><span class="bar-pct">75%</span></div><div class="bar-track"><div class="bar-fill" data-w="75" style="background:linear-gradient(90deg,#c77dff,#7c6fff);"></div></div></div>
-            <div class="bar-item"><div class="bar-header"><span class="bar-name">AI & IoT</span><span class="bar-pct">70%</span></div><div class="bar-track"><div class="bar-fill" data-w="70" style="background:linear-gradient(90deg,#00e5b0,#7c6fff);"></div></div></div>
-            <div class="bar-item"><div class="bar-header"><span class="bar-name">Music Production</span><span class="bar-pct">90%</span></div><div class="bar-track"><div class="bar-fill" data-w="90" style="background:linear-gradient(90deg,#ff9f1c,#ff6b9d);"></div></div></div>
-          </div>
+        <div class="tl-right">
+          <div class="tl-title">S1 Informatika</div>
+          <div class="tl-org">Universitas AMIKOM Yogyakarta</div>
+          <p class="tl-desc">Menempuh studi Sarjana Informatika dan aktif dalam berbagai kegiatan akademik, seminar nasional, dan kuliah umum yang memperkuat kompetensi di bidang networking, pengembangan perangkat lunak, dan teknologi informasi terkini.</p>
+          <div class="tl-tags"><span>Informatika</span><span>Networking</span><span>Web Dev</span></div>
         </div>
       </div>
-
-      <!-- ════ PROJECTS ════ -->
-      <div class="page" id="page-projects">
-        <div class="pg-header">
-          <div class="pg-eyebrow">Portfolio</div>
-          <h2 class="pg-title">Projects Yang <span class="accent">Saya Bangun</span></h2>
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-period">Aug 2024</div>
         </div>
-        <div class="projects-grid">
-          <div class="proj-card">
-            <div class="proj-num">01</div>
-            <div class="proj-preview">
-              <iframe src="https://jawahairstudio-nu.vercel.app/" title="Jawa Hair Studio" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no"></iframe>
-              <div class="proj-preview-overlay">
-                <a href="https://jawahairstudio-nu.vercel.app/" target="_blank" rel="noopener" class="proj-live-btn">
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                  Kunjungi Live Site
-                </a>
-              </div>
-            </div>
-            <div class="proj-body">
-              <div class="proj-tags"><span class="proj-tag">HTML/CSS</span><span class="proj-tag">JavaScript</span><span class="proj-tag">Vercel</span><span class="proj-tag">Landing Page</span></div>
-              <div class="proj-name">Jawa Hair Studio</div>
-              <div class="proj-desc">Website landing page profesional untuk barbershop — galeri, layanan, dan kontak dengan tampilan modern.</div>
-              <div class="proj-links"><a href="https://jawahairstudio-nu.vercel.app/" target="_blank" rel="noopener" class="plink"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Live</a></div>
-            </div>
-          </div>
-          <div class="proj-card">
-            <div class="proj-num">02</div>
-            <div class="proj-preview">
-              <iframe src="https://tokobungedi.vercel.app/" title="Toko Bung Edi" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no"></iframe>
-              <div class="proj-preview-overlay">
-                <a href="https://tokobungedi.vercel.app/" target="_blank" rel="noopener" class="proj-live-btn">
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                  Kunjungi Live Site
-                </a>
-              </div>
-            </div>
-            <div class="proj-body">
-              <div class="proj-tags"><span class="proj-tag">HTML/CSS</span><span class="proj-tag">JavaScript</span><span class="proj-tag">Vercel</span><span class="proj-tag">E-Commerce</span></div>
-              <div class="proj-name">Toko Bung Edi</div>
-              <div class="proj-desc">Website e-commerce untuk toko kelontong — katalog produk, pemesanan, desain hangat dan elegan.</div>
-              <div class="proj-links"><a href="https://tokobungedi.vercel.app/" target="_blank" rel="noopener" class="plink"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Live</a></div>
-            </div>
-          </div>
-          <div class="proj-card">
-            <div class="proj-num">03</div>
-            <div class="proj-preview">
-              <iframe src="https://futurasa.vercel.app/" title="Futurasa" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no"></iframe>
-              <div class="proj-preview-overlay">
-                <a href="https://futurasa.vercel.app/" target="_blank" rel="noopener" class="proj-live-btn">
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                  Kunjungi Live Site
-                </a>
-              </div>
-            </div>
-            <div class="proj-body">
-              <div class="proj-tags"><span class="proj-tag">PHP</span><span class="proj-tag">Laravel</span><span class="proj-tag">React</span><span class="proj-tag">Inertia.js</span></div>
-              <div class="proj-name">Futurasa</div>
-              <div class="proj-desc">Platform informasi beasiswa dan lowongan kerja terkini agar kamu mendapatkan masa depan yang lebih baik.</div>
-              <div class="proj-links"><a href="https://futurasa.vercel.app/" target="_blank" rel="noopener" class="plink"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Live</a></div>
-            </div>
-          </div>
-          <div class="proj-card soon">
-            <div class="proj-soon-badge">Coming Soon</div>
-            <div class="proj-num">04</div>
-            <div class="proj-preview" style="display:flex;align-items:center;justify-content:center;">
-              <div style="text-align:center;color:var(--muted);font-family:'Space Mono',monospace;font-size:.7rem;">
-                <div style="font-size:2rem;margin-bottom:.5rem;">🚧</div>In Development
-              </div>
-            </div>
-            <div class="proj-body">
-              <div class="proj-tags"><span class="proj-tag">Laravel</span><span class="proj-tag">MySQL</span><span class="proj-tag">React</span></div>
-              <div class="proj-name">Project Berikutnya</div>
-              <div class="proj-desc">Proyek fullstack sedang dalam pengembangan — Stay tuned!</div>
-            </div>
-          </div>
-        </div>
-        <div style="text-align:center;margin-top:2rem;">
-          <p style="color:var(--muted);font-family:'Space Mono',monospace;font-size:.68rem;margin-bottom:.9rem;letter-spacing:.05em;">Tertarik berkolaborasi? Mari buat sesuatu yang luar biasa.</p>
-          <button class="btn btn-primary" onclick="switchPage('connect')">Mulai Kolaborasi →</button>
+        <div class="tl-right">
+          <div class="tl-title">International Conference — AI & IoT, Industry 5.0</div>
+          <div class="tl-org">Universitas Islam Balitar, Indonesia</div>
+          <p class="tl-desc">Berpartisipasi aktif sebagai peserta pada konferensi internasional bertema AI Technology dan IoT dalam era Industrial Revolution 5.0. Memperluas wawasan global tentang tren AI dan IoT.</p>
+          <div class="tl-tags"><span>AI</span><span>IoT</span><span>Industry 5.0</span><span>International</span></div>
         </div>
       </div>
-
-      <!-- ════ EXPERIENCE ════ -->
-      <div class="page" id="page-experience">
-        <div class="pg-header">
-          <div class="pg-eyebrow">Journey</div>
-          <h2 class="pg-title">Perjalanan & <span class="accent">Pengalaman</span></h2>
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-period">Jan 2024</div>
         </div>
-        <div class="timeline-expanded">
-          <div class="tl-detail">
-            <div class="tl-detail-period">2022 — 2026</div>
-            <div class="tl-detail-title">S1 Informatika</div>
-            <div class="tl-detail-org">Universitas AMIKOM Yogyakarta</div>
-            <div class="tl-detail-desc">Menempuh studi Sarjana Informatika dan aktif dalam berbagai kegiatan akademik, seminar nasional, dan kuliah umum yang memperkuat kompetensi di bidang networking, pengembangan perangkat lunak, dan teknologi informasi terkini.</div>
-            <div class="tl-detail-tags"><span class="tl-tag">Informatika</span><span class="tl-tag">Networking</span><span class="tl-tag">Web Dev</span><span class="tl-tag">Akademik</span></div>
-          </div>
-          <div class="tl-detail">
-            <div class="tl-detail-period">Agustus 2024</div>
-            <div class="tl-detail-title">International Conference — AI & IoT, Industry 5.0</div>
-            <div class="tl-detail-org">Universitas Islam Balitar, Indonesia</div>
-            <div class="tl-detail-desc">Berpartisipasi aktif sebagai peserta pada konferensi internasional bertema "The World in the Hands of Artificial Intelligence Technology and the Internet of Things in the Era of Industrial Revolution 5.0". Memperluas wawasan global tentang tren AI dan IoT.</div>
-            <div class="tl-detail-tags"><span class="tl-tag">Artificial Intelligence</span><span class="tl-tag">IoT</span><span class="tl-tag">Industry 5.0</span><span class="tl-tag">International</span></div>
-          </div>
-          <div class="tl-detail">
-            <div class="tl-detail-period">Januari 2024</div>
-            <div class="tl-detail-title">Cisco CCNAv7: Introduction to Networks</div>
-            <div class="tl-detail-org">Cisco Networking Academy</div>
-            <div class="tl-detail-desc">Menyelesaikan program CCNAv7 melalui Cisco Networking Academy. Memperoleh keahlian fundamental dalam konfigurasi perangkat Cisco, protokol TCP/IP, routing, switching, dan keamanan jaringan dasar.</div>
-            <div class="tl-detail-tags"><span class="tl-tag">Cisco</span><span class="tl-tag">TCP/IP</span><span class="tl-tag">Routing</span><span class="tl-tag">Switching</span><span class="tl-tag">VLAN</span></div>
-          </div>
-          <div class="tl-detail">
-            <div class="tl-detail-period">Juni 2025</div>
-            <div class="tl-detail-title">Seminar Nasional Informatika 2025</div>
-            <div class="tl-detail-org">Universitas AMIKOM Yogyakarta</div>
-            <div class="tl-detail-desc">Berpartisipasi aktif dalam Seminar Nasional Informatika 2025 di MSV Cinema, Gedung 6, AMIKOM Yogyakarta — memperluas perspektif tentang perkembangan terkini dunia informatika di Indonesia.</div>
-            <div class="tl-detail-tags"><span class="tl-tag">Seminar</span><span class="tl-tag">Informatika</span><span class="tl-tag">Nasional</span></div>
-          </div>
-          <div class="tl-detail">
-            <div class="tl-detail-period">2022 — Present</div>
-            <div class="tl-detail-title">Web Developer — Freelance</div>
-            <div class="tl-detail-org">Jawa Hair Studio · Toko Bung Edi · dan lainnya</div>
-            <div class="tl-detail-desc">Membangun berbagai website profesional untuk klien lokal — dari landing page bisnis hingga toko online. Desain, development, hingga deployment di Vercel dengan hasil yang dapat diakses secara live.</div>
-            <div class="tl-detail-tags"><span class="tl-tag">HTML/CSS</span><span class="tl-tag">JavaScript</span><span class="tl-tag">Vercel</span><span class="tl-tag">Freelance</span><span class="tl-tag">Deployment</span></div>
-          </div>
-          <div class="tl-detail">
-            <div class="tl-detail-period">Ongoing</div>
-            <div class="tl-detail-title">Musisi & Content Creator</div>
-            <div class="tl-detail-org">Spotify · Apple Music · YouTube · TikTok · Instagram</div>
-            <div class="tl-detail-desc">Aktif berkarya sebagai musisi dengan rilisan resmi di Spotify dan Apple Music atas nama Avan Kabuchi — membuktikan bahwa developer pun bisa jadi kreator yang berdampak.</div>
-            <div class="tl-detail-tags"><span class="tl-tag">Music</span><span class="tl-tag">Spotify</span><span class="tl-tag">Content Creation</span><span class="tl-tag">TikTok</span><span class="tl-tag">YouTube</span></div>
-          </div>
+        <div class="tl-right">
+          <div class="tl-title">Cisco CCNAv7: Introduction to Networks</div>
+          <div class="tl-org">Cisco Networking Academy</div>
+          <p class="tl-desc">Menyelesaikan program CCNAv7. Memperoleh keahlian fundamental dalam konfigurasi perangkat Cisco, protokol TCP/IP, routing, switching, dan keamanan jaringan dasar.</p>
+          <div class="tl-tags"><span>Cisco</span><span>TCP/IP</span><span>Routing</span><span>Switching</span></div>
         </div>
       </div>
-
-      <!-- ════ CERTS ════ -->
-      <div class="page" id="page-certs">
-        <div class="pg-header">
-          <div class="pg-eyebrow">Credentials</div>
-          <h2 class="pg-title">Sertifikasi & <span class="accent">Partisipasi</span></h2>
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-period">Jun 2025</div>
         </div>
-        <div class="certs-layout">
-          <div class="cert-filter">
-            <button class="filter-btn active" onclick="filterCerts(this,'all')">Semua</button>
-            <button class="filter-btn" onclick="filterCerts(this,'professional')">Profesional</button>
-            <button class="filter-btn" onclick="filterCerts(this,'seminar')">Seminar</button>
-            <button class="filter-btn" onclick="filterCerts(this,'workshop')">Workshop</button>
-          </div>
-          <div class="certs-grid">
-            <div class="cert-card" data-cat="professional">
-              <div class="cert-badge" style="background:linear-gradient(135deg,#1ba5e1,#0055aa);">🌐</div>
-              <div><div class="cert-name">CCNAv7: Introduction to Networks</div><div class="cert-issuer">Cisco Networking Academy</div><div class="cert-meta">05 Januari 2024</div><div class="cert-id">ID: 34b115f0-b723-43c4-b6fd-0ce5fc89db76</div></div>
-              <div class="cert-type-badge" style="color:#00e5b0;border-color:rgba(0,229,176,.3);">Pro</div>
-            </div>
-            <div class="cert-card" data-cat="seminar">
-              <div class="cert-badge" style="background:linear-gradient(135deg,#c0392b,#a93226);">🌏</div>
-              <div><div class="cert-name">International Conference: AI, IoT & Industry 5.0</div><div class="cert-issuer">Universitas Islam Balitar</div><div class="cert-meta">26 Agustus 2024</div><div class="cert-id">No. 034/DK.04/E-Cert/071070/VIII/2024</div></div>
-              <div class="cert-type-badge" style="color:#ffd166;border-color:rgba(255,209,102,.3);">Seminar</div>
-            </div>
-            <div class="cert-card" data-cat="workshop">
-              <div class="cert-badge" style="background:linear-gradient(135deg,#f6c90e,#e09800);">🌱</div>
-              <div><div class="cert-name">Movers Workshop on Wellbeing for Changemakers</div><div class="cert-issuer">Movers Programme — Skill Our Future</div><div class="cert-meta">Certificate of Participation (2-Hour)</div></div>
-              <div class="cert-type-badge" style="color:#ff6b9d;border-color:rgba(255,107,157,.3);">WS</div>
-            </div>
-            <div class="cert-card" data-cat="seminar">
-              <div class="cert-badge" style="background:linear-gradient(135deg,#6a0dad,#9b59b6);">🎓</div>
-              <div><div class="cert-name">Seminar Nasional Informatika 2025</div><div class="cert-issuer">Universitas AMIKOM Yogyakarta</div><div class="cert-meta">5 Juni 2025</div><div class="cert-id">No. 1624/S-KMHS/AMIKOM/VI/2025</div></div>
-              <div class="cert-type-badge" style="color:#7c6fff;border-color:rgba(124,111,255,.3);">Seminar</div>
-            </div>
-            <div class="cert-card" data-cat="workshop">
-              <div class="cert-badge" style="background:linear-gradient(135deg,#16213e,#4a4e69);">💻</div>
-              <div><div class="cert-name">Introduction to Computer 2022</div><div class="cert-issuer">Universitas AMIKOM Yogyakarta</div><div class="cert-meta">1–13 September 2022</div><div class="cert-id">No. 220/KMHS/AMIKOM/IX/3385</div></div>
-              <div class="cert-type-badge" style="color:#ff6b9d;border-color:rgba(255,107,157,.3);">WS</div>
-            </div>
-            <div class="cert-card" data-cat="seminar">
-              <div class="cert-badge" style="background:linear-gradient(135deg,#4a4e69,#6b705c);">🎙️</div>
-              <div><div class="cert-name">Kuliah Umum: AMIKOM Creative Economy Park</div><div class="cert-issuer">Universitas AMIKOM Yogyakarta</div><div class="cert-meta">11 Juni 2022</div><div class="cert-id">No. 1605.S/A.DKUI/AMIKOM/VI/2022</div></div>
-              <div class="cert-type-badge" style="color:#7c6fff;border-color:rgba(124,111,255,.3);">Seminar</div>
-            </div>
-            <div class="cert-card" data-cat="seminar">
-              <div class="cert-badge" style="background:linear-gradient(135deg,#1a535c,#4ecdc4);">🗺️</div>
-              <div><div class="cert-name">Seminar: Potensi Karir Pemetaan & Geospasial</div><div class="cert-issuer">AMIKOM Yogyakarta — BPC & Alumni</div><div class="cert-meta">24 Juni 2025</div><div class="cert-id">No. 065/Sert.BPC/AMIKOM/VI/2025</div></div>
-              <div class="cert-type-badge" style="color:#00e5b0;border-color:rgba(0,229,176,.3);">Seminar</div>
-            </div>
-          </div>
+        <div class="tl-right">
+          <div class="tl-title">Seminar Nasional Informatika 2025</div>
+          <div class="tl-org">Universitas AMIKOM Yogyakarta</div>
+          <p class="tl-desc">Berpartisipasi aktif dalam Seminar Nasional Informatika 2025 di AMIKOM Yogyakarta — memperluas perspektif tentang perkembangan terkini dunia informatika di Indonesia.</p>
+          <div class="tl-tags"><span>Seminar</span><span>Informatika</span><span>Nasional</span></div>
         </div>
       </div>
-
-      <!-- ════ MUSIC ════ -->
-      <div class="page" id="page-music">
-        <div class="pg-header">
-          <div class="pg-eyebrow">Musik</div>
-          <h2 class="pg-title">Avan Kabuchi — <span class="accent">Artist</span></h2>
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-period">2022 — Now</div>
         </div>
-        <div class="music-layout">
-          <div class="music-player-card">
-            <div class="np-label"><div class="np-pulse"></div>Now Playing</div>
-            <div class="track-visual">
-              <div class="album-art" id="album-art">🎵</div>
-              <div class="track-meta">
-                <div class="track-title" id="track-title">Avan Kabuchi</div>
-                <div class="track-artist">Original Artist · Singer-Songwriter</div>
-                <div class="track-platform" id="track-plat">🎵 Spotify & Apple Music</div>
-              </div>
-            </div>
-            <div class="waveform" id="waveform"></div>
-            <div class="progress-wrap">
-              <div class="prog-bar"><div class="prog-fill" id="prog-fill"></div></div>
-              <div class="prog-times"><span id="prog-cur">0:00</span><span id="prog-dur">3:30</span></div>
-            </div>
-            <div class="player-btns">
-              <button class="p-btn" onclick="prevTrack()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/></svg></button>
-              <button class="p-btn-play" id="play-btn" onclick="togglePlay()"><svg id="play-icon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
-              <button class="p-btn" onclick="nextTrack()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></svg></button>
-            </div>
-            <div class="music-links">
-              <a href="https://open.spotify.com/artist/2fNzlKoGfAPpQQDQPpm6zD?si=S59taWq1Tti97nacValoRA" target="_blank" rel="noopener" class="m-link"><span style="color:#1db954">●</span>Spotify</a>
-              <a href="https://music.apple.com/id/artist/avan-kabuchi/1766126525?l=id" target="_blank" rel="noopener" class="m-link"><span style="color:#fc3c44">●</span>Apple Music</a>
-              <a href="https://youtube.com/@avankabuchi_" target="_blank" rel="noopener" class="m-link"><span style="color:#ff0000">●</span>YouTube</a>
-            </div>
-          </div>
-          <div class="discography-card">
-            <div class="disc-title">🎙️ Discography</div>
-            <div class="track-list" id="track-list"></div>
-            <div style="margin-top:1.3rem;padding:.9rem;background:var(--surface2);border-radius:10px;border:1px solid var(--border);">
-              <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.07em;">About the Artist</div>
-              <p style="font-size:.83rem;line-height:1.75;color:rgba(238,238,245,.58);">Avan Kabuchi adalah proyek musik dari Avankha Barlian Kabuchi — seorang developer yang juga musisi. Karya-karyanya tersedia di Spotify, Apple Music, dan YouTube.</p>
-            </div>
-          </div>
+        <div class="tl-right">
+          <div class="tl-title">Web Developer — Freelance</div>
+          <div class="tl-org">Jawa Hair Studio · Toko Bung Edi · dan lainnya</div>
+          <p class="tl-desc">Membangun berbagai website profesional untuk klien lokal — dari landing page bisnis hingga toko online. Desain, development, hingga deployment di Vercel.</p>
+          <div class="tl-tags"><span>HTML/CSS</span><span>JavaScript</span><span>Vercel</span><span>Freelance</span></div>
         </div>
       </div>
-
-      <!-- ════ CONNECT ════ -->
-      <div class="page" id="page-connect">
-        <div class="pg-header">
-          <div class="pg-eyebrow">Connect</div>
-          <h2 class="pg-title">Temukan Saya <span class="accent">Di Sini</span></h2>
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-period">Ongoing</div>
         </div>
-        <div class="connect-layout">
-          <p class="connect-intro">Saya aktif di berbagai platform. Jangan ragu untuk connect, kolaborasi, atau sekadar menyapa — pintu selalu terbuka!</p>
-          <div class="socials-grid">
-            <a href="https://www.instagram.com/avankabuchi_" target="_blank" rel="noopener" class="soc-card" style="--sc-border:#e1306c;--sc-shadow:rgba(225,48,108,.18);--sc-bg:rgba(225,48,108,.06);">
-              <div class="soc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><defs><radialGradient id="ig" cx="30%" cy="107%"><stop offset="0%" stop-color="#fdf497"/><stop offset="45%" stop-color="#fd5949"/><stop offset="60%" stop-color="#d6249f"/><stop offset="90%" stop-color="#285AEB"/></radialGradient></defs><rect x="2" y="2" width="20" height="20" rx="5" stroke="url(#ig)" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="url(#ig)" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.1" fill="url(#ig)"/></svg></div>
-              <div class="soc-name">Instagram</div><div class="soc-handle">@avankabuchi_</div>
-            </a>
-            <a href="https://www.tiktok.com/@avankabuchi_" target="_blank" rel="noopener" class="soc-card" style="--sc-border:#69c9d0;--sc-shadow:rgba(105,201,208,.18);--sc-bg:rgba(105,201,208,.05);">
-              <div class="soc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" stroke="#69c9d0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              <div class="soc-name">TikTok</div><div class="soc-handle">@avankabuchi_</div>
-            </a>
-            <a href="https://www.linkedin.com/in/avankha-barlian-kabuchi-080402274" target="_blank" rel="noopener" class="soc-card" style="--sc-border:#0a66c2;--sc-shadow:rgba(10,102,194,.18);--sc-bg:rgba(10,102,194,.06);">
-              <div class="soc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="#0a66c2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
-              <div class="soc-name">LinkedIn</div><div class="soc-handle">Avankha B. K.</div>
-            </a>
-            <a href="https://github.com/avankabuchi" target="_blank" rel="noopener" class="soc-card" style="--sc-border:#f0f6fc;--sc-shadow:rgba(240,246,252,.08);--sc-bg:rgba(240,246,252,.04);">
-              <div class="soc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="#f0f6fc"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></div>
-              <div class="soc-name">GitHub</div><div class="soc-handle">avankabuchi</div>
-            </a>
-            <a href="https://youtube.com/@avankabuchi_" target="_blank" rel="noopener" class="soc-card" style="--sc-border:#ff0000;--sc-shadow:rgba(255,0,0,.18);--sc-bg:rgba(255,0,0,.05);">
-              <div class="soc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="#ff0000"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-1.96C18.88 4 12 4 12 4s-6.88 0-8.6.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.4 19.54C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#fff"/></svg></div>
-              <div class="soc-name">YouTube</div><div class="soc-handle">@avankabuchi_</div>
-            </a>
-            <a href="https://open.spotify.com/artist/2fNzlKoGfAPpQQDQPpm6zD" target="_blank" rel="noopener" class="soc-card" style="--sc-border:#1db954;--sc-shadow:rgba(29,185,84,.18);--sc-bg:rgba(29,185,84,.05);">
-              <div class="soc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="#1db954"><circle cx="12" cy="12" r="10"/><path d="M8 14.5s1.5-1 4-1 4 1 4 1" stroke="#000" stroke-width="1.3" stroke-linecap="round"/><path d="M7 11.5s2-1.5 5-1.5 5 1.5 5 1.5" stroke="#000" stroke-width="1.3" stroke-linecap="round"/><path d="M6.5 8.5S9 6.5 12 6.5s5.5 2 5.5 2" stroke="#000" stroke-width="1.3" stroke-linecap="round"/></svg></div>
-              <div class="soc-name">Spotify</div><div class="soc-handle">Avan Kabuchi</div>
-            </a>
-            <a href="https://music.apple.com/id/artist/avan-kabuchi/1766126525" target="_blank" rel="noopener" class="soc-card" style="--sc-border:#fc3c44;--sc-shadow:rgba(252,60,68,.18);--sc-bg:rgba(252,60,68,.05);">
-              <div class="soc-icon"><svg width="22" height="22" viewBox="0 0 24 24"><defs><linearGradient id="am" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fc3c44"/><stop offset="100%" stop-color="#ff8a80"/></linearGradient></defs><circle cx="12" cy="12" r="10" fill="url(#am)"/><path d="M10 17V8l8-2v9" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="17" r="2" fill="#fff"/><circle cx="16" cy="15" r="2" fill="#fff"/></svg></div>
-              <div class="soc-name">Apple Music</div><div class="soc-handle">Avan Kabuchi</div>
+        <div class="tl-right">
+          <div class="tl-title">Musisi & Content Creator</div>
+          <div class="tl-org">Spotify · Apple Music · YouTube · TikTok</div>
+          <p class="tl-desc">Aktif berkarya sebagai musisi dengan rilisan resmi di Spotify dan Apple Music atas nama Avan Kabuchi — membuktikan bahwa developer pun bisa jadi kreator yang berdampak.</p>
+          <div class="tl-tags"><span>Music</span><span>Spotify</span><span>Content Creation</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="section section-alt">
+  <div class="container">
+    <div class="section-eyebrow">Projects</div>
+    <h2 class="section-title">Yang Saya Bangun<span class="dot">.</span></h2>
+    <div class="projects-grid">
+      <div class="proj-card">
+        <div class="proj-preview">
+          <iframe src="https://jawahairstudio-nu.vercel.app/" title="Jawa Hair Studio" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no" tabindex="-1"></iframe>
+          <div class="proj-overlay">
+            <a href="https://jawahairstudio-nu.vercel.app/" target="_blank" rel="noopener" class="proj-visit">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Visit Site
             </a>
           </div>
-          <div class="contact-cta">
-            <div class="pg-eyebrow" style="justify-content:center;margin-bottom:.75rem;">Let's Work Together</div>
-            <p>Punya proyek menarik atau ingin berkolaborasi? Reach out via LinkedIn atau Instagram — saya selalu terbuka untuk kesempatan baru.</p>
-            <div style="display:flex;justify-content:center;gap:.75rem;flex-wrap:wrap;">
-              <a href="https://www.linkedin.com/in/avankha-barlian-kabuchi-080402274" target="_blank" rel="noopener" class="btn btn-primary">LinkedIn →</a>
-              <a href="https://www.instagram.com/avankabuchi_" target="_blank" rel="noopener" class="btn btn-ghost">Instagram</a>
-            </div>
+        </div>
+        <div class="proj-info">
+          <div class="proj-tags">
+            <span>HTML/CSS</span><span>JavaScript</span><span>Vercel</span>
           </div>
+          <h3 class="proj-name">Jawa Hair Studio</h3>
+          <p class="proj-desc">Landing page profesional untuk barbershop — galeri, layanan, dan kontak dengan tampilan modern.</p>
+          <a href="https://jawahairstudio-nu.vercel.app/" target="_blank" rel="noopener" class="proj-link">
+            jawahairstudio-nu.vercel.app
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
         </div>
       </div>
+      <div class="proj-card">
+        <div class="proj-preview">
+          <iframe src="https://tokobungedi.vercel.app/" title="Toko Bung Edi" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no" tabindex="-1"></iframe>
+          <div class="proj-overlay">
+            <a href="https://tokobungedi.vercel.app/" target="_blank" rel="noopener" class="proj-visit">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Visit Site
+            </a>
+          </div>
+        </div>
+        <div class="proj-info">
+          <div class="proj-tags">
+            <span>HTML/CSS</span><span>JavaScript</span><span>E-Commerce</span>
+          </div>
+          <h3 class="proj-name">Toko Bung Edi</h3>
+          <p class="proj-desc">Website e-commerce untuk toko kelontong — katalog produk, pemesanan, desain hangat dan elegan.</p>
+          <a href="https://tokobungedi.vercel.app/" target="_blank" rel="noopener" class="proj-link">
+            tokobungedi.vercel.app
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-preview">
+          <iframe src="https://futurasa.vercel.app/" title="Futurasa" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no" tabindex="-1"></iframe>
+          <div class="proj-overlay">
+            <a href="https://futurasa.vercel.app/" target="_blank" rel="noopener" class="proj-visit">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Visit Site
+            </a>
+          </div>
+        </div>
+        <div class="proj-info">
+          <div class="proj-tags">
+            <span>PHP</span><span>Laravel</span><span>React</span><span>Inertia.js</span>
+          </div>
+          <h3 class="proj-name">Futurasa</h3>
+          <p class="proj-desc">Platform informasi beasiswa dan lowongan kerja terkini agar kamu mendapatkan masa depan yang lebih baik.</p>
+          <a href="https://futurasa.vercel.app/" target="_blank" rel="noopener" class="proj-link">
+            futurasa.vercel.app
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="proj-card proj-soon">
+        <div class="proj-preview proj-preview-empty">
+          <div class="coming-soon-badge">Coming Soon</div>
+          <div class="coming-soon-icon">🚧</div>
+        </div>
+        <div class="proj-info">
+          <div class="proj-tags">
+            <span>Laravel</span><span>MySQL</span><span>React</span>
+          </div>
+          <h3 class="proj-name">Project Berikutnya</h3>
+          <p class="proj-desc">Proyek fullstack sedang dalam pengembangan — stay tuned!</p>
+        </div>
+      </div>
+    </div>
+    <div class="projects-cta">
+      <p>Tertarik berkolaborasi?</p>
+      <a href="#contact" class="btn btn-primary">Mulai Kolaborasi</a>
+    </div>
+  </div>
+</section>
 
-    </div><!-- /pages -->
-  </div><!-- /main-area -->
-</div><!-- /os-shell -->
+<!-- CERTS -->
+<section id="certs" class="section">
+  <div class="container">
+    <div class="section-eyebrow">Credentials</div>
+    <h2 class="section-title">Sertifikasi & Partisipasi<span class="dot">.</span></h2>
+    <div class="cert-filter" id="cert-filter">
+      <button class="cf-btn active" data-cat="all">Semua</button>
+      <button class="cf-btn" data-cat="professional">Profesional</button>
+      <button class="cf-btn" data-cat="seminar">Seminar</button>
+      <button class="cf-btn" data-cat="workshop">Workshop</button>
+    </div>
+    <div class="certs-grid">
+      <div class="cert-card" data-cat="professional">
+        <div class="cert-icon" style="background:#EFF6FF; color:#2563EB;">🌐</div>
+        <div class="cert-body">
+          <div class="cert-name">CCNAv7: Introduction to Networks</div>
+          <div class="cert-issuer">Cisco Networking Academy</div>
+          <div class="cert-meta">05 Januari 2024 · ID: 34b115f0-b723-43c4-b6fd-0ce5fc89db76</div>
+        </div>
+        <div class="cert-badge-type professional">Pro</div>
+      </div>
+      <div class="cert-card" data-cat="seminar">
+        <div class="cert-icon" style="background:#FEF2F2; color:#DC2626;">🌏</div>
+        <div class="cert-body">
+          <div class="cert-name">International Conference: AI, IoT & Industry 5.0</div>
+          <div class="cert-issuer">Universitas Islam Balitar</div>
+          <div class="cert-meta">26 Agustus 2024 · No. 034/DK.04/E-Cert/071070/VIII/2024</div>
+        </div>
+        <div class="cert-badge-type seminar">Seminar</div>
+      </div>
+      <div class="cert-card" data-cat="workshop">
+        <div class="cert-icon" style="background:#FFFBEB; color:#D97706;">🌱</div>
+        <div class="cert-body">
+          <div class="cert-name">Movers Workshop on Wellbeing for Changemakers</div>
+          <div class="cert-issuer">Movers Programme — Skill Our Future</div>
+          <div class="cert-meta">Certificate of Participation (2-Hour)</div>
+        </div>
+        <div class="cert-badge-type workshop">WS</div>
+      </div>
+      <div class="cert-card" data-cat="seminar">
+        <div class="cert-icon" style="background:#F5F3FF; color:#7C3AED;">🎓</div>
+        <div class="cert-body">
+          <div class="cert-name">Seminar Nasional Informatika 2025</div>
+          <div class="cert-issuer">Universitas AMIKOM Yogyakarta</div>
+          <div class="cert-meta">5 Juni 2025 · No. 1624/S-KMHS/AMIKOM/VI/2025</div>
+        </div>
+        <div class="cert-badge-type seminar">Seminar</div>
+      </div>
+      <div class="cert-card" data-cat="workshop">
+        <div class="cert-icon" style="background:#F0FDF4; color:#16A34A;">💻</div>
+        <div class="cert-body">
+          <div class="cert-name">Introduction to Computer 2022</div>
+          <div class="cert-issuer">Universitas AMIKOM Yogyakarta</div>
+          <div class="cert-meta">1–13 September 2022 · No. 220/KMHS/AMIKOM/IX/3385</div>
+        </div>
+        <div class="cert-badge-type workshop">WS</div>
+      </div>
+      <div class="cert-card" data-cat="seminar">
+        <div class="cert-icon" style="background:#FFF7ED; color:#EA580C;">🎙️</div>
+        <div class="cert-body">
+          <div class="cert-name">Kuliah Umum: AMIKOM Creative Economy Park</div>
+          <div class="cert-issuer">Universitas AMIKOM Yogyakarta</div>
+          <div class="cert-meta">11 Juni 2022 · No. 1605.S/A.DKUI/AMIKOM/VI/2022</div>
+        </div>
+        <div class="cert-badge-type seminar">Seminar</div>
+      </div>
+      <div class="cert-card" data-cat="seminar">
+        <div class="cert-icon" style="background:#F0FDFA; color:#0D9488;">🗺️</div>
+        <div class="cert-body">
+          <div class="cert-name">Seminar: Potensi Karir Pemetaan & Geospasial</div>
+          <div class="cert-issuer">AMIKOM Yogyakarta — BPC & Alumni</div>
+          <div class="cert-meta">24 Juni 2025 · No. 065/Sert.BPC/AMIKOM/VI/2025</div>
+        </div>
+        <div class="cert-badge-type seminar">Seminar</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MUSIC -->
+<section id="music" class="section section-alt">
+  <div class="container">
+    <div class="section-eyebrow">Music</div>
+    <h2 class="section-title">Avan Kabuchi — Artist<span class="dot">.</span></h2>
+    <div class="music-layout">
+      <div class="music-player">
+        <div class="player-header">
+          <div class="player-live"><span class="live-dot"></span> Now Playing</div>
+        </div>
+        <div class="player-track">
+          <div class="player-art" id="player-art">🎵</div>
+          <div class="player-meta">
+            <div class="player-title" id="player-title">Avan Kabuchi — Track 1</div>
+            <div class="player-sub">Original Artist · Singer-Songwriter</div>
+            <div class="player-platform" id="player-plat">Spotify & Apple Music</div>
+          </div>
+        </div>
+        <div class="player-progress">
+          <div class="progress-bar">
+            <div class="progress-fill" id="prog-fill"></div>
+          </div>
+          <div class="progress-times">
+            <span id="prog-cur">0:00</span>
+            <span id="prog-dur">3:24</span>
+          </div>
+        </div>
+        <div class="player-controls">
+          <button class="ctrl-btn" onclick="prevTrack()" aria-label="Previous">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/></svg>
+          </button>
+          <button class="ctrl-play" id="play-btn" onclick="togglePlay()" aria-label="Play">
+            <svg id="play-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </button>
+          <button class="ctrl-btn" onclick="nextTrack()" aria-label="Next">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></svg>
+          </button>
+        </div>
+        <div class="player-links">
+          <a href="https://open.spotify.com/artist/2fNzlKoGfAPpQQDQPpm6zD?si=S59taWq1Tti97nacValoRA" target="_blank" rel="noopener" class="music-link spotify">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+            Spotify
+          </a>
+          <a href="https://music.apple.com/id/artist/avan-kabuchi/1766126525?l=id" target="_blank" rel="noopener" class="music-link apple">Apple Music</a>
+          <a href="https://youtube.com/@avankabuchi_" target="_blank" rel="noopener" class="music-link youtube">YouTube</a>
+        </div>
+      </div>
+      <div class="music-tracks">
+        <div class="tracks-label">Discography</div>
+        <div class="track-list" id="track-list"></div>
+        <div class="artist-note">
+          <p>Avan Kabuchi adalah proyek musik dari Avankha Barlian Kabuchi — seorang developer yang juga musisi. Karya-karyanya tersedia di Spotify, Apple Music, dan YouTube.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <div class="container">
+    <div class="section-eyebrow">Contact</div>
+    <h2 class="section-title">Temukan Saya<span class="dot">.</span></h2>
+    <p class="contact-intro">Saya aktif di berbagai platform. Connect, kolaborasi, atau sekadar menyapa — pintu selalu terbuka.</p>
+    <div class="socials-grid">
+      <a href="https://www.instagram.com/avankabuchi_" target="_blank" rel="noopener" class="social-card">
+        <div class="social-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+        </div>
+        <div class="social-info">
+          <div class="social-name">Instagram</div>
+          <div class="social-handle">@avankabuchi_</div>
+        </div>
+        <svg class="social-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+      </a>
+      <a href="https://www.tiktok.com/@avankabuchi_" target="_blank" rel="noopener" class="social-card">
+        <div class="social-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="social-info">
+          <div class="social-name">TikTok</div>
+          <div class="social-handle">@avankabuchi_</div>
+        </div>
+        <svg class="social-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/avankha-barlian-kabuchi-080402274" target="_blank" rel="noopener" class="social-card">
+        <div class="social-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </div>
+        <div class="social-info">
+          <div class="social-name">LinkedIn</div>
+          <div class="social-handle">Avankha B. K.</div>
+        </div>
+        <svg class="social-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+      </a>
+      <a href="https://github.com/avankabuchi" target="_blank" rel="noopener" class="social-card">
+        <div class="social-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        </div>
+        <div class="social-info">
+          <div class="social-name">GitHub</div>
+          <div class="social-handle">avankabuchi</div>
+        </div>
+        <svg class="social-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+      </a>
+      <a href="https://youtube.com/@avankabuchi_" target="_blank" rel="noopener" class="social-card">
+        <div class="social-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-1.96C18.88 4 12 4 12 4s-6.88 0-8.6.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.4 19.54C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#fff"/></svg>
+        </div>
+        <div class="social-info">
+          <div class="social-name">YouTube</div>
+          <div class="social-handle">@avankabuchi_</div>
+        </div>
+        <svg class="social-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+      </a>
+      <a href="https://open.spotify.com/artist/2fNzlKoGfAPpQQDQPpm6zD" target="_blank" rel="noopener" class="social-card">
+        <div class="social-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/><path d="M8 14.5s1.5-1 4-1 4 1 4 1" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/><path d="M7 11.5s2-1.5 5-1.5 5 1.5 5 1.5" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/><path d="M6.5 8.5S9 6.5 12 6.5s5.5 2 5.5 2" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/></svg>
+        </div>
+        <div class="social-info">
+          <div class="social-name">Spotify</div>
+          <div class="social-handle">Avan Kabuchi</div>
+        </div>
+        <svg class="social-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+      </a>
+      <a href="https://music.apple.com/id/artist/avan-kabuchi/1766126525" target="_blank" rel="noopener" class="social-card">
+        <div class="social-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10" fill="#FC3C44"/><path d="M10 17V8l8-2v9" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="17" r="2" fill="#fff"/><circle cx="16" cy="15" r="2" fill="#fff"/></svg>
+        </div>
+        <div class="social-info">
+          <div class="social-name">Apple Music</div>
+          <div class="social-handle">Avan Kabuchi</div>
+        </div>
+        <svg class="social-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+      </a>
+    </div>
+    <div class="collab-cta">
+      <h3>Punya proyek menarik?</h3>
+      <p>Reach out via LinkedIn atau Instagram — saya selalu terbuka untuk kesempatan baru dan kolaborasi yang bermakna.</p>
+      <div class="collab-btns">
+        <a href="https://www.linkedin.com/in/avankha-barlian-kabuchi-080402274" target="_blank" rel="noopener" class="btn btn-primary">LinkedIn →</a>
+        <a href="https://www.instagram.com/avankabuchi_" target="_blank" rel="noopener" class="btn btn-ghost">Instagram</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <div class="footer-logo">Avan<span>.</span></div>
+        <div class="footer-sub">Avankha Barlian Kabuchi, S.Kom. — Informatika, AMIKOM Yogyakarta</div>
+      </div>
+      <div class="footer-right">
+        <span>© 2025 Avankha Barlian Kabuchi</span>
+      </div>
+    </div>
+  </div>
+</footer>
 
 <script src="script.js"></script>
 </body>
